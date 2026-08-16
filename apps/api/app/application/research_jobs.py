@@ -1,13 +1,22 @@
 import asyncio
+import json
 import logging
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from time import perf_counter
 from uuid import uuid4
 
 from sqlalchemy.orm import Session
 
 from app.application.opportunity_review import default_opportunity, upsert_opportunity_score
-from app.domain.models import Company, CompanyAnalysis, CompanySignal, CompanySource, Evidence
+from app.domain.models import (
+    Company,
+    CompanyAnalysis,
+    CompanySignal,
+    CompanySource,
+    Evidence,
+    ResearchRun,
+)
 from app.infrastructure.database import SessionLocal
 from app.infrastructure.settings import get_settings
 from app.modules.research.llm import provider_from_settings
@@ -82,12 +91,16 @@ async def run_research_job(job_id: str) -> None:
 
 
 async def _research_company(db: Session, job: ResearchJob) -> None:
-    company = db.get(Company, job.company_id)
+    await research_company(db, job.company_id)
+
+
+async def research_company(db: Session, company_id: int, campaign_id: int | None = None) -> None:
+    started = perf_counter()
+    company = db.get(Company, company_id)
     if company is None:
         raise ValueError("Company not found")
 
     pages = await extract_relevant_pages(company.domain)
-    job.message = f"Fetched {len(pages)} relevant pages"
 
     sources_by_url: dict[str, CompanySource] = {}
     for page in pages:
@@ -127,7 +140,6 @@ async def _research_company(db: Session, job: ResearchJob) -> None:
         evidence_rows.append(evidence)
     db.commit()
 
-    job.message = f"Analyzing {len(evidence_rows)} evidence items"
     provider = provider_from_settings(get_settings())
     analysis = await provider.analyze_company(company, evidence_rows)
     _validate_analysis_references(analysis.model_dump(), {item.id for item in evidence_rows})
@@ -147,6 +159,22 @@ async def _research_company(db: Session, job: ResearchJob) -> None:
         )
     )
     upsert_opportunity_score(db, company, default_opportunity(db))
+    usage = _estimate_research_usage(
+        provider.provider_name, provider.model_name, evidence_rows, analysis
+    )
+    db.add(
+        ResearchRun(
+            company_id=company.id,
+            campaign_id=campaign_id,
+            provider=provider.provider_name,
+            model=provider.model_name,
+            input_tokens=usage["input_tokens"],
+            output_tokens=usage["output_tokens"],
+            estimated_cost=usage["estimated_cost"],
+            execution_time_ms=int((perf_counter() - started) * 1000),
+            status="COMPLETED",
+        )
+    )
     db.commit()
 
 
@@ -161,3 +189,21 @@ def _validate_analysis_references(payload: dict, evidence_ids: set[int]) -> None
 
 def schedule_background_job(job_id: str) -> None:
     asyncio.create_task(run_research_job(job_id))
+
+
+def _estimate_research_usage(
+    provider: str, model: str, evidence: list[Evidence], analysis: object
+) -> dict[str, int | float]:
+    input_chars = sum(len(item.content_excerpt) for item in evidence)
+    output_chars = len(json.dumps(analysis.model_dump(), default=str))
+    input_tokens = max(0, input_chars // 4)
+    output_tokens = max(0, output_chars // 4)
+    if provider != "openai":
+        return {"input_tokens": input_tokens, "output_tokens": output_tokens, "estimated_cost": 0.0}
+    rate = 0.0000004 if "mini" in model else 0.000002
+    estimated_cost = round((input_tokens + output_tokens) * rate, 6)
+    return {
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "estimated_cost": estimated_cost,
+    }

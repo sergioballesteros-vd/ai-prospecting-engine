@@ -39,6 +39,8 @@ class Company(Base):
     analyses: Mapped[list["CompanyAnalysis"]] = relationship(back_populates="company")
     opportunity_scores: Mapped[list["OpportunityScore"]] = relationship(back_populates="company")
     outreach_drafts: Mapped[list["OutreachDraft"]] = relationship(back_populates="company")
+    campaign_entries: Mapped[list["CampaignCompany"]] = relationship(back_populates="company")
+    research_runs: Mapped[list["ResearchRun"]] = relationship(back_populates="company")
 
 
 class Opportunity(Base):
@@ -56,6 +58,7 @@ class Opportunity(Base):
 
     scores: Mapped[list["OpportunityScore"]] = relationship(back_populates="opportunity")
     outreach_drafts: Mapped[list["OutreachDraft"]] = relationship(back_populates="opportunity")
+    campaigns: Mapped[list["ProspectingCampaign"]] = relationship(back_populates="opportunity")
 
 
 class CompanySource(Base):
@@ -190,3 +193,77 @@ class OutreachDraft(Base):
     company: Mapped[Company] = relationship(back_populates="outreach_drafts")
     opportunity: Mapped[Opportunity] = relationship(back_populates="outreach_drafts")
     score: Mapped[OpportunityScore | None] = relationship(back_populates="outreach_drafts")
+
+
+class ProspectingCampaign(Base):
+    __tablename__ = "prospecting_campaigns"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    country: Mapped[str] = mapped_column(String(120), nullable=False)
+    city_or_region: Mapped[str] = mapped_column(String(120), nullable=False)
+    industries: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    employee_min: Mapped[int | None] = mapped_column(Integer)
+    employee_max: Mapped[int | None] = mapped_column(Integer)
+    opportunity_id: Mapped[int] = mapped_column(ForeignKey("opportunities.id", ondelete="CASCADE"))
+    target_company_count: Mapped[int] = mapped_column(Integer, nullable=False)
+    status: Mapped[str] = mapped_column(String(40), nullable=False, default="DRAFT")
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+    started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+    opportunity: Mapped[Opportunity] = relationship(back_populates="campaigns")
+    companies: Mapped[list["CampaignCompany"]] = relationship(back_populates="campaign")
+    research_runs: Mapped[list["ResearchRun"]] = relationship(back_populates="campaign")
+
+
+class CampaignCompany(Base):
+    __tablename__ = "campaign_companies"
+    __table_args__ = (
+        UniqueConstraint("campaign_id", "company_id", name="uq_campaign_companies_company"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    campaign_id: Mapped[int] = mapped_column(
+        ForeignKey("prospecting_campaigns.id", ondelete="CASCADE")
+    )
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    discovery_source: Mapped[str] = mapped_column(String(120), nullable=False)
+    discovery_metadata: Mapped[dict] = mapped_column("metadata", JSON, nullable=False, default=dict)
+    research_state: Mapped[str] = mapped_column(String(40), nullable=False, default="DISCOVERED")
+    error: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+    campaign: Mapped[ProspectingCampaign] = relationship(back_populates="companies")
+    company: Mapped[Company] = relationship(back_populates="campaign_entries")
+
+
+class ResearchRun(Base):
+    __tablename__ = "research_runs"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    campaign_id: Mapped[int | None] = mapped_column(
+        ForeignKey("prospecting_campaigns.id", ondelete="SET NULL")
+    )
+    provider: Mapped[str] = mapped_column(String(80), nullable=False)
+    model: Mapped[str] = mapped_column(String(120), nullable=False)
+    input_tokens: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    output_tokens: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    estimated_cost: Mapped[float] = mapped_column(Float, nullable=False, default=0)
+    execution_time_ms: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    status: Mapped[str] = mapped_column(String(40), nullable=False)
+    error: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+    company: Mapped[Company] = relationship(back_populates="research_runs")
+    campaign: Mapped[ProspectingCampaign | None] = relationship(back_populates="research_runs")

@@ -154,6 +154,7 @@ h1 {
 }
 
 .researchForm,
+.campaignForm,
 .statusStrip,
 .panel,
 .notice {
@@ -169,6 +170,44 @@ h1 {
   gap: 16px;
   align-items: end;
   padding: 18px;
+}
+
+.campaignForm {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 18px;
+}
+
+.campaignForm label {
+  display: grid;
+  gap: 8px;
+  color: #243836;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.campaignForm input {
+  min-height: 42px;
+  border: 1px solid #cbd5d3;
+  border-radius: 6px;
+  padding: 0 12px;
+}
+
+.campaignForm button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 16px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .researchForm label {
@@ -219,6 +258,17 @@ h1 {
   cursor: pointer;
   font-size: 13px;
   font-weight: 800;
+}
+
+a.secondaryButton {
+  text-decoration: none;
+}
+
+.secondaryButton.tiny {
+  min-height: 30px;
+  margin-top: 8px;
+  padding: 0 8px;
+  font-size: 12px;
 }
 
 .reviewActions button:not(.secondaryButton):not(.dangerButton) {
@@ -486,6 +536,27 @@ h1 {
   text-align: left;
 }
 
+.campaignRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 14px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+  color: var(--text);
+}
+
+.campaignRow strong,
+.campaignRow small {
+  display: block;
+}
+
+.campaignRow small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .rankedRow.selected {
   background: var(--accent-soft);
 }
@@ -532,6 +603,13 @@ h1 {
   padding: 16px;
 }
 
+.scoreBreakdown.inline {
+  grid-template-columns: repeat(4, minmax(58px, 1fr));
+  gap: 6px;
+  border: 0;
+  padding: 0;
+}
+
 .metric {
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -550,6 +628,99 @@ h1 {
   display: block;
   margin-top: 4px;
   font-size: 18px;
+}
+
+.compactMetric {
+  padding: 7px;
+}
+
+.compactMetric strong {
+  font-size: 14px;
+}
+
+.campaignStats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.campaignCompanyList {
+  display: grid;
+}
+
+.campaignCompanyRow {
+  display: grid;
+  grid-template-columns: 160px 260px minmax(0, 1fr) 120px;
+  grid-template-areas:
+    "company score signals state"
+    "company score evidence state";
+  gap: 14px;
+  align-items: start;
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+}
+
+.campaignCompanyRow > div:nth-child(1) {
+  grid-area: company;
+}
+
+.campaignCompanyRow > div:nth-child(2) {
+  grid-area: score;
+}
+
+.campaignCompanyRow > div:nth-child(3) {
+  grid-area: signals;
+}
+
+.campaignCompanyRow > div:nth-child(4) {
+  grid-area: evidence;
+}
+
+.campaignCompanyRow > div:nth-child(5) {
+  grid-area: state;
+  justify-self: end;
+}
+
+.campaignCompanyRow strong,
+.campaignCompanyRow small {
+  display: block;
+}
+
+.campaignCompanyRow small,
+.errorText {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.errorText {
+  color: var(--danger);
+}
+
+.signalsCell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+}
+
+.signalsCell span {
+  border-radius: 999px;
+  background: var(--surface-subtle);
+  padding: 4px 7px;
+  color: #244240;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.evidenceCell p {
+  margin: 0 0 6px;
+  color: #2e403f;
+  font-size: 12px;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .detailSection {
@@ -651,6 +822,7 @@ h1 {
   }
 
   .researchForm,
+  .campaignForm,
   .statusStrip,
   .split,
   .reviewGrid,
@@ -660,6 +832,18 @@ h1 {
 
   .scoreBreakdown {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .campaignStats,
+  .campaignCompanyRow,
+  .campaignRow {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+  }
+
+  .campaignCompanyRow > div:nth-child(n) {
+    grid-area: auto;
+    justify-self: stretch;
   }
 
   .topbar {

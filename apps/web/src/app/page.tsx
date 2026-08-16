@@ -7,6 +7,7 @@ import {
   FileSearch,
   Loader2,
   Play,
+  Send,
   Search,
   Sparkles,
 } from "lucide-react";
@@ -85,6 +86,10 @@ export default function Home() {
             <Building2 size={17} />
             Companies
           </a>
+          <Link className="navItem" href="/campaigns">
+            <Send size={17} />
+            Campaigns
+          </Link>
           <Link className="navItem" href="/opportunities">
             <Sparkles size={17} />
             Opportunities

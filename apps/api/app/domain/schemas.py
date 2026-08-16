@@ -137,6 +137,77 @@ class RankedOpportunityRead(BaseModel):
     latest_draft: OutreachDraftRead | None = None
 
 
+class ProspectingCampaignCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=255)
+    country: str = Field(min_length=1, max_length=120)
+    city_or_region: str = Field(min_length=1, max_length=120)
+    industries: list[str] = Field(min_length=1)
+    employee_min: int | None = None
+    employee_max: int | None = None
+    opportunity_id: int = 1
+    target_company_count: int = Field(default=20, ge=1, le=100)
+
+
+class ProspectingCampaignRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    name: str
+    country: str
+    city_or_region: str
+    industries: list[str]
+    employee_min: int | None
+    employee_max: int | None
+    opportunity_id: int
+    target_company_count: int
+    status: str
+    created_at: datetime
+    started_at: datetime | None
+    completed_at: datetime | None
+
+
+class CampaignCompanyRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    campaign_id: int
+    company_id: int
+    discovery_source: str
+    discovery_metadata: dict
+    research_state: str
+    error: str | None
+    company: CompanyRead
+
+
+class ResearchRunRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    company_id: int
+    campaign_id: int | None
+    provider: str
+    model: str
+    input_tokens: int
+    output_tokens: int
+    estimated_cost: float
+    execution_time_ms: int
+    status: str
+    error: str | None
+    created_at: datetime
+
+
+class CampaignCompanyResult(BaseModel):
+    entry: CampaignCompanyRead
+    score: OpportunityScoreRead | None
+    top_evidence: list[EvidenceRead]
+
+
+class ProspectingCampaignDetail(ProspectingCampaignRead):
+    stats: dict
+    companies: list[CampaignCompanyResult]
+    research_runs: list[ResearchRunRead]
+
+
 class ResearchJobRead(BaseModel):
     id: str
     company_id: int

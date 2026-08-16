@@ -116,6 +116,65 @@ export type RankedOpportunity = {
   latest_draft: OutreachDraft | null;
 };
 
+export type ProspectingCampaign = {
+  id: number;
+  name: string;
+  country: string;
+  city_or_region: string;
+  industries: string[];
+  employee_min: number | null;
+  employee_max: number | null;
+  opportunity_id: number;
+  target_company_count: number;
+  status: "DRAFT" | "RUNNING" | "COMPLETED" | "FAILED";
+  created_at: string;
+  started_at: string | null;
+  completed_at: string | null;
+};
+
+export type CampaignCompanyResult = {
+  entry: {
+    id: number;
+    campaign_id: number;
+    company_id: number;
+    discovery_source: string;
+    discovery_metadata: Record<string, unknown>;
+    research_state: "DISCOVERED" | "RESEARCHING" | "RESEARCHED" | "FAILED";
+    error: string | null;
+    company: Company;
+  };
+  score: OpportunityScore | null;
+  top_evidence: Evidence[];
+};
+
+export type ProspectingCampaignDetail = ProspectingCampaign & {
+  stats: {
+    discovered: number;
+    target: number;
+    researched: number;
+    failed: number;
+    qualified: number;
+    approved: number;
+    total_research_cost: number;
+    average_cost_per_company: number;
+  };
+  companies: CampaignCompanyResult[];
+  research_runs: Array<{
+    id: number;
+    company_id: number;
+    campaign_id: number | null;
+    provider: string;
+    model: string;
+    input_tokens: number;
+    output_tokens: number;
+    estimated_cost: number;
+    execution_time_ms: number;
+    status: string;
+    error: string | null;
+    created_at: string;
+  }>;
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...init,
@@ -175,5 +234,39 @@ export function updateDraft(
   return request<OutreachDraft>(`/outreach-drafts/${draftId}`, {
     method: "PATCH",
     body: JSON.stringify(payload),
+  });
+}
+
+export function listCampaigns(): Promise<ProspectingCampaign[]> {
+  return request<ProspectingCampaign[]>("/campaigns");
+}
+
+export function createCampaign(payload: {
+  name: string;
+  country: string;
+  city_or_region: string;
+  industries: string[];
+  employee_min: number | null;
+  employee_max: number | null;
+  opportunity_id: number;
+  target_company_count: number;
+}): Promise<ProspectingCampaign> {
+  return request<ProspectingCampaign>("/campaigns", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function getCampaign(campaignId: number): Promise<ProspectingCampaignDetail> {
+  return request<ProspectingCampaignDetail>(`/campaigns/${campaignId}`);
+}
+
+export function runCampaign(campaignId: number): Promise<ProspectingCampaign> {
+  return request<ProspectingCampaign>(`/campaigns/${campaignId}/run`, { method: "POST" });
+}
+
+export function retryCampaignCompany(entryId: number): Promise<CampaignCompanyResult["entry"]> {
+  return request<CampaignCompanyResult["entry"]>(`/campaign-companies/${entryId}/retry`, {
+    method: "POST",
   });
 }

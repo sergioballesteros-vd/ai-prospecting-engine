@@ -6,6 +6,7 @@ import {
   Loader2,
   MailPlus,
   Save,
+  Send,
   Search,
   Sparkles,
   X,
@@ -116,6 +117,10 @@ export default function OpportunitiesPage() {
           <Link className="navItem" href="/">
             <Search size={17} />
             Research
+          </Link>
+          <Link className="navItem" href="/campaigns">
+            <Send size={17} />
+            Campaigns
           </Link>
           <Link className="navItem active" href="/opportunities">
             <Sparkles size={17} />

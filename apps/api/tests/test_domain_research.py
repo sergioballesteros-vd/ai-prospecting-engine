@@ -6,6 +6,7 @@ from app.modules.research.website import ExtractedPage, detect_evidence, normali
 
 def test_normalize_domain_accepts_urls_and_strips_www() -> None:
     assert normalize_domain("https://www.example.com/path") == "example.com"
+    assert normalize_domain("HTTP://WWW.Example.com/") == "example.com"
 
 
 def test_normalize_domain_rejects_invalid_domain() -> None:
