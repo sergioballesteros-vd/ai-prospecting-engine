@@ -1,11 +1,11 @@
 {
     "schema_version": 1,
-    "commit": "HEAD",
-    "indexed_at": "2026-08-16T17:18:51Z",
-    "project": "Users-sergioballesteros-Documents-ChatGPT-ai-prospecting-engine",
-    "nodes": 0,
-    "edges": 0,
-    "original_size": 102400,
-    "compressed_size": 1396,
+    "commit": "64ebd9c5c29e1fba2c6cccea41808d382c2aa7c9",
+    "indexed_at": "2026-08-16T17:33:11Z",
+    "project": "Users-sergioballesteros-ai-prospecting-engine",
+    "nodes": 313,
+    "edges": 813,
+    "original_size": 2097152,
+    "compressed_size": 91498,
     "compression_level": 3
 }

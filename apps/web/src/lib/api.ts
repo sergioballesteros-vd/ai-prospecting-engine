@@ -75,6 +75,47 @@ export type ResearchJob = {
   completed_at: string | null;
 };
 
+export type OpportunityScore = {
+  id: number;
+  company_id: number;
+  opportunity_id: number;
+  icp_score: number;
+  pain_score: number;
+  value_score: number;
+  intent_score: number;
+  reachability_score: number;
+  confidence_score: number;
+  total_score: number;
+  qualification_state: "RESEARCHED" | "QUALIFIED" | "REJECTED" | "APPROVED";
+  explanation: string;
+  evidence_ids: number[];
+  matched_signals: string[];
+  created_at: string;
+  updated_at: string;
+};
+
+export type OutreachDraft = {
+  id: number;
+  company_id: number;
+  opportunity_id: number;
+  opportunity_score_id: number | null;
+  channel: string;
+  subject: string;
+  body: string;
+  evidence_used: number[];
+  status: "DRAFT" | "READY_FOR_REVIEW";
+  created_at: string;
+  updated_at: string;
+};
+
+export type RankedOpportunity = {
+  score: OpportunityScore;
+  company: Company;
+  top_evidence: Evidence[];
+  why_matched: string;
+  latest_draft: OutreachDraft | null;
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...init,
@@ -107,4 +148,32 @@ export function getResearchJob(jobId: string): Promise<ResearchJob> {
 
 export function getCompany(companyId: number): Promise<CompanyDetail> {
   return request<CompanyDetail>(`/companies/${companyId}`);
+}
+
+export function listRankedOpportunities(): Promise<RankedOpportunity[]> {
+  return request<RankedOpportunity[]>("/opportunities/ranked");
+}
+
+export function updateOpportunityState(
+  scoreId: number,
+  state: OpportunityScore["qualification_state"],
+): Promise<RankedOpportunity> {
+  return request<RankedOpportunity>(`/opportunity-scores/${scoreId}/state`, {
+    method: "PATCH",
+    body: JSON.stringify({ state }),
+  });
+}
+
+export function generateDraft(scoreId: number): Promise<OutreachDraft> {
+  return request<OutreachDraft>(`/opportunity-scores/${scoreId}/draft`, { method: "POST" });
+}
+
+export function updateDraft(
+  draftId: number,
+  payload: Pick<OutreachDraft, "subject" | "body" | "status">,
+): Promise<OutreachDraft> {
+  return request<OutreachDraft>(`/outreach-drafts/${draftId}`, {
+    method: "PATCH",
+    body: JSON.stringify(payload),
+  });
 }

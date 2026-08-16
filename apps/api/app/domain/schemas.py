@@ -82,6 +82,61 @@ class CompanyDetail(CompanyRead):
     analyses: list[AnalysisRead]
 
 
+class OpportunityScoreRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    company_id: int
+    opportunity_id: int
+    icp_score: float
+    pain_score: float
+    value_score: float
+    intent_score: float
+    reachability_score: float
+    confidence_score: float
+    total_score: float
+    qualification_state: str
+    explanation: str
+    evidence_ids: list[int]
+    matched_signals: list[str]
+    created_at: datetime
+    updated_at: datetime
+
+
+class OutreachDraftRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    company_id: int
+    opportunity_id: int
+    opportunity_score_id: int | None
+    channel: str
+    subject: str
+    body: str
+    evidence_used: list[int]
+    status: str
+    created_at: datetime
+    updated_at: datetime
+
+
+class OutreachDraftUpdate(BaseModel):
+    subject: str = Field(min_length=1, max_length=255)
+    body: str = Field(min_length=1)
+    status: str | None = None
+
+
+class ReviewStateUpdate(BaseModel):
+    state: str
+
+
+class RankedOpportunityRead(BaseModel):
+    score: OpportunityScoreRead
+    company: CompanyRead
+    top_evidence: list[EvidenceRead]
+    why_matched: str
+    latest_draft: OutreachDraftRead | None = None
+
+
 class ResearchJobRead(BaseModel):
     id: str
     company_id: int

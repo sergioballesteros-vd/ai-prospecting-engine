@@ -6,6 +6,7 @@ from uuid import uuid4
 
 from sqlalchemy.orm import Session
 
+from app.application.opportunity_review import default_opportunity, upsert_opportunity_score
 from app.domain.models import Company, CompanyAnalysis, CompanySignal, CompanySource, Evidence
 from app.infrastructure.database import SessionLocal
 from app.infrastructure.settings import get_settings
@@ -145,6 +146,7 @@ async def _research_company(db: Session, job: ResearchJob) -> None:
             raw_output=analysis.model_dump(),
         )
     )
+    upsert_opportunity_score(db, company, default_opportunity(db))
     db.commit()
 
 

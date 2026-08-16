@@ -10,6 +10,7 @@ import {
   Search,
   Sparkles,
 } from "lucide-react";
+import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import {
   Analysis,
@@ -76,18 +77,18 @@ export default function Home() {
           <span>AI Prospecting Engine</span>
         </div>
         <nav className="nav">
-          <a className="navItem active" href="#">
+          <Link className="navItem active" href="/">
             <Search size={17} />
             Research
-          </a>
+          </Link>
           <a className="navItem" href="#">
             <Building2 size={17} />
             Companies
           </a>
-          <a className="navItem" href="#">
+          <Link className="navItem" href="/opportunities">
             <Sparkles size={17} />
             Opportunities
-          </a>
+          </Link>
         </nav>
         <div className="operator">
           <span className="avatar">SB</span>

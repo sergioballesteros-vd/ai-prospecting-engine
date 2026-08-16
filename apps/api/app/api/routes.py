@@ -4,9 +4,24 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
+from app.application.opportunity_review import (
+    generate_outreach_draft,
+    ranked_opportunity_scores,
+    update_outreach_draft,
+    update_score_state,
+)
 from app.application.research_jobs import create_research_job, get_research_job, run_research_job
-from app.domain.models import Company
-from app.domain.schemas import CompanyCreate, CompanyDetail, CompanyRead, ResearchJobRead
+from app.domain.models import Company, Evidence, OpportunityScore
+from app.domain.schemas import (
+    CompanyCreate,
+    CompanyDetail,
+    CompanyRead,
+    OutreachDraftRead,
+    OutreachDraftUpdate,
+    RankedOpportunityRead,
+    ResearchJobRead,
+    ReviewStateUpdate,
+)
 from app.infrastructure.database import get_db
 from app.modules.research.website import normalize_domain, website_url_for_domain
 
@@ -81,3 +96,72 @@ def read_research_job(job_id: str):
     if job is None:
         raise HTTPException(status_code=404, detail="Research job not found")
     return job
+
+
+@router.get("/opportunities/ranked", response_model=list[RankedOpportunityRead])
+def list_ranked_opportunities(db: DbSession) -> list[RankedOpportunityRead]:
+    rows: list[RankedOpportunityRead] = []
+    for score in ranked_opportunity_scores(db):
+        evidence_by_id = {item.id: item for item in score.company.evidence}
+        top_evidence = [
+            evidence_by_id[item_id] for item_id in score.evidence_ids if item_id in evidence_by_id
+        ]
+        latest_draft = sorted(score.outreach_drafts, key=lambda item: item.id, reverse=True)
+        rows.append(
+            RankedOpportunityRead(
+                score=score,
+                company=score.company,
+                top_evidence=top_evidence,
+                why_matched=score.explanation,
+                latest_draft=latest_draft[0] if latest_draft else None,
+            )
+        )
+    return rows
+
+
+@router.patch("/opportunity-scores/{score_id}/state", response_model=RankedOpportunityRead)
+def set_opportunity_score_state(
+    score_id: int, payload: ReviewStateUpdate, db: DbSession
+) -> RankedOpportunityRead:
+    try:
+        score = update_score_state(db, score_id, payload.state)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    score = db.scalar(
+        select(OpportunityScore)
+        .where(OpportunityScore.id == score_id)
+        .options(
+            selectinload(OpportunityScore.company).selectinload(Company.evidence),
+            selectinload(OpportunityScore.outreach_drafts),
+        )
+    )
+    if score is None:
+        raise HTTPException(status_code=404, detail="Opportunity score not found")
+    evidence_by_id: dict[int, Evidence] = {item.id: item for item in score.company.evidence}
+    return RankedOpportunityRead(
+        score=score,
+        company=score.company,
+        top_evidence=[
+            evidence_by_id[item_id] for item_id in score.evidence_ids if item_id in evidence_by_id
+        ],
+        why_matched=score.explanation,
+        latest_draft=sorted(score.outreach_drafts, key=lambda item: item.id, reverse=True)[0]
+        if score.outreach_drafts
+        else None,
+    )
+
+
+@router.post("/opportunity-scores/{score_id}/draft", response_model=OutreachDraftRead)
+def create_score_draft(score_id: int, db: DbSession):
+    try:
+        return generate_outreach_draft(db, score_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.patch("/outreach-drafts/{draft_id}", response_model=OutreachDraftRead)
+def edit_score_draft(draft_id: int, payload: OutreachDraftUpdate, db: DbSession):
+    try:
+        return update_outreach_draft(db, draft_id, payload.subject, payload.body, payload.status)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc

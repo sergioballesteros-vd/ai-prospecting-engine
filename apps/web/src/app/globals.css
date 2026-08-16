@@ -26,7 +26,8 @@ body {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -202,6 +203,43 @@ h1 {
   font-weight: 800;
 }
 
+.secondaryButton,
+.reviewActions button,
+.draftEditor button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 12px;
+  background: var(--surface);
+  color: #173331;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.reviewActions button:not(.secondaryButton):not(.dangerButton) {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+}
+
+.dangerButton {
+  border-color: #f5b7b1 !important;
+  background: var(--danger-soft) !important;
+  color: var(--danger) !important;
+}
+
+.secondaryButton:disabled,
+.reviewActions button:disabled,
+.draftEditor button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .researchForm button:disabled {
   cursor: not-allowed;
   opacity: 0.55;
@@ -272,6 +310,13 @@ h1 {
   margin-top: 12px;
 }
 
+.reviewGrid {
+  display: grid;
+  grid-template-columns: minmax(340px, 0.8fr) minmax(560px, 1.2fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
 .panel {
   min-height: 520px;
   overflow: hidden;
@@ -306,6 +351,12 @@ h1 {
 .evidenceRow {
   border-bottom: 1px solid var(--border);
   padding: 14px 16px;
+}
+
+.evidenceRow.compact {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 8px;
 }
 
 .rowTitle {
@@ -415,6 +466,142 @@ h1 {
   gap: 16px;
 }
 
+.rankedList {
+  max-height: calc(100vh - 180px);
+  overflow: auto;
+}
+
+.rankedRow {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding: 14px 16px;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.rankedRow.selected {
+  background: var(--accent-soft);
+}
+
+.rankedRow strong,
+.rankedRow small {
+  display: block;
+}
+
+.rankedRow small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.scoreBadge {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 8px;
+  background: #0b3332;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.scoreBadge.large {
+  width: 52px;
+  height: 52px;
+  font-size: 18px;
+}
+
+.detailPanel {
+  min-height: calc(100vh - 110px);
+  overflow: auto;
+}
+
+.scoreBreakdown {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  padding: 16px;
+}
+
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--surface-subtle);
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.metric strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+.detailSection {
+  border-bottom: 1px solid var(--border);
+  padding: 16px;
+}
+
+.detailSection h3 {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.reviewActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  padding: 16px;
+}
+
+.draftEditor {
+  display: grid;
+  gap: 10px;
+}
+
+.draftEditor label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.draftEditor input,
+.draftEditor textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px;
+  color: var(--text);
+}
+
+.draftEditor textarea {
+  min-height: 220px;
+  resize: vertical;
+}
+
+.draftEditor small,
+.mutedText {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .empty {
   display: grid;
   min-height: 260px;
@@ -466,8 +653,13 @@ h1 {
   .researchForm,
   .statusStrip,
   .split,
+  .reviewGrid,
   .columns {
     grid-template-columns: 1fr;
+  }
+
+  .scoreBreakdown {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .topbar {
