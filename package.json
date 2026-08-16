@@ -1,0 +1,12 @@
+{
+  "name": "ai-prospecting-engine",
+  "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "lint": "npm --workspace apps/web run lint && cd apps/api && ruff check .",
+    "typecheck": "npm --workspace apps/web run typecheck",
+    "test": "cd apps/api && pytest"
+  }
+}

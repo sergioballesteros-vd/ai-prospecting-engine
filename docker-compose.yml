@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: prospecting
+      POSTGRES_PASSWORD: prospecting
+      POSTGRES_DB: prospecting
+    ports:
+      - "5432:5432"
+    volumes:
+      - prospecting_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U prospecting -d prospecting"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  prospecting_postgres:
