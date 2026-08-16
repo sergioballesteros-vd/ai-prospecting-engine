@@ -41,6 +41,7 @@ class Company(Base):
     outreach_drafts: Mapped[list["OutreachDraft"]] = relationship(back_populates="company")
     campaign_entries: Mapped[list["CampaignCompany"]] = relationship(back_populates="company")
     research_runs: Mapped[list["ResearchRun"]] = relationship(back_populates="company")
+    pipeline_events: Mapped[list["PipelineEvent"]] = relationship(back_populates="company")
 
 
 class Opportunity(Base):
@@ -59,6 +60,7 @@ class Opportunity(Base):
     scores: Mapped[list["OpportunityScore"]] = relationship(back_populates="opportunity")
     outreach_drafts: Mapped[list["OutreachDraft"]] = relationship(back_populates="opportunity")
     campaigns: Mapped[list["ProspectingCampaign"]] = relationship(back_populates="opportunity")
+    pipeline_events: Mapped[list["PipelineEvent"]] = relationship(back_populates="opportunity")
 
 
 class CompanySource(Base):
@@ -217,6 +219,7 @@ class ProspectingCampaign(Base):
     opportunity: Mapped[Opportunity] = relationship(back_populates="campaigns")
     companies: Mapped[list["CampaignCompany"]] = relationship(back_populates="campaign")
     research_runs: Mapped[list["ResearchRun"]] = relationship(back_populates="campaign")
+    pipeline_events: Mapped[list["PipelineEvent"]] = relationship(back_populates="campaign")
 
 
 class CampaignCompany(Base):
@@ -267,3 +270,34 @@ class ResearchRun(Base):
 
     company: Mapped[Company] = relationship(back_populates="research_runs")
     campaign: Mapped[ProspectingCampaign | None] = relationship(back_populates="research_runs")
+
+
+class PipelineEvent(Base):
+    __tablename__ = "pipeline_events"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    campaign_id: Mapped[int | None] = mapped_column(
+        ForeignKey("prospecting_campaigns.id", ondelete="SET NULL")
+    )
+    opportunity_id: Mapped[int] = mapped_column(ForeignKey("opportunities.id", ondelete="CASCADE"))
+    from_state: Mapped[str | None] = mapped_column(String(40))
+    to_state: Mapped[str] = mapped_column(String(40), nullable=False)
+    timestamp: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+    notes: Mapped[str | None] = mapped_column(Text)
+    event_metadata: Mapped[dict] = mapped_column("metadata", JSON, nullable=False, default=dict)
+    channel: Mapped[str | None] = mapped_column(String(40))
+    contacted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    message_used: Mapped[str | None] = mapped_column(Text)
+    expected_revenue: Mapped[float | None] = mapped_column(Float)
+    recurring_revenue_monthly: Mapped[float | None] = mapped_column(Float)
+    implementation_revenue: Mapped[float | None] = mapped_column(Float)
+    currency: Mapped[str | None] = mapped_column(String(3))
+    closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    lost_reason: Mapped[str | None] = mapped_column(String(255))
+
+    company: Mapped[Company] = relationship(back_populates="pipeline_events")
+    campaign: Mapped[ProspectingCampaign | None] = relationship(back_populates="pipeline_events")
+    opportunity: Mapped[Opportunity] = relationship(back_populates="pipeline_events")

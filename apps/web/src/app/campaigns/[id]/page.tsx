@@ -1,12 +1,14 @@
 "use client";
 
-import { FileSearch, RefreshCw, Search, Send, Sparkles } from "lucide-react";
+import { BarChart3, FileSearch, RefreshCw, Search, Send, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import {
   CampaignCompanyResult,
+  FunnelAnalytics,
   ProspectingCampaignDetail,
+  getCampaignAnalytics,
   getCampaign,
   retryCampaignCompany,
   runCampaign,
@@ -16,12 +18,18 @@ export default function CampaignDetailPage() {
   const params = useParams<{ id: string }>();
   const campaignId = Number(params.id);
   const [campaign, setCampaign] = useState<ProspectingCampaignDetail | null>(null);
+  const [analytics, setAnalytics] = useState<FunnelAnalytics | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
     try {
-      setCampaign(await getCampaign(campaignId));
+      const [nextCampaign, nextAnalytics] = await Promise.all([
+        getCampaign(campaignId),
+        getCampaignAnalytics(campaignId),
+      ]);
+      setCampaign(nextCampaign);
+      setAnalytics(nextAnalytics);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not load campaign");
     }
@@ -86,6 +94,10 @@ export default function CampaignDetailPage() {
             <Sparkles size={17} />
             Opportunities
           </Link>
+          <Link className="navItem" href="/analytics">
+            <BarChart3 size={17} />
+            Analytics
+          </Link>
         </nav>
       </aside>
       <section className="workspace">
@@ -115,6 +127,21 @@ export default function CampaignDetailPage() {
           />
           <Stat label="Status" value={campaign.status} />
         </section>
+        {analytics ? (
+          <section className="campaignStats">
+            <Stat label="Contacted" value={String(analytics.counts.contacted)} />
+            <Stat label="Replied" value={String(analytics.counts.replied)} />
+            <Stat label="Meetings" value={String(analytics.counts.meetings)} />
+            <Stat label="Proposals" value={String(analytics.counts.proposals)} />
+            <Stat label="Won" value={String(analytics.counts.won)} />
+            <Stat label="Lost" value={String(analytics.counts.lost)} />
+            <Stat
+              label="Revenue"
+              value={`€${analytics.business_metrics.revenue_generated.toFixed(0)}`}
+            />
+            <Stat label="MRR" value={`€${analytics.business_metrics.mrr_generated.toFixed(0)}`} />
+          </section>
+        ) : null}
         <section className="panel">
           <div className="panelHeader">
             <div>
@@ -151,6 +178,9 @@ function CompanyResult({
       <div>
         <strong>{result.entry.company.name}</strong>
         <small>{result.entry.company.domain}</small>
+        <Link className="secondaryButton tiny" href={`/companies/${result.entry.company.id}`}>
+          Timeline
+        </Link>
         {result.entry.error ? <p className="errorText">{result.entry.error}</p> : null}
       </div>
       <div className="scoreBreakdown inline">
@@ -173,6 +203,11 @@ function CompanyResult({
         <span className={`status ${result.entry.research_state === "FAILED" ? "failed" : "done"}`}>
           {result.entry.research_state}
         </span>
+        {result.pipeline_state ? (
+          <span className={`status ${result.pipeline_state === "LOST" ? "failed" : "done"}`}>
+            {result.pipeline_state}
+          </span>
+        ) : null}
         {result.entry.research_state === "FAILED" ? (
           <button
             className="secondaryButton tiny"

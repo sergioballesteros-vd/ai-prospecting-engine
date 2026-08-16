@@ -127,6 +127,8 @@ class OutreachDraftUpdate(BaseModel):
 
 class ReviewStateUpdate(BaseModel):
     state: str
+    campaign_id: int | None = None
+    notes: str | None = None
 
 
 class RankedOpportunityRead(BaseModel):
@@ -134,6 +136,7 @@ class RankedOpportunityRead(BaseModel):
     company: CompanyRead
     top_evidence: list[EvidenceRead]
     why_matched: str
+    pipeline_state: str | None = None
     latest_draft: OutreachDraftRead | None = None
 
 
@@ -200,12 +203,78 @@ class CampaignCompanyResult(BaseModel):
     entry: CampaignCompanyRead
     score: OpportunityScoreRead | None
     top_evidence: list[EvidenceRead]
+    pipeline_state: str | None = None
 
 
 class ProspectingCampaignDetail(ProspectingCampaignRead):
     stats: dict
     companies: list[CampaignCompanyResult]
     research_runs: list[ResearchRunRead]
+
+
+class PipelineTransitionCreate(BaseModel):
+    company_id: int
+    opportunity_id: int
+    campaign_id: int | None = None
+    to_state: str
+    notes: str | None = None
+    metadata: dict = Field(default_factory=dict)
+    channel: str | None = None
+    contacted_at: datetime | None = None
+    message_used: str | None = None
+    expected_revenue: float | None = None
+    recurring_revenue_monthly: float | None = None
+    implementation_revenue: float | None = None
+    currency: str | None = None
+    closed_at: datetime | None = None
+    lost_reason: str | None = None
+
+
+class PipelineEventRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    company_id: int
+    campaign_id: int | None
+    opportunity_id: int
+    from_state: str | None
+    to_state: str
+    timestamp: datetime
+    notes: str | None
+    event_metadata: dict
+    channel: str | None
+    contacted_at: datetime | None
+    message_used: str | None
+    expected_revenue: float | None
+    recurring_revenue_monthly: float | None
+    implementation_revenue: float | None
+    currency: str | None
+    closed_at: datetime | None
+    lost_reason: str | None
+
+
+class CompanyTimelineRead(CompanyDetail):
+    timeline: list[PipelineEventRead]
+
+
+class FunnelAnalyticsRead(BaseModel):
+    counts: dict
+    conversion_rates: dict
+    business_metrics: dict
+
+
+class CampaignComparisonRead(BaseModel):
+    campaign_id: int
+    name: str
+    sector: str
+    companies_discovered: int
+    qualified: int
+    reply_rate: float
+    meeting_rate: float
+    win_rate: float
+    revenue: float
+    mrr: float
+    research_cost: float
 
 
 class ResearchJobRead(BaseModel):

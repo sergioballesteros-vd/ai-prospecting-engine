@@ -17,16 +17,28 @@ from app.application.opportunity_review import (
     update_outreach_draft,
     update_score_state,
 )
+from app.application.pipeline import (
+    campaign_comparison,
+    current_pipeline_state,
+    funnel_metrics,
+    timeline_for_company,
+    transition_pipeline,
+)
 from app.application.research_jobs import create_research_job, get_research_job, run_research_job
 from app.domain.models import Company, Evidence, OpportunityScore, ProspectingCampaign
 from app.domain.schemas import (
     CampaignCompanyRead,
     CampaignCompanyResult,
+    CampaignComparisonRead,
     CompanyCreate,
     CompanyDetail,
     CompanyRead,
+    CompanyTimelineRead,
+    FunnelAnalyticsRead,
     OutreachDraftRead,
     OutreachDraftUpdate,
+    PipelineEventRead,
+    PipelineTransitionCreate,
     ProspectingCampaignCreate,
     ProspectingCampaignDetail,
     ProspectingCampaignRead,
@@ -93,6 +105,37 @@ def get_company(company_id: int, db: DbSession) -> Company:
     return company
 
 
+@router.get("/companies/{company_id}/timeline", response_model=CompanyTimelineRead)
+def get_company_timeline(company_id: int, db: DbSession):
+    company = db.scalar(
+        select(Company)
+        .where(Company.id == company_id)
+        .options(
+            selectinload(Company.sources),
+            selectinload(Company.evidence),
+            selectinload(Company.signals),
+            selectinload(Company.analyses),
+        )
+    )
+    if company is None:
+        raise HTTPException(status_code=404, detail="Company not found")
+    return CompanyTimelineRead(
+        id=company.id,
+        name=company.name,
+        domain=company.domain,
+        website_url=company.website_url,
+        industry=company.industry,
+        country=company.country,
+        city=company.city,
+        created_at=company.created_at,
+        sources=company.sources,
+        evidence=company.evidence,
+        signals=company.signals,
+        analyses=company.analyses,
+        timeline=timeline_for_company(db, company.id),
+    )
+
+
 @router.post("/companies/{company_id}/research", response_model=ResearchJobRead)
 def start_research(company_id: int, background_tasks: BackgroundTasks, db: DbSession):
     if db.get(Company, company_id) is None:
@@ -125,6 +168,9 @@ def list_ranked_opportunities(db: DbSession) -> list[RankedOpportunityRead]:
                 company=score.company,
                 top_evidence=top_evidence,
                 why_matched=score.explanation,
+                pipeline_state=current_pipeline_state(
+                    db, score.company_id, score.opportunity_id
+                ),
                 latest_draft=latest_draft[0] if latest_draft else None,
             )
         )
@@ -139,6 +185,24 @@ def set_opportunity_score_state(
         score = update_score_state(db, score_id, payload.state)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if payload.state == "APPROVED":
+        try:
+            if (
+                current_pipeline_state(
+                    db, score.company_id, score.opportunity_id, payload.campaign_id
+                )
+                is None
+            ):
+                transition_pipeline(
+                    db,
+                    company_id=score.company_id,
+                    opportunity_id=score.opportunity_id,
+                    campaign_id=payload.campaign_id,
+                    to_state="APPROVED",
+                    notes=payload.notes,
+                )
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
     score = db.scalar(
         select(OpportunityScore)
         .where(OpportunityScore.id == score_id)
@@ -157,6 +221,7 @@ def set_opportunity_score_state(
             evidence_by_id[item_id] for item_id in score.evidence_ids if item_id in evidence_by_id
         ],
         why_matched=score.explanation,
+        pipeline_state=current_pipeline_state(db, score.company_id, score.opportunity_id),
         latest_draft=sorted(score.outreach_drafts, key=lambda item: item.id, reverse=True)[0]
         if score.outreach_drafts
         else None,
@@ -210,7 +275,7 @@ def read_campaign(campaign_id: int, db: DbSession):
         campaign = campaign_detail(db, campaign_id)
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
-    return _campaign_detail_response(campaign)
+    return _campaign_detail_response(db, campaign)
 
 
 @router.post("/campaigns/{campaign_id}/run", response_model=ProspectingCampaignRead)
@@ -236,7 +301,49 @@ async def retry_campaign_entry(entry_id: int, db: DbSession):
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
 
-def _campaign_detail_response(campaign: ProspectingCampaign) -> ProspectingCampaignDetail:
+@router.post("/pipeline/events", response_model=PipelineEventRead)
+def create_pipeline_event(payload: PipelineTransitionCreate, db: DbSession):
+    try:
+        return transition_pipeline(
+            db,
+            company_id=payload.company_id,
+            opportunity_id=payload.opportunity_id,
+            campaign_id=payload.campaign_id,
+            to_state=payload.to_state,
+            notes=payload.notes,
+            metadata=payload.metadata,
+            channel=payload.channel,
+            contacted_at=payload.contacted_at,
+            message_used=payload.message_used,
+            expected_revenue=payload.expected_revenue,
+            recurring_revenue_monthly=payload.recurring_revenue_monthly,
+            implementation_revenue=payload.implementation_revenue,
+            currency=payload.currency,
+            closed_at=payload.closed_at,
+            lost_reason=payload.lost_reason,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.get("/analytics/funnel", response_model=FunnelAnalyticsRead)
+def read_global_funnel(db: DbSession):
+    return funnel_metrics(db)
+
+
+@router.get("/campaigns/{campaign_id}/analytics", response_model=FunnelAnalyticsRead)
+def read_campaign_funnel(campaign_id: int, db: DbSession):
+    return funnel_metrics(db, campaign_id)
+
+
+@router.get("/analytics/campaign-comparison", response_model=list[CampaignComparisonRead])
+def read_campaign_comparison(db: DbSession):
+    return campaign_comparison(db)
+
+
+def _campaign_detail_response(
+    db: Session, campaign: ProspectingCampaign
+) -> ProspectingCampaignDetail:
     company_results: list[CampaignCompanyResult] = []
     for entry in campaign.companies:
         scores = [
@@ -256,7 +363,14 @@ def _campaign_detail_response(campaign: ProspectingCampaign) -> ProspectingCampa
                 if item_id in evidence_by_id
             ]
         company_results.append(
-            CampaignCompanyResult(entry=entry, score=score, top_evidence=top_evidence)
+            CampaignCompanyResult(
+                entry=entry,
+                score=score,
+                top_evidence=top_evidence,
+                pipeline_state=current_pipeline_state(
+                    db, entry.company_id, campaign.opportunity_id, campaign.id
+                ),
+            )
         )
     company_results.sort(
         key=lambda item: item.score.total_score if item.score is not None else -1, reverse=True

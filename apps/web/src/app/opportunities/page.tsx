@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  BarChart3,
   Check,
   FileSearch,
   Loader2,
@@ -16,7 +17,9 @@ import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import {
   OutreachDraft,
+  PipelineState,
   RankedOpportunity,
+  createPipelineEvent,
   generateDraft,
   listRankedOpportunities,
   updateDraft,
@@ -99,6 +102,36 @@ export default function OpportunitiesPage() {
     }
   }
 
+  async function movePipeline(
+    row: RankedOpportunity,
+    payload: {
+      to_state: PipelineState;
+      notes?: string | null;
+      channel?: "EMAIL" | "LINKEDIN" | "PHONE" | "OTHER" | null;
+      message_used?: string | null;
+      expected_revenue?: number | null;
+      recurring_revenue_monthly?: number | null;
+      implementation_revenue?: number | null;
+      currency?: string | null;
+      lost_reason?: string | null;
+    },
+  ) {
+    setPendingAction(`PIPELINE-${row.score.id}`);
+    setError(null);
+    try {
+      const event = await createPipelineEvent({
+        company_id: row.company.id,
+        opportunity_id: row.score.opportunity_id,
+        ...payload,
+      });
+      replaceRow({ ...row, pipeline_state: event.to_state });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Pipeline transition failed");
+    } finally {
+      setPendingAction(null);
+    }
+  }
+
   function replaceRow(updated: RankedOpportunity) {
     setRows((current) =>
       current.map((row) => (row.score.id === updated.score.id ? updated : row)),
@@ -125,6 +158,10 @@ export default function OpportunitiesPage() {
           <Link className="navItem active" href="/opportunities">
             <Sparkles size={17} />
             Opportunities
+          </Link>
+          <Link className="navItem" href="/analytics">
+            <BarChart3 size={17} />
+            Analytics
           </Link>
         </nav>
         <div className="operator">
@@ -190,6 +227,7 @@ export default function OpportunitiesPage() {
             onReview={review}
             onCreateDraft={createDraft}
             onSaveDraft={saveDraft}
+            onMovePipeline={movePipeline}
           />
         </section>
       </section>
@@ -205,6 +243,7 @@ function OpportunityDetail({
   onReview,
   onCreateDraft,
   onSaveDraft,
+  onMovePipeline,
 }: {
   row: RankedOpportunity | null;
   pendingAction: string | null;
@@ -213,7 +252,32 @@ function OpportunityDetail({
   onReview: (row: RankedOpportunity, state: "APPROVED" | "REJECTED") => void;
   onCreateDraft: (row: RankedOpportunity) => void;
   onSaveDraft: (draft: OutreachDraft) => void;
+  onMovePipeline: (
+    row: RankedOpportunity,
+    payload: {
+      to_state: PipelineState;
+      notes?: string | null;
+      channel?: "EMAIL" | "LINKEDIN" | "PHONE" | "OTHER" | null;
+      message_used?: string | null;
+      expected_revenue?: number | null;
+      recurring_revenue_monthly?: number | null;
+      implementation_revenue?: number | null;
+      currency?: string | null;
+      lost_reason?: string | null;
+    },
+  ) => void;
 }) {
+  const [pipelineForm, setPipelineForm] = useState({
+    notes: "",
+    channel: "EMAIL" as "EMAIL" | "LINKEDIN" | "PHONE" | "OTHER",
+    message_used: "",
+    expected_revenue: "",
+    recurring_revenue_monthly: "",
+    implementation_revenue: "",
+    currency: "EUR",
+    lost_reason: "",
+  });
+
   if (!row) {
     return (
       <div className="panel">
@@ -226,6 +290,9 @@ function OpportunityDetail({
   const edits = draft
     ? (draftEdits[draft.id] ?? { subject: draft.subject, body: draft.body })
     : null;
+  const nextState = nextPipelineState(row.pipeline_state);
+  const canManagePipeline =
+    row.score.qualification_state === "APPROVED" && row.pipeline_state !== "WON" && row.pipeline_state !== "LOST";
 
   return (
     <div className="panel detailPanel">
@@ -294,6 +361,160 @@ function OpportunityDetail({
       </section>
 
       <section className="detailSection">
+        <h3>Commercial pipeline</h3>
+        <div className="pipelineHeader">
+          <span className={`status ${row.pipeline_state ? stateClass(row.pipeline_state) : ""}`}>
+            {row.pipeline_state ?? "NOT STARTED"}
+          </span>
+          <Link className="secondaryButton tiny" href={`/companies/${row.company.id}`}>
+            Timeline
+          </Link>
+        </div>
+        {canManagePipeline && nextState ? (
+          <div className="pipelineForm">
+            {nextState === "CONTACTED" ? (
+              <>
+                <label>
+                  <span>Channel</span>
+                  <select
+                    value={pipelineForm.channel}
+                    onChange={(event) =>
+                      setPipelineForm((current) => ({
+                        ...current,
+                        channel: event.target.value as typeof pipelineForm.channel,
+                      }))
+                    }
+                  >
+                    <option value="EMAIL">Email</option>
+                    <option value="LINKEDIN">LinkedIn</option>
+                    <option value="PHONE">Phone</option>
+                    <option value="OTHER">Other</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Message used</span>
+                  <textarea
+                    value={pipelineForm.message_used}
+                    onChange={(event) =>
+                      setPipelineForm((current) => ({
+                        ...current,
+                        message_used: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+              </>
+            ) : null}
+            {nextState === "WON" ? (
+              <div className="revenueGrid">
+                <label>
+                  <span>Expected revenue</span>
+                  <input
+                    inputMode="decimal"
+                    value={pipelineForm.expected_revenue}
+                    onChange={(event) =>
+                      setPipelineForm((current) => ({
+                        ...current,
+                        expected_revenue: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+                <label>
+                  <span>MRR</span>
+                  <input
+                    inputMode="decimal"
+                    value={pipelineForm.recurring_revenue_monthly}
+                    onChange={(event) =>
+                      setPipelineForm((current) => ({
+                        ...current,
+                        recurring_revenue_monthly: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+                <label>
+                  <span>Implementation</span>
+                  <input
+                    inputMode="decimal"
+                    value={pipelineForm.implementation_revenue}
+                    onChange={(event) =>
+                      setPipelineForm((current) => ({
+                        ...current,
+                        implementation_revenue: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+                <label>
+                  <span>Currency</span>
+                  <input
+                    value={pipelineForm.currency}
+                    onChange={(event) =>
+                      setPipelineForm((current) => ({
+                        ...current,
+                        currency: event.target.value.toUpperCase().slice(0, 3),
+                      }))
+                    }
+                  />
+                </label>
+              </div>
+            ) : null}
+            <label>
+              <span>Notes</span>
+              <textarea
+                value={pipelineForm.notes}
+                onChange={(event) =>
+                  setPipelineForm((current) => ({ ...current, notes: event.target.value }))
+                }
+              />
+            </label>
+            {row.pipeline_state ? (
+              <label>
+                <span>Lost reason</span>
+                <input
+                  value={pipelineForm.lost_reason}
+                  onChange={(event) =>
+                    setPipelineForm((current) => ({
+                      ...current,
+                      lost_reason: event.target.value,
+                    }))
+                  }
+                />
+              </label>
+            ) : null}
+            <div className="reviewActions">
+              <button
+                className="secondaryButton"
+                onClick={() =>
+                  onMovePipeline(row, buildPipelinePayload(nextState, pipelineForm))
+                }
+                disabled={pendingAction === `PIPELINE-${row.score.id}`}
+              >
+                Move to {nextState}
+              </button>
+              {row.pipeline_state && row.pipeline_state !== "LOST" ? (
+                <button
+                  className="dangerButton"
+                  onClick={() =>
+                    onMovePipeline(row, buildPipelinePayload("LOST", pipelineForm))
+                  }
+                  disabled={
+                    pendingAction === `PIPELINE-${row.score.id}` ||
+                    !pipelineForm.lost_reason.trim()
+                  }
+                >
+                  Mark lost
+                </button>
+              ) : null}
+            </div>
+          </div>
+        ) : (
+          <p className="mutedText">Approve the company before moving it through the funnel.</p>
+        )}
+      </section>
+
+      <section className="detailSection">
         <h3>Draft</h3>
         {draft && edits ? (
           <div className="draftEditor">
@@ -349,8 +570,63 @@ function Metric({ label, value }: { label: string; value: number }) {
 }
 
 function stateClass(state: string) {
-  if (state === "APPROVED") return "done";
-  if (state === "REJECTED") return "failed";
+  if (state === "APPROVED" || state === "WON") return "done";
+  if (state === "REJECTED" || state === "LOST") return "failed";
   if (state === "QUALIFIED") return "live";
   return "";
+}
+
+function nextPipelineState(state: PipelineState | null): PipelineState | null {
+  if (state === null) return "APPROVED";
+  if (state === "APPROVED") return "CONTACTED";
+  if (state === "CONTACTED") return "REPLIED";
+  if (state === "REPLIED") return "MEETING";
+  if (state === "MEETING") return "PROPOSAL";
+  if (state === "PROPOSAL") return "WON";
+  return null;
+}
+
+function buildPipelinePayload(
+  toState: PipelineState,
+  form: {
+    notes: string;
+    channel: "EMAIL" | "LINKEDIN" | "PHONE" | "OTHER";
+    message_used: string;
+    expected_revenue: string;
+    recurring_revenue_monthly: string;
+    implementation_revenue: string;
+    currency: string;
+    lost_reason: string;
+  },
+) {
+  const payload = {
+    to_state: toState,
+    notes: form.notes || null,
+    channel: null as "EMAIL" | "LINKEDIN" | "PHONE" | "OTHER" | null,
+    message_used: null as string | null,
+    expected_revenue: null as number | null,
+    recurring_revenue_monthly: null as number | null,
+    implementation_revenue: null as number | null,
+    currency: null as string | null,
+    lost_reason: null as string | null,
+  };
+  if (toState === "CONTACTED") {
+    payload.channel = form.channel;
+    payload.message_used = form.message_used || null;
+  }
+  if (toState === "WON") {
+    payload.expected_revenue = numberOrNull(form.expected_revenue);
+    payload.recurring_revenue_monthly = numberOrNull(form.recurring_revenue_monthly);
+    payload.implementation_revenue = numberOrNull(form.implementation_revenue);
+    payload.currency = form.currency || "EUR";
+  }
+  if (toState === "LOST") {
+    payload.lost_reason = form.lost_reason;
+  }
+  return payload;
+}
+
+function numberOrNull(value: string): number | null {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && value.trim() !== "" ? parsed : null;
 }

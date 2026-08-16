@@ -108,11 +108,42 @@ export type OutreachDraft = {
   updated_at: string;
 };
 
+export type PipelineState =
+  | "APPROVED"
+  | "CONTACTED"
+  | "REPLIED"
+  | "MEETING"
+  | "PROPOSAL"
+  | "WON"
+  | "LOST";
+
+export type PipelineEvent = {
+  id: number;
+  company_id: number;
+  campaign_id: number | null;
+  opportunity_id: number;
+  from_state: PipelineState | null;
+  to_state: PipelineState;
+  timestamp: string;
+  notes: string | null;
+  event_metadata: Record<string, unknown>;
+  channel: "EMAIL" | "LINKEDIN" | "PHONE" | "OTHER" | null;
+  contacted_at: string | null;
+  message_used: string | null;
+  expected_revenue: number | null;
+  recurring_revenue_monthly: number | null;
+  implementation_revenue: number | null;
+  currency: string | null;
+  closed_at: string | null;
+  lost_reason: string | null;
+};
+
 export type RankedOpportunity = {
   score: OpportunityScore;
   company: Company;
   top_evidence: Evidence[];
   why_matched: string;
+  pipeline_state: PipelineState | null;
   latest_draft: OutreachDraft | null;
 };
 
@@ -145,6 +176,7 @@ export type CampaignCompanyResult = {
   };
   score: OpportunityScore | null;
   top_evidence: Evidence[];
+  pipeline_state: PipelineState | null;
 };
 
 export type ProspectingCampaignDetail = ProspectingCampaign & {
@@ -173,6 +205,55 @@ export type ProspectingCampaignDetail = ProspectingCampaign & {
     error: string | null;
     created_at: string;
   }>;
+};
+
+export type CompanyTimeline = CompanyDetail & {
+  timeline: PipelineEvent[];
+};
+
+export type FunnelAnalytics = {
+  counts: Record<
+    | "discovered"
+    | "researched"
+    | "qualified"
+    | "approved"
+    | "contacted"
+    | "replied"
+    | "meetings"
+    | "proposals"
+    | "won"
+    | "lost",
+    number
+  >;
+  conversion_rates: Record<
+    "contacted_to_reply" | "reply_to_meeting" | "meeting_to_proposal" | "proposal_to_won",
+    number
+  >;
+  business_metrics: Record<
+    | "revenue_generated"
+    | "mrr_generated"
+    | "average_deal_value"
+    | "revenue_per_100_discovered"
+    | "revenue_per_100_contacted"
+    | "research_cost_per_meeting"
+    | "research_cost_per_won_customer"
+    | "research_cost",
+    number
+  >;
+};
+
+export type CampaignComparison = {
+  campaign_id: number;
+  name: string;
+  sector: string;
+  companies_discovered: number;
+  qualified: number;
+  reply_rate: number;
+  meeting_rate: number;
+  win_rate: number;
+  revenue: number;
+  mrr: number;
+  research_cost: number;
 };
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -221,6 +302,45 @@ export function updateOpportunityState(
     method: "PATCH",
     body: JSON.stringify({ state }),
   });
+}
+
+export function createPipelineEvent(payload: {
+  company_id: number;
+  opportunity_id: number;
+  campaign_id?: number | null;
+  to_state: PipelineState;
+  notes?: string | null;
+  metadata?: Record<string, unknown>;
+  channel?: PipelineEvent["channel"];
+  contacted_at?: string | null;
+  message_used?: string | null;
+  expected_revenue?: number | null;
+  recurring_revenue_monthly?: number | null;
+  implementation_revenue?: number | null;
+  currency?: string | null;
+  closed_at?: string | null;
+  lost_reason?: string | null;
+}): Promise<PipelineEvent> {
+  return request<PipelineEvent>("/pipeline/events", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function getCompanyTimeline(companyId: number): Promise<CompanyTimeline> {
+  return request<CompanyTimeline>(`/companies/${companyId}/timeline`);
+}
+
+export function getGlobalFunnel(): Promise<FunnelAnalytics> {
+  return request<FunnelAnalytics>("/analytics/funnel");
+}
+
+export function getCampaignAnalytics(campaignId: number): Promise<FunnelAnalytics> {
+  return request<FunnelAnalytics>(`/campaigns/${campaignId}/analytics`);
+}
+
+export function getCampaignComparison(): Promise<CampaignComparison[]> {
+  return request<CampaignComparison[]>("/analytics/campaign-comparison");
 }
 
 export function generateDraft(scoreId: number): Promise<OutreachDraft> {
