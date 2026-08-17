@@ -15,6 +15,7 @@ from app.domain.models import (
     CompanySignal,
     CompanySource,
     Evidence,
+    ResearchJobRecord,
     ResearchRun,
 )
 from app.infrastructure.database import SessionLocal
@@ -37,10 +38,7 @@ class ResearchJob:
     error: str | None = None
 
 
-JOBS: dict[str, ResearchJob] = {}
-
-
-def create_research_job(company_id: int) -> ResearchJob:
+def create_research_job(company_id: int, db: Session | None = None) -> ResearchJob:
     job = ResearchJob(
         id=str(uuid4()),
         company_id=company_id,
@@ -49,20 +47,33 @@ def create_research_job(company_id: int) -> ResearchJob:
         started_at=datetime.now(UTC),
         message="Research queued",
     )
-    JOBS[job.id] = job
+    if db is None:
+        with SessionLocal() as session:
+            _persist_job(session, job)
+    else:
+        _persist_job(db, job)
     return job
 
 
 def get_research_job(job_id: str) -> ResearchJob | None:
-    return JOBS.get(job_id)
+    with SessionLocal() as db:
+        record = db.get(ResearchJobRecord, job_id)
+        return _job_from_record(record) if record is not None else None
 
 
 async def run_research_job(job_id: str) -> None:
-    job = JOBS[job_id]
-    job.status = "running"
-    job.message = "Fetching website pages"
-    started = datetime.now(UTC)
     db = SessionLocal()
+    record = db.get(ResearchJobRecord, job_id)
+    if record is None:
+        logger.error("research_job_missing", extra={"job_id": job_id})
+        db.close()
+        return
+    record.status = "running"
+    record.message = "Fetching website pages"
+    record.error = None
+    db.commit()
+    job = _job_from_record(record)
+    started = datetime.now(UTC)
     try:
         await _research_company(db, job)
         job.status = "completed"
@@ -76,8 +87,9 @@ async def run_research_job(job_id: str) -> None:
         job.error = str(exc)
         job.message = "Research failed"
     finally:
-        db.close()
         job.completed_at = datetime.now(UTC)
+        _save_job_state(db, job)
+        db.close()
         logger.info(
             "research_job_finished",
             extra={
@@ -88,6 +100,46 @@ async def run_research_job(job_id: str) -> None:
                 "status": job.status,
             },
         )
+
+
+def _persist_job(db: Session, job: ResearchJob) -> None:
+    db.add(
+        ResearchJobRecord(
+            id=job.id,
+            company_id=job.company_id,
+            status=job.status,
+            operation=job.operation,
+            message=job.message,
+            error=job.error,
+            started_at=job.started_at,
+            completed_at=job.completed_at,
+        )
+    )
+    db.commit()
+
+
+def _job_from_record(record: ResearchJobRecord) -> ResearchJob:
+    return ResearchJob(
+        id=record.id,
+        company_id=record.company_id,
+        status=record.status,
+        operation=record.operation,
+        started_at=record.started_at,
+        completed_at=record.completed_at,
+        message=record.message,
+        error=record.error,
+    )
+
+
+def _save_job_state(db: Session, job: ResearchJob) -> None:
+    record = db.get(ResearchJobRecord, job.id)
+    if record is None:
+        return
+    record.status = job.status
+    record.message = job.message
+    record.error = job.error
+    record.completed_at = job.completed_at
+    db.commit()
 
 
 async def _research_company(db: Session, job: ResearchJob) -> None:

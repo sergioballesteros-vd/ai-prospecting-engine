@@ -140,7 +140,7 @@ def get_company_timeline(company_id: int, db: DbSession):
 def start_research(company_id: int, background_tasks: BackgroundTasks, db: DbSession):
     if db.get(Company, company_id) is None:
         raise HTTPException(status_code=404, detail="Company not found")
-    job = create_research_job(company_id)
+    job = create_research_job(company_id, db)
     background_tasks.add_task(run_research_job, job.id)
     return job
 

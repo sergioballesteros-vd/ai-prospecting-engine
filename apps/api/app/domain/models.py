@@ -42,6 +42,7 @@ class Company(Base):
     campaign_entries: Mapped[list["CampaignCompany"]] = relationship(back_populates="company")
     research_runs: Mapped[list["ResearchRun"]] = relationship(back_populates="company")
     pipeline_events: Mapped[list["PipelineEvent"]] = relationship(back_populates="company")
+    research_jobs: Mapped[list["ResearchJobRecord"]] = relationship(back_populates="company")
 
 
 class Opportunity(Base):
@@ -270,6 +271,21 @@ class ResearchRun(Base):
 
     company: Mapped[Company] = relationship(back_populates="research_runs")
     campaign: Mapped[ProspectingCampaign | None] = relationship(back_populates="research_runs")
+
+
+class ResearchJobRecord(Base):
+    __tablename__ = "research_jobs"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    status: Mapped[str] = mapped_column(String(40), nullable=False)
+    operation: Mapped[str] = mapped_column(String(80), nullable=False)
+    message: Mapped[str | None] = mapped_column(Text)
+    error: Mapped[str | None] = mapped_column(Text)
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+    company: Mapped[Company] = relationship(back_populates="research_jobs")
 
 
 class PipelineEvent(Base):
