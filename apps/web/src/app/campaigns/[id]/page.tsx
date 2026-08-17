@@ -1,9 +1,10 @@
 "use client";
 
-import { BarChart3, FileSearch, RefreshCw, Search, Send, Sparkles } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { AppShell } from "@/components/AppShell";
 import {
   CampaignCompanyResult,
   FunnelAnalytics,
@@ -76,31 +77,7 @@ export default function CampaignDetailPage() {
   }
 
   return (
-    <main className="shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <FileSearch size={22} />
-          <span>AI Prospecting Engine</span>
-        </div>
-        <nav className="nav">
-          <Link className="navItem" href="/">
-            <Search size={17} />
-            Investigación
-          </Link>
-          <Link className="navItem active" href="/campaigns">
-            <Send size={17} />
-            Campañas
-          </Link>
-          <Link className="navItem" href="/opportunities">
-            <Sparkles size={17} />
-            Oportunidades
-          </Link>
-          <Link className="navItem" href="/analytics">
-            <BarChart3 size={17} />
-            Analítica
-          </Link>
-        </nav>
-      </aside>
+    <AppShell>
       <section className="workspace">
         <header className="topbar">
           <div>
@@ -161,7 +138,7 @@ export default function CampaignDetailPage() {
           </div>
         </section>
       </section>
-    </main>
+    </AppShell>
   );
 }
 

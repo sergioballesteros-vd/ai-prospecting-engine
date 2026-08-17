@@ -290,6 +290,10 @@ export function getCompany(companyId: number): Promise<CompanyDetail> {
   return request<CompanyDetail>(`/companies/${companyId}`);
 }
 
+export function listCompanies(): Promise<Company[]> {
+  return request<Company[]>("/companies");
+}
+
 export function listRankedOpportunities(): Promise<RankedOpportunity[]> {
   return request<RankedOpportunity[]>("/opportunities/ranked");
 }

@@ -1,9 +1,8 @@
 "use client";
 
-import { BarChart3, FileSearch, Search, Send, Sparkles } from "lucide-react";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AppShell } from "@/components/AppShell";
 import { CompanyTimeline, PipelineEvent, getCompanyTimeline } from "@/lib/api";
 import { pipelineStateLabel } from "@/lib/labels";
 
@@ -22,31 +21,7 @@ export default function CompanyTimelinePage() {
   }, [companyId]);
 
   return (
-    <main className="shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <FileSearch size={22} />
-          <span>AI Prospecting Engine</span>
-        </div>
-        <nav className="nav">
-          <Link className="navItem" href="/">
-            <Search size={17} />
-            Investigación
-          </Link>
-          <Link className="navItem" href="/campaigns">
-            <Send size={17} />
-            Campañas
-          </Link>
-          <Link className="navItem" href="/opportunities">
-            <Sparkles size={17} />
-            Oportunidades
-          </Link>
-          <Link className="navItem" href="/analytics">
-            <BarChart3 size={17} />
-            Analítica
-          </Link>
-        </nav>
-      </aside>
+    <AppShell>
       <section className="workspace">
         {error ? <div className="notice error">{error}</div> : null}
         {company ? (
@@ -92,7 +67,7 @@ export default function CompanyTimelinePage() {
           <div className="empty">Cargando empresa...</div>
         )}
       </section>
-    </main>
+    </AppShell>
   );
 }
 

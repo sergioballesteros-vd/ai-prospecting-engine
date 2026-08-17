@@ -1,20 +1,16 @@
 "use client";
 
 import {
-  BarChart3,
   Check,
-  FileSearch,
   Loader2,
   MailPlus,
   Save,
-  Send,
-  Search,
-  Sparkles,
   X,
 } from "lucide-react";
 import Link from "next/link";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
+import { AppShell } from "@/components/AppShell";
 import {
   OutreachDraft,
   PipelineState,
@@ -141,39 +137,7 @@ export default function OpportunitiesPage() {
   }
 
   return (
-    <main className="shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <FileSearch size={22} />
-          <span>AI Prospecting Engine</span>
-        </div>
-        <nav className="nav">
-          <Link className="navItem" href="/">
-            <Search size={17} />
-            Investigación
-          </Link>
-          <Link className="navItem" href="/campaigns">
-            <Send size={17} />
-            Campañas
-          </Link>
-          <Link className="navItem active" href="/opportunities">
-            <Sparkles size={17} />
-            Oportunidades
-          </Link>
-          <Link className="navItem" href="/analytics">
-            <BarChart3 size={17} />
-            Analítica
-          </Link>
-        </nav>
-        <div className="operator">
-          <span className="avatar">SB</span>
-          <span>
-            <strong>Sergio Ballesteros</strong>
-            <small>Workspace interno</small>
-          </span>
-        </div>
-      </aside>
-
+    <AppShell>
       <section className="workspace">
         <header className="topbar">
           <div>
@@ -232,7 +196,7 @@ export default function OpportunitiesPage() {
           />
         </section>
       </section>
-    </main>
+    </AppShell>
   );
 }
 

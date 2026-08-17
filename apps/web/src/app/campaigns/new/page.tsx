@@ -1,9 +1,9 @@
 "use client";
 
-import { FileSearch, Save, Search, Send, Sparkles } from "lucide-react";
-import Link from "next/link";
+import { Save } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { AppShell } from "@/components/AppShell";
 import { createCampaign } from "@/lib/api";
 
 export default function NewCampaignPage() {
@@ -39,27 +39,7 @@ export default function NewCampaignPage() {
   }
 
   return (
-    <main className="shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <FileSearch size={22} />
-          <span>AI Prospecting Engine</span>
-        </div>
-        <nav className="nav">
-          <Link className="navItem" href="/">
-            <Search size={17} />
-            Investigación
-          </Link>
-          <Link className="navItem active" href="/campaigns">
-            <Send size={17} />
-            Campañas
-          </Link>
-          <Link className="navItem" href="/opportunities">
-            <Sparkles size={17} />
-            Oportunidades
-          </Link>
-        </nav>
-      </aside>
+    <AppShell>
       <section className="workspace">
         <header className="topbar">
           <div>
@@ -107,7 +87,7 @@ export default function NewCampaignPage() {
           </button>
         </form>
       </section>
-    </main>
+    </AppShell>
   );
 }
 

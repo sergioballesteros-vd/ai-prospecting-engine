@@ -2,17 +2,12 @@
 
 import {
   AlertCircle,
-  Building2,
   CheckCircle2,
-  FileSearch,
   Loader2,
   Play,
-  Send,
-  Search,
-  Sparkles,
 } from "lucide-react";
-import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { AppShell } from "@/components/AppShell";
 import {
   Analysis,
   Company,
@@ -72,39 +67,7 @@ export default function Home() {
   }
 
   return (
-    <main className="shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <FileSearch size={22} />
-          <span>AI Prospecting Engine</span>
-        </div>
-        <nav className="nav">
-          <Link className="navItem active" href="/">
-            <Search size={17} />
-            Investigación
-          </Link>
-          <a className="navItem" href="#">
-            <Building2 size={17} />
-            Empresas
-          </a>
-          <Link className="navItem" href="/campaigns">
-            <Send size={17} />
-            Campañas
-          </Link>
-          <Link className="navItem" href="/opportunities">
-            <Sparkles size={17} />
-            Oportunidades
-          </Link>
-        </nav>
-        <div className="operator">
-          <span className="avatar">SB</span>
-          <span>
-            <strong>Sergio Ballesteros</strong>
-            <small>Workspace interno</small>
-          </span>
-        </div>
-      </aside>
-
+    <AppShell>
       <section className="workspace">
         <header className="topbar">
           <div>
@@ -144,7 +107,7 @@ export default function Home() {
           <AnalysisPanel analysis={latestAnalysis} job={job} />
         </section>
       </section>
-    </main>
+    </AppShell>
   );
 }
 

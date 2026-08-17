@@ -883,8 +883,10 @@ a.secondaryButton {
   display: grid;
   min-height: 260px;
   place-items: center;
+  padding: 24px;
   color: var(--muted);
   font-size: 13px;
+  text-align: center;
 }
 
 .spin {
