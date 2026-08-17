@@ -4,6 +4,7 @@ import { FileSearch, Plus, Search, Send, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ProspectingCampaign, listCampaigns } from "@/lib/api";
+import { campaignStatusLabel } from "@/lib/labels";
 
 export default function CampaignsPage() {
   const [campaigns, setCampaigns] = useState<ProspectingCampaign[]>([]);
@@ -12,7 +13,7 @@ export default function CampaignsPage() {
   useEffect(() => {
     listCampaigns()
       .then(setCampaigns)
-      .catch((err) => setError(err instanceof Error ? err.message : "Could not load campaigns"));
+      .catch((err) => setError(err instanceof Error ? err.message : "No se pudieron cargar las campañas"));
   }, []);
 
   return (
@@ -25,35 +26,35 @@ export default function CampaignsPage() {
         <nav className="nav">
           <Link className="navItem" href="/">
             <Search size={17} />
-            Research
+            Investigación
           </Link>
           <Link className="navItem active" href="/campaigns">
             <Send size={17} />
-            Campaigns
+            Campañas
           </Link>
           <Link className="navItem" href="/opportunities">
             <Sparkles size={17} />
-            Opportunities
+            Oportunidades
           </Link>
         </nav>
       </aside>
       <section className="workspace">
         <header className="topbar">
           <div>
-            <h1>Campaigns</h1>
-            <p>Define a target market, discover companies, research them, and rank results.</p>
+            <h1>Campañas</h1>
+            <p>Define un mercado objetivo, descubre empresas, investígalas y prioriza resultados.</p>
           </div>
           <Link className="secondaryButton" href="/campaigns/new">
             <Plus size={16} />
-            New campaign
+            Nueva campaña
           </Link>
         </header>
         {error ? <div className="notice error">{error}</div> : null}
         <section className="panel">
           <div className="panelHeader">
             <div>
-              <h2>Prospecting campaigns</h2>
-              <p>No outreach is sent from campaigns.</p>
+              <h2>Campañas de prospección</h2>
+              <p>Las campañas no envían outreach automáticamente.</p>
             </div>
             <span>{campaigns.length}</span>
           </div>
@@ -66,13 +67,13 @@ export default function CampaignsPage() {
                     {campaign.city_or_region}, {campaign.country} · {campaign.industries.join(", ")}
                   </small>
                 </span>
-                <span>{campaign.target_company_count} targets</span>
+                <span>{campaign.target_company_count} objetivos</span>
                 <span className={`status ${campaign.status === "COMPLETED" ? "done" : "live"}`}>
-                  {campaign.status}
+                  {campaignStatusLabel(campaign.status)}
                 </span>
               </Link>
             ))}
-            {!campaigns.length && <div className="empty">Create a campaign to start discovery.</div>}
+            {!campaigns.length && <div className="empty">Crea una campaña para empezar el descubrimiento.</div>}
           </div>
         </section>
       </section>

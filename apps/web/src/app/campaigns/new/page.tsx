@@ -32,7 +32,7 @@ export default function NewCampaignPage() {
       });
       router.push(`/campaigns/${campaign.id}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not create campaign");
+      setError(err instanceof Error ? err.message : "No se pudo crear la campaña");
     } finally {
       setIsSubmitting(false);
     }
@@ -48,62 +48,62 @@ export default function NewCampaignPage() {
         <nav className="nav">
           <Link className="navItem" href="/">
             <Search size={17} />
-            Research
+            Investigación
           </Link>
           <Link className="navItem active" href="/campaigns">
             <Send size={17} />
-            Campaigns
+            Campañas
           </Link>
           <Link className="navItem" href="/opportunities">
             <Sparkles size={17} />
-            Opportunities
+            Oportunidades
           </Link>
         </nav>
       </aside>
       <section className="workspace">
         <header className="topbar">
           <div>
-            <h1>New campaign</h1>
-            <p>Example: Training companies in Madrid, 10-150 employees.</p>
+            <h1>Nueva campaña</h1>
+            <p>Ejemplo: empresas de formación en Madrid, 10-150 empleados.</p>
           </div>
         </header>
         {error ? <div className="notice error">{error}</div> : null}
         <form className="campaignForm" onSubmit={submit}>
           <label>
-            <span>Name</span>
-            <input name="name" defaultValue="Training companies in Madrid" required />
+            <span>Nombre</span>
+            <input name="name" defaultValue="Empresas de formación en Madrid" required />
           </label>
           <label>
-            <span>Country</span>
+            <span>País</span>
             <input name="country" defaultValue="Spain" required />
           </label>
           <label>
-            <span>City / region</span>
+            <span>Ciudad / región</span>
             <input name="city_or_region" defaultValue="Madrid" required />
           </label>
           <label>
-            <span>Industries</span>
+            <span>Industrias</span>
             <input name="industries" defaultValue="training companies" required />
           </label>
           <label>
-            <span>Employee min</span>
+            <span>Empleados mín.</span>
             <input name="employee_min" type="number" defaultValue="10" />
           </label>
           <label>
-            <span>Employee max</span>
+            <span>Empleados máx.</span>
             <input name="employee_max" type="number" defaultValue="150" />
           </label>
           <label>
-            <span>Target company count</span>
+            <span>Número de empresas objetivo</span>
             <input name="target_company_count" type="number" min="1" max="100" defaultValue="20" />
           </label>
           <label>
-            <span>Opportunity hypothesis</span>
+            <span>Hipótesis de oportunidad</span>
             <input value="Sales Operations Automation" disabled />
           </label>
           <button type="submit" disabled={isSubmitting}>
             <Save size={16} />
-            Create campaign
+            Crear campaña
           </button>
         </form>
       </section>

@@ -25,6 +25,7 @@ import {
   updateDraft,
   updateOpportunityState,
 } from "@/lib/api";
+import { pipelineStateLabel, reviewStateLabel, signalLabel } from "@/lib/labels";
 
 export default function OpportunitiesPage() {
   const [rows, setRows] = useState<RankedOpportunity[]>([]);
@@ -49,7 +50,7 @@ export default function OpportunitiesPage() {
         return nextRows.find((row) => row.score.id === current.score.id) ?? nextRows[0] ?? null;
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load opportunities");
+      setError(err instanceof Error ? err.message : "No se pudieron cargar las oportunidades");
     } finally {
       setIsLoading(false);
     }
@@ -62,7 +63,7 @@ export default function OpportunitiesPage() {
       const updated = await updateOpportunityState(row.score.id, state);
       replaceRow(updated);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Review action failed");
+      setError(err instanceof Error ? err.message : "No se pudo guardar la revisión");
     } finally {
       setPendingAction(null);
     }
@@ -80,7 +81,7 @@ export default function OpportunitiesPage() {
         [draft.id]: { subject: draft.subject, body: draft.body },
       }));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Draft generation failed");
+      setError(err instanceof Error ? err.message : "No se pudo generar el borrador");
     } finally {
       setPendingAction(null);
     }
@@ -96,7 +97,7 @@ export default function OpportunitiesPage() {
       if (!selected) return;
       replaceRow({ ...selected, latest_draft: updatedDraft });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Draft save failed");
+      setError(err instanceof Error ? err.message : "No se pudo guardar el borrador");
     } finally {
       setPendingAction(null);
     }
@@ -126,7 +127,7 @@ export default function OpportunitiesPage() {
       });
       replaceRow({ ...row, pipeline_state: event.to_state });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Pipeline transition failed");
+      setError(err instanceof Error ? err.message : "No se pudo mover el pipeline");
     } finally {
       setPendingAction(null);
     }
@@ -149,26 +150,26 @@ export default function OpportunitiesPage() {
         <nav className="nav">
           <Link className="navItem" href="/">
             <Search size={17} />
-            Research
+            Investigación
           </Link>
           <Link className="navItem" href="/campaigns">
             <Send size={17} />
-            Campaigns
+            Campañas
           </Link>
           <Link className="navItem active" href="/opportunities">
             <Sparkles size={17} />
-            Opportunities
+            Oportunidades
           </Link>
           <Link className="navItem" href="/analytics">
             <BarChart3 size={17} />
-            Analytics
+            Analítica
           </Link>
         </nav>
         <div className="operator">
           <span className="avatar">SB</span>
           <span>
             <strong>Sergio Ballesteros</strong>
-            <small>Internal workspace</small>
+            <small>Workspace interno</small>
           </span>
         </div>
       </aside>
@@ -176,12 +177,12 @@ export default function OpportunitiesPage() {
       <section className="workspace">
         <header className="topbar">
           <div>
-            <h1>Ranked opportunities</h1>
-            <p>Review deterministic scores, inspect evidence, then approve or reject.</p>
+            <h1>Oportunidades priorizadas</h1>
+            <p>Revisa scores determinísticos, inspecciona evidencia y aprueba o rechaza.</p>
           </div>
           <button className="secondaryButton" onClick={refresh} disabled={isLoading}>
             {isLoading ? <Loader2 className="spin" size={16} /> : null}
-            Refresh scores
+            Actualizar scores
           </button>
         </header>
 
@@ -191,8 +192,8 @@ export default function OpportunitiesPage() {
           <div className="panel">
             <div className="panelHeader">
               <div>
-                <h2>Companies</h2>
-                <p>Total score uses configurable opportunity weights.</p>
+                <h2>Empresas</h2>
+                <p>El score total usa pesos configurables por oportunidad.</p>
               </div>
               <span>{rows.length}</span>
             </div>
@@ -211,11 +212,11 @@ export default function OpportunitiesPage() {
                     <small>{row.company.domain}</small>
                   </span>
                   <span className={`status ${stateClass(row.score.qualification_state)}`}>
-                    {row.score.qualification_state}
+                    {reviewStateLabel(row.score.qualification_state)}
                   </span>
                 </button>
               ))}
-              {!rows.length && <div className="empty">Run research before reviewing opportunities.</div>}
+              {!rows.length && <div className="empty">Investiga alguna empresa antes de revisar oportunidades.</div>}
             </div>
           </div>
 
@@ -281,7 +282,7 @@ function OpportunityDetail({
   if (!row) {
     return (
       <div className="panel">
-        <div className="empty">Select a ranked company.</div>
+        <div className="empty">Selecciona una empresa priorizada.</div>
       </div>
     );
   }
@@ -306,20 +307,20 @@ function OpportunityDetail({
 
       <section className="scoreBreakdown">
         <Metric label="ICP" value={row.score.icp_score} />
-        <Metric label="Pain" value={row.score.pain_score} />
-        <Metric label="Value" value={row.score.value_score} />
-        <Metric label="Intent" value={row.score.intent_score} />
-        <Metric label="Reachability" value={row.score.reachability_score} />
-        <Metric label="Confidence" value={row.score.confidence_score} />
+        <Metric label="Dolor" value={row.score.pain_score} />
+        <Metric label="Valor" value={row.score.value_score} />
+        <Metric label="Intención" value={row.score.intent_score} />
+        <Metric label="Alcance" value={row.score.reachability_score} />
+        <Metric label="Confianza" value={row.score.confidence_score} />
       </section>
 
       <section className="detailSection">
-        <h3>Top evidence</h3>
+        <h3>Evidencia principal</h3>
         {row.top_evidence.map((item) => (
           <article className="evidenceRow compact" key={item.id}>
             <div className="rowTitle">
               <span>
-                #{item.id} {item.signal_type}
+                #{item.id} {signalLabel(item.signal_type)}
               </span>
               <small>{Math.round(item.confidence * 100)}%</small>
             </div>
@@ -338,14 +339,14 @@ function OpportunityDetail({
           disabled={pendingAction === `REJECTED-${row.score.id}`}
         >
           <X size={16} />
-          Reject
+          Rechazar
         </button>
         <button
           onClick={() => onReview(row, "APPROVED")}
           disabled={pendingAction === `APPROVED-${row.score.id}`}
         >
           <Check size={16} />
-          Approve
+          Aprobar
         </button>
         <button
           className="secondaryButton"
@@ -356,18 +357,18 @@ function OpportunityDetail({
           }
         >
           <MailPlus size={16} />
-          Generate draft
+          Generar borrador
         </button>
       </section>
 
       <section className="detailSection">
-        <h3>Commercial pipeline</h3>
+        <h3>Pipeline comercial</h3>
         <div className="pipelineHeader">
           <span className={`status ${row.pipeline_state ? stateClass(row.pipeline_state) : ""}`}>
-            {row.pipeline_state ?? "NOT STARTED"}
+            {pipelineStateLabel(row.pipeline_state)}
           </span>
           <Link className="secondaryButton tiny" href={`/companies/${row.company.id}`}>
-            Timeline
+            Cronología
           </Link>
         </div>
         {canManagePipeline && nextState ? (
@@ -375,7 +376,7 @@ function OpportunityDetail({
             {nextState === "CONTACTED" ? (
               <>
                 <label>
-                  <span>Channel</span>
+                  <span>Canal</span>
                   <select
                     value={pipelineForm.channel}
                     onChange={(event) =>
@@ -387,12 +388,12 @@ function OpportunityDetail({
                   >
                     <option value="EMAIL">Email</option>
                     <option value="LINKEDIN">LinkedIn</option>
-                    <option value="PHONE">Phone</option>
-                    <option value="OTHER">Other</option>
+                    <option value="PHONE">Teléfono</option>
+                    <option value="OTHER">Otro</option>
                   </select>
                 </label>
                 <label>
-                  <span>Message used</span>
+                  <span>Mensaje usado</span>
                   <textarea
                     value={pipelineForm.message_used}
                     onChange={(event) =>
@@ -408,7 +409,7 @@ function OpportunityDetail({
             {nextState === "WON" ? (
               <div className="revenueGrid">
                 <label>
-                  <span>Expected revenue</span>
+                  <span>Ingresos esperados</span>
                   <input
                     inputMode="decimal"
                     value={pipelineForm.expected_revenue}
@@ -434,7 +435,7 @@ function OpportunityDetail({
                   />
                 </label>
                 <label>
-                  <span>Implementation</span>
+                  <span>Implementación</span>
                   <input
                     inputMode="decimal"
                     value={pipelineForm.implementation_revenue}
@@ -447,7 +448,7 @@ function OpportunityDetail({
                   />
                 </label>
                 <label>
-                  <span>Currency</span>
+                  <span>Moneda</span>
                   <input
                     value={pipelineForm.currency}
                     onChange={(event) =>
@@ -461,7 +462,7 @@ function OpportunityDetail({
               </div>
             ) : null}
             <label>
-              <span>Notes</span>
+              <span>Notas</span>
               <textarea
                 value={pipelineForm.notes}
                 onChange={(event) =>
@@ -471,7 +472,7 @@ function OpportunityDetail({
             </label>
             {row.pipeline_state ? (
               <label>
-                <span>Lost reason</span>
+                <span>Motivo de pérdida</span>
                 <input
                   value={pipelineForm.lost_reason}
                   onChange={(event) =>
@@ -491,7 +492,7 @@ function OpportunityDetail({
                 }
                 disabled={pendingAction === `PIPELINE-${row.score.id}`}
               >
-                Move to {nextState}
+                Mover a {pipelineStateLabel(nextState)}
               </button>
               {row.pipeline_state && row.pipeline_state !== "LOST" ? (
                 <button
@@ -504,22 +505,22 @@ function OpportunityDetail({
                     !pipelineForm.lost_reason.trim()
                   }
                 >
-                  Mark lost
+                  Marcar perdido
                 </button>
               ) : null}
             </div>
           </div>
         ) : (
-          <p className="mutedText">Approve the company before moving it through the funnel.</p>
+          <p className="mutedText">Aprueba la empresa antes de moverla por el funnel.</p>
         )}
       </section>
 
       <section className="detailSection">
-        <h3>Draft</h3>
+        <h3>Borrador</h3>
         {draft && edits ? (
           <div className="draftEditor">
             <label>
-              <span>Subject</span>
+              <span>Asunto</span>
               <input
                 value={edits.subject}
                 onChange={(event) =>
@@ -531,7 +532,7 @@ function OpportunityDetail({
               />
             </label>
             <label>
-              <span>Body</span>
+              <span>Cuerpo</span>
               <textarea
                 value={edits.body}
                 onChange={(event) =>
@@ -542,18 +543,18 @@ function OpportunityDetail({
                 }
               />
             </label>
-            <small>Evidence used: #{draft.evidence_used.join(", #")}</small>
+            <small>Evidencia usada: #{draft.evidence_used.join(", #")}</small>
             <button
               className="secondaryButton"
               onClick={() => onSaveDraft(draft)}
               disabled={pendingAction === `SAVE-${draft.id}`}
             >
               <Save size={16} />
-              Save draft
+              Guardar borrador
             </button>
           </div>
         ) : (
-          <p className="mutedText">Approve the company before generating an editable draft.</p>
+          <p className="mutedText">Aprueba la empresa antes de generar un borrador editable.</p>
         )}
       </section>
     </div>

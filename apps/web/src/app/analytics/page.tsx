@@ -22,7 +22,7 @@ export default function AnalyticsPage() {
         setCampaigns(nextCampaigns);
       })
       .catch((err) =>
-        setError(err instanceof Error ? err.message : "Could not load analytics"),
+        setError(err instanceof Error ? err.message : "No se pudo cargar la analítica"),
       );
   }, []);
 
@@ -36,112 +36,112 @@ export default function AnalyticsPage() {
         <nav className="nav">
           <Link className="navItem" href="/">
             <Search size={17} />
-            Research
+            Investigación
           </Link>
           <Link className="navItem" href="/campaigns">
             <Send size={17} />
-            Campaigns
+            Campañas
           </Link>
           <Link className="navItem" href="/opportunities">
             <Sparkles size={17} />
-            Opportunities
+            Oportunidades
           </Link>
           <Link className="navItem active" href="/analytics">
             <BarChart3 size={17} />
-            Analytics
+            Analítica
           </Link>
         </nav>
       </aside>
       <section className="workspace">
         <header className="topbar">
           <div>
-            <h1>Commercial analytics</h1>
-            <p>Manual funnel outcomes, campaign comparison and revenue attribution.</p>
+            <h1>Analítica comercial</h1>
+            <p>Resultados manuales del funnel, comparación de campañas y atribución de ingresos.</p>
           </div>
         </header>
         {error ? <div className="notice error">{error}</div> : null}
         {funnel ? (
           <>
             <section className="campaignStats">
-              <Stat label="Discovered" value={funnel.counts.discovered} />
-              <Stat label="Researched" value={funnel.counts.researched} />
-              <Stat label="Qualified" value={funnel.counts.qualified} />
-              <Stat label="Approved" value={funnel.counts.approved} />
-              <Stat label="Contacted" value={funnel.counts.contacted} />
-              <Stat label="Replied" value={funnel.counts.replied} />
-              <Stat label="Meetings" value={funnel.counts.meetings} />
-              <Stat label="Proposals" value={funnel.counts.proposals} />
-              <Stat label="Won" value={funnel.counts.won} />
-              <Stat label="Lost" value={funnel.counts.lost} />
+              <Stat label="Descubiertas" value={funnel.counts.discovered} />
+              <Stat label="Investigadas" value={funnel.counts.researched} />
+              <Stat label="Cualificadas" value={funnel.counts.qualified} />
+              <Stat label="Aprobadas" value={funnel.counts.approved} />
+              <Stat label="Contactadas" value={funnel.counts.contacted} />
+              <Stat label="Respondieron" value={funnel.counts.replied} />
+              <Stat label="Reuniones" value={funnel.counts.meetings} />
+              <Stat label="Propuestas" value={funnel.counts.proposals} />
+              <Stat label="Ganadas" value={funnel.counts.won} />
+              <Stat label="Perdidas" value={funnel.counts.lost} />
             </section>
             <section className="campaignStats">
               <Stat
-                label="Contacted -> Reply"
+                label="Contactado -> Respuesta"
                 value={`${percent(funnel.conversion_rates.contacted_to_reply)}%`}
               />
               <Stat
-                label="Reply -> Meeting"
+                label="Respuesta -> Reunión"
                 value={`${percent(funnel.conversion_rates.reply_to_meeting)}%`}
               />
               <Stat
-                label="Meeting -> Proposal"
+                label="Reunión -> Propuesta"
                 value={`${percent(funnel.conversion_rates.meeting_to_proposal)}%`}
               />
               <Stat
-                label="Proposal -> Won"
+                label="Propuesta -> Ganado"
                 value={`${percent(funnel.conversion_rates.proposal_to_won)}%`}
               />
             </section>
             <section className="campaignStats">
               <Stat
-                label="Revenue generated"
+                label="Ingresos generados"
                 value={`€${funnel.business_metrics.revenue_generated.toFixed(0)}`}
               />
-              <Stat label="MRR generated" value={`€${funnel.business_metrics.mrr_generated.toFixed(0)}`} />
+              <Stat label="MRR generado" value={`€${funnel.business_metrics.mrr_generated.toFixed(0)}`} />
               <Stat
-                label="Average deal"
+                label="Ticket medio"
                 value={`€${funnel.business_metrics.average_deal_value.toFixed(0)}`}
               />
               <Stat
-                label="Revenue / 100 discovered"
+                label="Ingresos / 100 descubiertas"
                 value={`€${funnel.business_metrics.revenue_per_100_discovered.toFixed(0)}`}
               />
               <Stat
-                label="Revenue / 100 contacted"
+                label="Ingresos / 100 contactadas"
                 value={`€${funnel.business_metrics.revenue_per_100_contacted.toFixed(0)}`}
               />
               <Stat
-                label="Cost / meeting"
+                label="Coste / reunión"
                 value={`€${funnel.business_metrics.research_cost_per_meeting.toFixed(4)}`}
               />
               <Stat
-                label="Cost / won customer"
+                label="Coste / cliente ganado"
                 value={`€${funnel.business_metrics.research_cost_per_won_customer.toFixed(4)}`}
               />
             </section>
           </>
         ) : (
-          <div className="empty">Loading analytics...</div>
+          <div className="empty">Cargando analítica...</div>
         )}
         <section className="panel analyticsPanel">
           <div className="panelHeader">
             <div>
-              <h2>Campaign comparison</h2>
-              <p>Compare sectors by discovery volume, conversion, revenue and research cost.</p>
+              <h2>Comparación de campañas</h2>
+              <p>Compara sectores por volumen descubierto, conversión, ingresos y coste de investigación.</p>
             </div>
           </div>
           <div className="comparisonTable">
             <div className="comparisonHeader">
-              <span>Campaign</span>
+              <span>Campaña</span>
               <span>Sector</span>
-              <span>Discovered</span>
-              <span>Qualified</span>
-              <span>Reply</span>
-              <span>Meeting</span>
-              <span>Win</span>
-              <span>Revenue</span>
+              <span>Descubiertas</span>
+              <span>Cualificadas</span>
+              <span>Respuesta</span>
+              <span>Reunión</span>
+              <span>Ganadas</span>
+              <span>Ingresos</span>
               <span>MRR</span>
-              <span>Cost</span>
+              <span>Coste</span>
             </div>
             {campaigns.map((campaign) => (
               <Link
@@ -161,7 +161,7 @@ export default function AnalyticsPage() {
                 <span>€{campaign.research_cost.toFixed(4)}</span>
               </Link>
             ))}
-            {!campaigns.length ? <div className="empty">No campaigns yet.</div> : null}
+            {!campaigns.length ? <div className="empty">Todavía no hay campañas.</div> : null}
           </div>
         </section>
       </section>

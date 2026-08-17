@@ -13,6 +13,7 @@ import {
   retryCampaignCompany,
   runCampaign,
 } from "@/lib/api";
+import { campaignStatusLabel, pipelineStateLabel, researchStateLabel, signalLabel } from "@/lib/labels";
 
 export default function CampaignDetailPage() {
   const params = useParams<{ id: string }>();
@@ -31,7 +32,7 @@ export default function CampaignDetailPage() {
       setCampaign(nextCampaign);
       setAnalytics(nextAnalytics);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load campaign");
+      setError(err instanceof Error ? err.message : "No se pudo cargar la campaña");
     }
   }, [campaignId]);
 
@@ -52,7 +53,7 @@ export default function CampaignDetailPage() {
       await runCampaign(campaignId);
       await refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not run campaign");
+      setError(err instanceof Error ? err.message : "No se pudo ejecutar la campaña");
     } finally {
       setPending(null);
     }
@@ -64,14 +65,14 @@ export default function CampaignDetailPage() {
       await retryCampaignCompany(entryId);
       await refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Retry failed");
+      setError(err instanceof Error ? err.message : "No se pudo reintentar");
     } finally {
       setPending(null);
     }
   }
 
   if (!campaign) {
-    return <div className="empty">Loading campaign...</div>;
+    return <div className="empty">Cargando campaña...</div>;
   }
 
   return (
@@ -84,19 +85,19 @@ export default function CampaignDetailPage() {
         <nav className="nav">
           <Link className="navItem" href="/">
             <Search size={17} />
-            Research
+            Investigación
           </Link>
           <Link className="navItem active" href="/campaigns">
             <Send size={17} />
-            Campaigns
+            Campañas
           </Link>
           <Link className="navItem" href="/opportunities">
             <Sparkles size={17} />
-            Opportunities
+            Oportunidades
           </Link>
           <Link className="navItem" href="/analytics">
             <BarChart3 size={17} />
-            Analytics
+            Analítica
           </Link>
         </nav>
       </aside>
@@ -110,33 +111,33 @@ export default function CampaignDetailPage() {
           </div>
           <button className="secondaryButton" onClick={start} disabled={pending === "run"}>
             <RefreshCw size={16} />
-            {campaign.status === "DRAFT" ? "Run campaign" : "Run again"}
+            {campaign.status === "DRAFT" ? "Ejecutar campaña" : "Ejecutar de nuevo"}
           </button>
         </header>
         {error ? <div className="notice error">{error}</div> : null}
         <section className="campaignStats">
-          <Stat label="Discovered" value={`${campaign.stats.discovered} / ${campaign.stats.target}`} />
-          <Stat label="Researched" value={String(campaign.stats.researched)} />
-          <Stat label="Failed" value={String(campaign.stats.failed)} />
-          <Stat label="Qualified" value={String(campaign.stats.qualified)} />
-          <Stat label="Approved" value={String(campaign.stats.approved)} />
-          <Stat label="Total cost" value={`$${campaign.stats.total_research_cost.toFixed(4)}`} />
+          <Stat label="Descubiertas" value={`${campaign.stats.discovered} / ${campaign.stats.target}`} />
+          <Stat label="Investigadas" value={String(campaign.stats.researched)} />
+          <Stat label="Fallidas" value={String(campaign.stats.failed)} />
+          <Stat label="Cualificadas" value={String(campaign.stats.qualified)} />
+          <Stat label="Aprobadas" value={String(campaign.stats.approved)} />
+          <Stat label="Coste total" value={`$${campaign.stats.total_research_cost.toFixed(4)}`} />
           <Stat
-            label="Avg cost/company"
+            label="Coste medio/empresa"
             value={`$${campaign.stats.average_cost_per_company.toFixed(4)}`}
           />
-          <Stat label="Status" value={campaign.status} />
+          <Stat label="Estado" value={campaignStatusLabel(campaign.status)} />
         </section>
         {analytics ? (
           <section className="campaignStats">
-            <Stat label="Contacted" value={String(analytics.counts.contacted)} />
-            <Stat label="Replied" value={String(analytics.counts.replied)} />
-            <Stat label="Meetings" value={String(analytics.counts.meetings)} />
-            <Stat label="Proposals" value={String(analytics.counts.proposals)} />
-            <Stat label="Won" value={String(analytics.counts.won)} />
-            <Stat label="Lost" value={String(analytics.counts.lost)} />
+            <Stat label="Contactadas" value={String(analytics.counts.contacted)} />
+            <Stat label="Respondieron" value={String(analytics.counts.replied)} />
+            <Stat label="Reuniones" value={String(analytics.counts.meetings)} />
+            <Stat label="Propuestas" value={String(analytics.counts.proposals)} />
+            <Stat label="Ganadas" value={String(analytics.counts.won)} />
+            <Stat label="Perdidas" value={String(analytics.counts.lost)} />
             <Stat
-              label="Revenue"
+              label="Ingresos"
               value={`€${analytics.business_metrics.revenue_generated.toFixed(0)}`}
             />
             <Stat label="MRR" value={`€${analytics.business_metrics.mrr_generated.toFixed(0)}`} />
@@ -145,18 +146,18 @@ export default function CampaignDetailPage() {
         <section className="panel">
           <div className="panelHeader">
             <div>
-              <h2>Ranked companies</h2>
-              <p>Companies are deduped by normalized domain before research.</p>
+              <h2>Empresas priorizadas</h2>
+              <p>Las empresas se deduplican por dominio normalizado antes de investigarlas.</p>
             </div>
             <Link className="secondaryButton" href="/opportunities">
-              Review approvals
+              Revisar aprobaciones
             </Link>
           </div>
           <div className="campaignCompanyList">
             {campaign.companies.map((result) => (
               <CompanyResult key={result.entry.id} result={result} pending={pending} onRetry={retry} />
             ))}
-            {!campaign.companies.length && <div className="empty">Run the campaign to discover companies.</div>}
+            {!campaign.companies.length && <div className="empty">Ejecuta la campaña para descubrir empresas.</div>}
           </div>
         </section>
       </section>
@@ -179,19 +180,19 @@ function CompanyResult({
         <strong>{result.entry.company.name}</strong>
         <small>{result.entry.company.domain}</small>
         <Link className="secondaryButton tiny" href={`/companies/${result.entry.company.id}`}>
-          Timeline
+          Cronología
         </Link>
         {result.entry.error ? <p className="errorText">{result.entry.error}</p> : null}
       </div>
       <div className="scoreBreakdown inline">
         <Metric label="Total" value={result.score?.total_score ?? 0} />
         <Metric label="ICP" value={result.score?.icp_score ?? 0} />
-        <Metric label="Pain" value={result.score?.pain_score ?? 0} />
-        <Metric label="Value" value={result.score?.value_score ?? 0} />
+        <Metric label="Dolor" value={result.score?.pain_score ?? 0} />
+        <Metric label="Valor" value={result.score?.value_score ?? 0} />
       </div>
       <div className="signalsCell">
         {(result.score?.matched_signals ?? []).slice(0, 4).map((signal) => (
-          <span key={signal}>{signal}</span>
+          <span key={signal}>{signalLabel(signal)}</span>
         ))}
       </div>
       <div className="evidenceCell">
@@ -201,11 +202,11 @@ function CompanyResult({
       </div>
       <div>
         <span className={`status ${result.entry.research_state === "FAILED" ? "failed" : "done"}`}>
-          {result.entry.research_state}
+          {researchStateLabel(result.entry.research_state)}
         </span>
         {result.pipeline_state ? (
           <span className={`status ${result.pipeline_state === "LOST" ? "failed" : "done"}`}>
-            {result.pipeline_state}
+            {pipelineStateLabel(result.pipeline_state)}
           </span>
         ) : null}
         {result.entry.research_state === "FAILED" ? (
@@ -214,7 +215,7 @@ function CompanyResult({
             onClick={() => onRetry(result.entry.id)}
             disabled={pending === `retry-${result.entry.id}`}
           >
-            Retry
+            Reintentar
           </button>
         ) : null}
       </div>

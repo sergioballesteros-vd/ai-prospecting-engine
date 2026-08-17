@@ -23,6 +23,7 @@ import {
   getResearchJob,
   startResearch,
 } from "@/lib/api";
+import { jobStatusLabel, signalLabel } from "@/lib/labels";
 
 export default function Home() {
   const [domain, setDomain] = useState("");
@@ -47,7 +48,7 @@ export default function Home() {
           setDetail(await getCompany(nextJob.company_id));
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Could not refresh job state");
+        setError(err instanceof Error ? err.message : "No se pudo actualizar el estado del trabajo");
       }
     }, 1500);
     return () => window.clearInterval(interval);
@@ -64,7 +65,7 @@ export default function Home() {
       const createdJob = await startResearch(created.id);
       setJob(createdJob);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Research could not be started");
+      setError(err instanceof Error ? err.message : "No se pudo iniciar la investigación");
     } finally {
       setIsSubmitting(false);
     }
@@ -80,26 +81,26 @@ export default function Home() {
         <nav className="nav">
           <Link className="navItem active" href="/">
             <Search size={17} />
-            Research
+            Investigación
           </Link>
           <a className="navItem" href="#">
             <Building2 size={17} />
-            Companies
+            Empresas
           </a>
           <Link className="navItem" href="/campaigns">
             <Send size={17} />
-            Campaigns
+            Campañas
           </Link>
           <Link className="navItem" href="/opportunities">
             <Sparkles size={17} />
-            Opportunities
+            Oportunidades
           </Link>
         </nav>
         <div className="operator">
           <span className="avatar">SB</span>
           <span>
             <strong>Sergio Ballesteros</strong>
-            <small>Internal workspace</small>
+            <small>Workspace interno</small>
           </span>
         </div>
       </aside>
@@ -107,15 +108,15 @@ export default function Home() {
       <section className="workspace">
         <header className="topbar">
           <div>
-            <h1>Research</h1>
-            <p>Enter a company domain, extract public evidence, and review structured analysis.</p>
+            <h1>Investigación</h1>
+            <p>Introduce un dominio, extrae evidencia pública y revisa el análisis estructurado.</p>
           </div>
-          <span className="environment">No automatic outreach</span>
+          <span className="environment">Sin envío automático</span>
         </header>
 
         <form className="researchForm" onSubmit={submit}>
           <label>
-            <span>Company domain</span>
+            <span>Dominio de la empresa</span>
             <input
               value={domain}
               onChange={(event) => setDomain(event.target.value)}
@@ -125,7 +126,7 @@ export default function Home() {
           </label>
           <button type="submit" disabled={isSubmitting || !domain.trim()}>
             {isSubmitting ? <Loader2 className="spin" size={16} /> : <Play size={16} />}
-            Run research
+            Investigar
           </button>
         </form>
 
@@ -160,24 +161,24 @@ function StatusStrip({
   return (
     <section className="statusStrip">
       <div>
-        <span className="label">Company</span>
-        <strong>{company ? company.name : "Not selected"}</strong>
+        <span className="label">Empresa</span>
+        <strong>{company ? company.name : "Sin seleccionar"}</strong>
       </div>
       <div>
-        <span className="label">Latest job</span>
-        <strong className={`status ${statusClass}`}>{job ? job.status : "idle"}</strong>
+        <span className="label">Último trabajo</span>
+        <strong className={`status ${statusClass}`}>{jobStatusLabel(job ? job.status : "idle")}</strong>
       </div>
       <div>
-        <span className="label">Sources</span>
+        <span className="label">Fuentes</span>
         <strong>{detail?.sources.length ?? 0}</strong>
       </div>
       <div>
-        <span className="label">Evidence</span>
+        <span className="label">Evidencia</span>
         <strong>{detail?.evidence.length ?? 0}</strong>
       </div>
       <div className="statusMessage">
-        <span className="label">Message</span>
-        <strong>{job?.error || job?.message || "Waiting for research"}</strong>
+        <span className="label">Mensaje</span>
+        <strong>{job?.error || translateJobMessage(job?.message) || "Esperando investigación"}</strong>
       </div>
     </section>
   );
@@ -188,8 +189,8 @@ function EvidencePanel({ detail }: { detail: CompanyDetail | null }) {
     <section className="panel">
       <div className="panelHeader">
         <div>
-          <h2>Evidence</h2>
-          <p>Signals are traceable to public source URLs.</p>
+          <h2>Evidencia</h2>
+          <p>Las señales son trazables a URLs públicas.</p>
         </div>
         <span>{detail?.evidence.length ?? 0}</span>
       </div>
@@ -199,7 +200,7 @@ function EvidencePanel({ detail }: { detail: CompanyDetail | null }) {
             <article className="evidenceRow" key={item.id}>
               <div>
                 <div className="rowTitle">
-                  <span>{item.signal_type}</span>
+                  <span>{signalLabel(item.signal_type)}</span>
                   <small>{Math.round(item.confidence * 100)}%</small>
                 </div>
                 <p>{item.content_excerpt}</p>
@@ -210,7 +211,7 @@ function EvidencePanel({ detail }: { detail: CompanyDetail | null }) {
             </article>
           ))
         ) : (
-          <EmptyState text="Run research to collect evidence." />
+          <EmptyState text="Lanza una investigación para recopilar evidencia." />
         )}
       </div>
     </section>
@@ -222,50 +223,50 @@ function AnalysisPanel({ analysis, job }: { analysis: Analysis | null; job: Rese
     <section className="panel">
       <div className="panelHeader">
         <div>
-          <h2>AI Analysis</h2>
-          <p>Structured output, constrained to collected evidence.</p>
+          <h2>Análisis IA</h2>
+          <p>Salida estructurada, limitada a la evidencia recopilada.</p>
         </div>
         {job?.status === "running" ? <Loader2 className="spin" size={18} /> : null}
       </div>
       {analysis ? (
         <div className="analysis">
           <section>
-            <h3>Summary</h3>
+            <h3>Resumen</h3>
             <p>{analysis.summary}</p>
           </section>
           <section>
-            <h3>Observed signals</h3>
+            <h3>Señales observadas</h3>
             <ul>
               {analysis.observed_signals.map((signal) => (
                 <li key={`${signal.signalType}-${signal.evidenceIds.join("-")}`}>
                   <CheckCircle2 size={15} />
                   <span>
-                    <strong>{signal.signalType}</strong> {signal.reasoning}
-                    <small>Evidence #{signal.evidenceIds.join(", #")}</small>
+                    <strong>{signalLabel(signal.signalType)}</strong> {signal.reasoning}
+                    <small>Evidencia #{signal.evidenceIds.join(", #")}</small>
                   </span>
                 </li>
               ))}
             </ul>
           </section>
           <section>
-            <h3>Possible automation opportunities</h3>
+            <h3>Posibles oportunidades de automatización</h3>
             {analysis.possible_automation_opportunities.map((opportunity) => (
               <div className="opportunity" key={opportunity.problem}>
                 <strong>{opportunity.problem}</strong>
                 <p>{opportunity.reasoning}</p>
-                <small>Evidence #{opportunity.evidenceIds.join(", #")}</small>
+                <small>Evidencia #{opportunity.evidenceIds.join(", #")}</small>
               </div>
             ))}
           </section>
           <section className="columns">
             <div>
-              <h3>Unknowns</h3>
+              <h3>Desconocidos</h3>
               {analysis.unknowns.map((unknown) => (
                 <p key={unknown}>? {unknown}</p>
               ))}
             </div>
             <div>
-              <h3>Buyer roles</h3>
+              <h3>Roles compradores</h3>
               {analysis.recommended_buyer_roles.map((role) => (
                 <p key={role}>{role}</p>
               ))}
@@ -273,7 +274,7 @@ function AnalysisPanel({ analysis, job }: { analysis: Analysis | null; job: Rese
           </section>
         </div>
       ) : (
-        <EmptyState text="Structured analysis will appear after evidence extraction." />
+        <EmptyState text="El análisis estructurado aparecerá tras extraer evidencia." />
       )}
     </section>
   );
@@ -281,4 +282,15 @@ function AnalysisPanel({ analysis, job }: { analysis: Analysis | null; job: Rese
 
 function EmptyState({ text }: { text: string }) {
   return <div className="empty">{text}</div>;
+}
+
+function translateJobMessage(message: string | null | undefined) {
+  if (!message) return null;
+  const labels: Record<string, string> = {
+    "Research queued": "Investigación en cola",
+    "Fetching website pages": "Recopilando páginas web",
+    "Research completed": "Investigación completada",
+    "Research failed": "La investigación falló",
+  };
+  return labels[message] ?? message;
 }
