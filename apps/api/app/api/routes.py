@@ -98,6 +98,7 @@ def get_company(company_id: int, db: DbSession) -> Company:
             selectinload(Company.evidence),
             selectinload(Company.signals),
             selectinload(Company.analyses),
+            selectinload(Company.research_runs),
         )
     )
     if company is None:
@@ -115,6 +116,7 @@ def get_company_timeline(company_id: int, db: DbSession):
             selectinload(Company.evidence),
             selectinload(Company.signals),
             selectinload(Company.analyses),
+            selectinload(Company.research_runs),
         )
     )
     if company is None:
@@ -132,6 +134,7 @@ def get_company_timeline(company_id: int, db: DbSession):
         evidence=company.evidence,
         signals=company.signals,
         analyses=company.analyses,
+        research_runs=company.research_runs,
         timeline=timeline_for_company(db, company.id),
     )
 

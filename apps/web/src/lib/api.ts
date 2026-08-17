@@ -18,9 +18,51 @@ export type Evidence = {
   signal_type: string;
   source_url: string;
   content_excerpt: string;
+  fingerprint: string;
   confidence: number;
   detected_at: string;
   evidence_metadata: Record<string, unknown>;
+};
+
+export type ResearchDiagnostics = {
+  pages_discovered?: number;
+  pages_crawled?: number;
+  pages_skipped?: number;
+  evidence_extracted?: number;
+  evidence_detected?: number;
+  signals_detected?: number;
+  crawl_failures?: number;
+  content_bytes_collected?: number;
+  content_tokens_estimated?: number;
+  llm_input_tokens?: number;
+  llm_output_tokens?: number;
+  llm_cost?: number;
+  total_research_latency_ms?: number;
+  visited_pages?: Array<{
+    url: string;
+    reason: string;
+    priority_score: number;
+    status_code: number;
+    content_bytes: number;
+  }>;
+  skipped_pages?: Array<{ url: string; reason: string }>;
+  crawl_failure_details?: Array<{ url: string; error: string }>;
+};
+
+export type ResearchRun = {
+  id: number;
+  company_id: number;
+  campaign_id: number | null;
+  provider: string;
+  model: string;
+  input_tokens: number;
+  output_tokens: number;
+  estimated_cost: number;
+  execution_time_ms: number;
+  status: string;
+  error: string | null;
+  diagnostics: ResearchDiagnostics;
+  created_at: string;
 };
 
 export type Analysis = {
@@ -62,6 +104,7 @@ export type CompanyDetail = Company & {
     evidence_id: number;
   }>;
   analyses: Analysis[];
+  research_runs: ResearchRun[];
 };
 
 export type ResearchJob = {
@@ -191,20 +234,7 @@ export type ProspectingCampaignDetail = ProspectingCampaign & {
     average_cost_per_company: number;
   };
   companies: CampaignCompanyResult[];
-  research_runs: Array<{
-    id: number;
-    company_id: number;
-    campaign_id: number | null;
-    provider: string;
-    model: string;
-    input_tokens: number;
-    output_tokens: number;
-    estimated_cost: number;
-    execution_time_ms: number;
-    status: string;
-    error: string | null;
-    created_at: string;
-  }>;
+  research_runs: ResearchRun[];
 };
 
 export type CompanyTimeline = CompanyDetail & {

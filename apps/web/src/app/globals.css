@@ -319,6 +319,20 @@ a.secondaryButton {
   padding: 14px 18px;
 }
 
+.diagnosticsStrip {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(86px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.diagnosticsStrip strong {
+  font-size: 13px;
+}
+
 .label {
   display: block;
   color: var(--muted);

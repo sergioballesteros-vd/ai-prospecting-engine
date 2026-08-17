@@ -230,6 +230,7 @@ def _seed_pipeline_context(db: Session) -> tuple[Company, Opportunity, Prospecti
             estimated_cost=12.5,
             execution_time_ms=1000,
             status="COMPLETED",
+            diagnostics={"pages_crawled": 1},
         )
     )
     db.commit()

@@ -245,6 +245,7 @@ async def _research_campaign_company(
                     execution_time_ms=0,
                     status="FAILED",
                     error=str(exc),
+                    diagnostics={"crawl_failures": 1, "error": str(exc)},
                 )
             )
         db.commit()

@@ -9,6 +9,7 @@ from app.application.opportunity_review import (
     upsert_opportunity_score,
 )
 from app.domain.models import Base, Company, Evidence, Opportunity
+from app.modules.research.website import evidence_fingerprint
 
 
 def test_scoring_is_deterministic_and_explainable() -> None:
@@ -129,6 +130,9 @@ def _evidence(
         signal_type=signal_type,
         source_url="https://acme.example",
         content_excerpt=f"Public evidence for {signal_type}",
+        fingerprint=evidence_fingerprint(
+            signal_type, "https://acme.example", f"Public evidence for {signal_type}"
+        ),
         confidence=confidence,
         evidence_metadata={"test": True},
     )

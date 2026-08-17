@@ -82,6 +82,9 @@ class CompanySource(Base):
 
 class Evidence(Base):
     __tablename__ = "evidence"
+    __table_args__ = (
+        UniqueConstraint("company_id", "fingerprint", name="uq_evidence_company_fingerprint"),
+    )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
@@ -91,6 +94,7 @@ class Evidence(Base):
     signal_type: Mapped[str] = mapped_column(String(120), nullable=False)
     source_url: Mapped[str] = mapped_column(String(1024), nullable=False)
     content_excerpt: Mapped[str] = mapped_column(Text, nullable=False)
+    fingerprint: Mapped[str] = mapped_column(String(64), nullable=False)
     confidence: Mapped[float] = mapped_column(Float, nullable=False)
     detected_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
@@ -265,6 +269,7 @@ class ResearchRun(Base):
     execution_time_ms: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     status: Mapped[str] = mapped_column(String(40), nullable=False)
     error: Mapped[str | None] = mapped_column(Text)
+    diagnostics: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )

@@ -55,6 +55,19 @@ class StubCompanyAnalysisProvider:
             for item in evidence[:8]
         ]
         evidence_ids = [item.id for item in evidence[:3]]
+        opportunities = []
+        if evidence_ids:
+            opportunities.append(
+                PossibleAutomationOpportunity(
+                    problem="Lead routing or follow-up process complexity",
+                    reasoning=(
+                        "Public signals suggest acquisition or contact workflows may exist. "
+                        "This should be validated with the company before making any claim."
+                    ),
+                    confidence=0.45,
+                    evidenceIds=evidence_ids,
+                )
+            )
         return StructuredCompanyAnalysis(
             summary=(
                 f"{company.name} has public website evidence that can be reviewed for possible "
@@ -62,17 +75,7 @@ class StubCompanyAnalysisProvider:
                 "website content and does not assert internal process problems."
             ),
             observedSignals=observed,
-            possibleAutomationOpportunities=[
-                PossibleAutomationOpportunity(
-                    problem="Lead routing or follow-up process complexity",
-                    reasoning=(
-                        "Public signals suggest acquisition or contact workflows may exist. "
-                        "This should be validated with the company before making any claim."
-                    ),
-                    confidence=0.45 if evidence_ids else 0.2,
-                    evidenceIds=evidence_ids,
-                )
-            ],
+            possibleAutomationOpportunities=opportunities,
             unknowns=[
                 "Current CRM or operational system configuration",
                 "Lead volume and response-time requirements",

@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from app.application import campaigns
 from app.domain.models import Base, Evidence, Opportunity
 from app.modules.discovery.providers import CompanyCandidate, DiscoveryCriteria
+from app.modules.research.website import evidence_fingerprint
 
 
 class FakeProvider:
@@ -156,6 +157,9 @@ def _evidence(company_id: int, signal_type: str, confidence: float) -> Evidence:
         signal_type=signal_type,
         source_url="https://training-one.example",
         content_excerpt=f"Public evidence for {signal_type}",
+        fingerprint=evidence_fingerprint(
+            signal_type, "https://training-one.example", f"Public evidence for {signal_type}"
+        ),
         confidence=confidence,
         evidence_metadata={"test": True},
     )

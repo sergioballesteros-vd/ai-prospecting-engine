@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from time import perf_counter
 from uuid import uuid4
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.application.opportunity_review import default_opportunity, upsert_opportunity_score
@@ -152,7 +153,16 @@ async def research_company(db: Session, company_id: int, campaign_id: int | None
     if company is None:
         raise ValueError("Company not found")
 
-    pages = await extract_relevant_pages(company.domain)
+    settings = get_settings()
+    crawl = await extract_relevant_pages(
+        company.domain,
+        timeout_seconds=settings.research_timeout_seconds,
+        max_pages=settings.research_max_pages,
+        max_content_bytes=settings.research_max_content_bytes,
+        retries=settings.research_retries,
+        rate_limit_seconds=settings.research_rate_limit_seconds,
+    )
+    pages = crawl.pages
 
     sources_by_url: dict[str, CompanySource] = {}
     for page in pages:
@@ -160,15 +170,31 @@ async def research_company(db: Session, company_id: int, campaign_id: int | None
             company_id=company.id,
             source_type="website_page",
             source_url=page.url,
-            source_metadata={"title": page.title, "status_code": page.status_code},
+            source_metadata={
+                "title": page.title,
+                "status_code": page.status_code,
+                "selected_reason": page.selected_reason,
+                "priority_score": page.priority_score,
+                "content_bytes": page.content_bytes,
+            },
         )
         db.add(source)
         db.flush()
         sources_by_url[page.url] = source
 
     detected = detect_evidence(pages)
+    existing_evidence = {
+        item.fingerprint: item
+        for item in db.scalars(select(Evidence).where(Evidence.company_id == company.id)).all()
+        if item.fingerprint
+    }
     evidence_rows: list[Evidence] = []
+    created_evidence_count = 0
     for item in detected:
+        existing = existing_evidence.get(item.fingerprint)
+        if existing is not None:
+            evidence_rows.append(existing)
+            continue
         source = sources_by_url.get(item.source_url)
         evidence = Evidence(
             company_id=company.id,
@@ -176,6 +202,7 @@ async def research_company(db: Session, company_id: int, campaign_id: int | None
             signal_type=item.signal_type,
             source_url=item.source_url,
             content_excerpt=item.content_excerpt,
+            fingerprint=item.fingerprint,
             confidence=item.confidence,
             evidence_metadata=item.metadata,
         )
@@ -190,9 +217,11 @@ async def research_company(db: Session, company_id: int, campaign_id: int | None
             )
         )
         evidence_rows.append(evidence)
+        existing_evidence[item.fingerprint] = evidence
+        created_evidence_count += 1
     db.commit()
 
-    provider = provider_from_settings(get_settings())
+    provider = provider_from_settings(settings)
     analysis = await provider.analyze_company(company, evidence_rows)
     _validate_analysis_references(analysis.model_dump(), {item.id for item in evidence_rows})
     db.add(
@@ -214,6 +243,14 @@ async def research_company(db: Session, company_id: int, campaign_id: int | None
     usage = _estimate_research_usage(
         provider.provider_name, provider.model_name, evidence_rows, analysis
     )
+    diagnostics = _research_diagnostics(
+        crawl=crawl,
+        detected_count=len(detected),
+        created_evidence_count=created_evidence_count,
+        evidence_rows=evidence_rows,
+        usage=usage,
+        latency_ms=int((perf_counter() - started) * 1000),
+    )
     db.add(
         ResearchRun(
             company_id=company.id,
@@ -223,8 +260,9 @@ async def research_company(db: Session, company_id: int, campaign_id: int | None
             input_tokens=usage["input_tokens"],
             output_tokens=usage["output_tokens"],
             estimated_cost=usage["estimated_cost"],
-            execution_time_ms=int((perf_counter() - started) * 1000),
+            execution_time_ms=diagnostics["total_research_latency_ms"],
             status="COMPLETED",
+            diagnostics=diagnostics,
         )
     )
     db.commit()
@@ -234,6 +272,8 @@ def _validate_analysis_references(payload: dict, evidence_ids: set[int]) -> None
     for collection in ("observedSignals", "possibleAutomationOpportunities"):
         for item in payload.get(collection, []):
             ids = set(item.get("evidenceIds", []))
+            if not ids:
+                raise ValueError(f"Analysis {collection} item did not reference evidence ids")
             if not ids.issubset(evidence_ids):
                 unknown_ids = sorted(ids - evidence_ids)
                 raise ValueError(f"Analysis referenced unknown evidence ids: {unknown_ids}")
@@ -258,4 +298,46 @@ def _estimate_research_usage(
         "input_tokens": input_tokens,
         "output_tokens": output_tokens,
         "estimated_cost": estimated_cost,
+    }
+
+
+def _research_diagnostics(
+    *,
+    crawl,
+    detected_count: int,
+    created_evidence_count: int,
+    evidence_rows: list[Evidence],
+    usage: dict[str, int | float],
+    latency_ms: int,
+) -> dict[str, object]:
+    return {
+        "pages_discovered": len(crawl.discovered_urls),
+        "pages_crawled": len(crawl.pages),
+        "pages_skipped": len(crawl.skipped),
+        "evidence_extracted": created_evidence_count,
+        "evidence_detected": detected_count,
+        "signals_detected": len({item.signal_type for item in evidence_rows}),
+        "crawl_failures": len(crawl.failures),
+        "content_bytes_collected": crawl.content_bytes,
+        "content_tokens_estimated": crawl.content_bytes // 4,
+        "llm_input_tokens": usage["input_tokens"],
+        "llm_output_tokens": usage["output_tokens"],
+        "llm_cost": usage["estimated_cost"],
+        "total_research_latency_ms": latency_ms,
+        "visited_pages": [
+            {
+                "url": page.url,
+                "reason": page.selected_reason,
+                "priority_score": page.priority_score,
+                "status_code": page.status_code,
+                "content_bytes": page.content_bytes,
+            }
+            for page in crawl.pages
+        ],
+        "skipped_pages": [
+            {"url": item.url, "reason": item.reason} for item in crawl.skipped[:50]
+        ],
+        "crawl_failure_details": [
+            {"url": item.url, "error": item.error} for item in crawl.failures[:20]
+        ],
     }

@@ -13,6 +13,7 @@ import {
   Company,
   CompanyDetail,
   ResearchJob,
+  ResearchRun,
   createCompany,
   getCompany,
   getResearchJob,
@@ -31,6 +32,10 @@ export default function Home() {
   const latestAnalysis = useMemo<Analysis | null>(() => {
     if (!detail?.analyses.length) return null;
     return [...detail.analyses].sort((a, b) => b.id - a.id)[0];
+  }, [detail]);
+  const latestRun = useMemo<ResearchRun | null>(() => {
+    if (!detail?.research_runs.length) return null;
+    return [...detail.research_runs].sort((a, b) => b.id - a.id)[0];
   }, [detail]);
 
   useEffect(() => {
@@ -100,7 +105,8 @@ export default function Home() {
           </div>
         ) : null}
 
-        <StatusStrip company={company} detail={detail} job={job} />
+        <StatusStrip company={company} detail={detail} job={job} latestRun={latestRun} />
+        <DiagnosticsStrip latestRun={latestRun} />
 
         <section className="split">
           <EvidencePanel detail={detail} />
@@ -115,10 +121,12 @@ function StatusStrip({
   company,
   detail,
   job,
+  latestRun,
 }: {
   company: Company | null;
   detail: CompanyDetail | null;
   job: ResearchJob | null;
+  latestRun: ResearchRun | null;
 }) {
   const statusClass = job?.status === "failed" ? "failed" : job?.status === "completed" ? "done" : "live";
   return (
@@ -133,16 +141,42 @@ function StatusStrip({
       </div>
       <div>
         <span className="label">Fuentes</span>
-        <strong>{detail?.sources.length ?? 0}</strong>
+        <strong>{latestRun?.diagnostics.pages_crawled ?? detail?.sources.length ?? 0}</strong>
       </div>
       <div>
         <span className="label">Evidencia</span>
-        <strong>{detail?.evidence.length ?? 0}</strong>
+        <strong>{latestRun?.diagnostics.evidence_extracted ?? detail?.evidence.length ?? 0}</strong>
       </div>
       <div className="statusMessage">
         <span className="label">Mensaje</span>
         <strong>{job?.error || translateJobMessage(job?.message) || "Esperando investigación"}</strong>
       </div>
+    </section>
+  );
+}
+
+function DiagnosticsStrip({ latestRun }: { latestRun: ResearchRun | null }) {
+  const diagnostics = latestRun?.diagnostics;
+  if (!diagnostics) return null;
+  const metrics = [
+    ["Descubiertas", diagnostics.pages_discovered],
+    ["Rastreadas", diagnostics.pages_crawled],
+    ["Omitidas", diagnostics.pages_skipped],
+    ["Señales", diagnostics.signals_detected],
+    ["Fallos", diagnostics.crawl_failures],
+    ["KB", diagnostics.content_bytes_collected ? Math.round(diagnostics.content_bytes_collected / 1024) : 0],
+    ["Tokens IA", (diagnostics.llm_input_tokens ?? 0) + (diagnostics.llm_output_tokens ?? 0)],
+    ["Coste", diagnostics.llm_cost != null ? `$${diagnostics.llm_cost.toFixed(4)}` : "$0"],
+    ["Latencia", diagnostics.total_research_latency_ms ? `${Math.round(diagnostics.total_research_latency_ms / 1000)}s` : "0s"],
+  ];
+  return (
+    <section className="diagnosticsStrip">
+      {metrics.map(([label, value]) => (
+        <div key={label}>
+          <span className="label">{label}</span>
+          <strong>{value ?? 0}</strong>
+        </div>
+      ))}
     </section>
   );
 }

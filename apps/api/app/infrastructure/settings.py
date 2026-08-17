@@ -16,6 +16,17 @@ class Settings(BaseSettings):
     )
     discovery_provider: str = Field(default="csv", alias="DISCOVERY_PROVIDER")
     discovery_csv_path: str | None = Field(default=None, alias="DISCOVERY_CSV_PATH")
+    research_max_pages: int = Field(default=12, ge=1, le=50, alias="RESEARCH_MAX_PAGES")
+    research_max_content_bytes: int = Field(
+        default=180_000, ge=10_000, le=2_000_000, alias="RESEARCH_MAX_CONTENT_BYTES"
+    )
+    research_timeout_seconds: float = Field(
+        default=10.0, ge=1.0, le=60.0, alias="RESEARCH_TIMEOUT_SECONDS"
+    )
+    research_retries: int = Field(default=1, ge=0, le=5, alias="RESEARCH_RETRIES")
+    research_rate_limit_seconds: float = Field(
+        default=0.25, ge=0.0, le=5.0, alias="RESEARCH_RATE_LIMIT_SECONDS"
+    )
     overpass_endpoint: str = Field(
         default="https://overpass-api.de/api/interpreter", alias="OVERPASS_ENDPOINT"
     )

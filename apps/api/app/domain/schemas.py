@@ -44,6 +44,7 @@ class EvidenceRead(BaseModel):
     signal_type: str
     source_url: str
     content_excerpt: str
+    fingerprint: str
     confidence: float
     detected_at: datetime
     evidence_metadata: dict
@@ -80,6 +81,7 @@ class CompanyDetail(CompanyRead):
     evidence: list[EvidenceRead]
     signals: list[SignalRead]
     analyses: list[AnalysisRead]
+    research_runs: list["ResearchRunRead"] = Field(default_factory=list)
 
 
 class OpportunityScoreRead(BaseModel):
@@ -196,6 +198,7 @@ class ResearchRunRead(BaseModel):
     execution_time_ms: int
     status: str
     error: str | None
+    diagnostics: dict
     created_at: datetime
 
 
