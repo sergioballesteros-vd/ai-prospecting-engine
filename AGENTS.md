@@ -181,6 +181,69 @@ npm run lint
 npm test
 ```
 
+## Production Deployment
+
+Frontend production runs on Vercel.
+
+Use this flow for frontend changes:
+
+```bash
+npm --workspace apps/web run lint
+npm --workspace apps/web run typecheck
+npm --workspace apps/web run build
+git status --short
+git add apps/web package.json package-lock.json vercel.json
+git commit -m "<clear frontend change>"
+git push origin main
+npx vercel@latest --prod --yes
+```
+
+The Vercel project is already linked in `.vercel/project.json`.
+
+Production URL:
+
+```text
+https://ai-prospecting-engine.vercel.app
+```
+
+Backend production runs on Render from `render.yaml`.
+
+Render currently builds from the GitHub repository, so the repository must remain public until the GitHub/Render private-repo connection is fixed. Do not make the repository private again without confirming Render can still pull and build it.
+
+Render configuration:
+
+- service: `ai-prospecting-api`
+- database: `ai-prospecting-db`
+- Dockerfile: `apps/api/Dockerfile`
+- Docker context: `apps/api`
+- health check: `/api/health`
+
+Use this flow for backend changes:
+
+```bash
+cd apps/api
+source .venv/bin/activate
+ruff check .
+pytest
+alembic upgrade head
+cd ../..
+git status --short
+git add apps/api render.yaml
+git commit -m "<clear backend change>"
+git push origin main
+```
+
+After pushing, trigger or watch the Render deploy from the Render dashboard for `ai-prospecting-api`. If Render reports a build failure, inspect the build logs first and fix the repo/build configuration instead of changing secrets or production data.
+
+Required Render environment variables:
+
+- `DATABASE_URL`: provided by `ai-prospecting-db`
+- `LLM_PROVIDER`: `stub` unless real LLM calls are intentionally enabled
+- `OPENAI_MODEL`: current default `gpt-4.1-mini`
+- `DISCOVERY_PROVIDER`: `csv`
+- `CORS_ORIGINS`: set in Render, should include the Vercel production origin
+- `OPENAI_API_KEY`: set only when `LLM_PROVIDER=openai`
+
 ## Before Finishing Work
 
 Run the relevant checks for the files changed. If a check cannot be run, explain why.
