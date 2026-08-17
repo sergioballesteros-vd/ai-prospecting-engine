@@ -18,3 +18,4 @@ out/
 # Local browser verification artifacts
 .playwright-cli/
 output/
+.vercel
