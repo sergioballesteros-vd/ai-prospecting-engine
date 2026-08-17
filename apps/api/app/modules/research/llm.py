@@ -89,6 +89,7 @@ class OpenAICompanyAnalysisProvider:
         if not settings.openai_api_key:
             raise ValueError("OPENAI_API_KEY is required when LLM_PROVIDER=openai")
         self.model_name = settings.openai_model
+        self.reasoning_effort = settings.openai_reasoning_effort
         self.client = AsyncOpenAI(api_key=settings.openai_api_key)
 
     async def analyze_company(
@@ -123,6 +124,7 @@ class OpenAICompanyAnalysisProvider:
                     ),
                 },
             ],
+            reasoning={"effort": self.reasoning_effort},
             text_format=StructuredCompanyAnalysis,
         )
         return response.output_parsed

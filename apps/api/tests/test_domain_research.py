@@ -1,6 +1,11 @@
 import pytest
 
-from app.modules.research.llm import StubCompanyAnalysisProvider
+from app.infrastructure.settings import Settings
+from app.modules.research.llm import (
+    OpenAICompanyAnalysisProvider,
+    StructuredCompanyAnalysis,
+    StubCompanyAnalysisProvider,
+)
 from app.modules.research.website import ExtractedPage, detect_evidence, normalize_domain
 
 
@@ -46,3 +51,51 @@ async def test_stub_analysis_references_existing_evidence_ids() -> None:
 
     assert analysis.observedSignals[0].evidenceIds == [10]
     assert analysis.possibleAutomationOpportunities[0].evidenceIds == [10]
+
+
+@pytest.mark.asyncio
+async def test_openai_analysis_uses_configured_model_and_reasoning_effort() -> None:
+    class Company:
+        name = "Example"
+        domain = "example.com"
+
+    class Evidence:
+        id = 10
+        signal_type = "USES_HUBSPOT"
+        source_url = "https://example.com"
+        content_excerpt = "We use HubSpot."
+        confidence = 0.8
+
+    class Responses:
+        kwargs: dict
+
+        async def parse(self, **kwargs):
+            self.kwargs = kwargs
+
+            class Response:
+                output_parsed = StructuredCompanyAnalysis(
+                    summary="Evidence-backed summary.",
+                    observedSignals=[],
+                    possibleAutomationOpportunities=[],
+                    unknowns=[],
+                    recommendedBuyerRoles=[],
+                )
+
+            return Response()
+
+    class Client:
+        responses = Responses()
+
+    provider = OpenAICompanyAnalysisProvider(
+        Settings(
+            LLM_PROVIDER="openai",
+            OPENAI_API_KEY="openai-key",
+            APP_API_TOKEN="app-token",
+        )
+    )
+    provider.client = Client()
+
+    await provider.analyze_company(Company(), [Evidence()])
+
+    assert provider.client.responses.kwargs["model"] == "gpt-5.4-mini"
+    assert provider.client.responses.kwargs["reasoning"] == {"effort": "low"}
