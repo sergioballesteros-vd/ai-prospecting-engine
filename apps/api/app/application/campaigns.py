@@ -4,7 +4,10 @@ from datetime import UTC, datetime
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
-from app.application.opportunity_review import upsert_opportunity_score
+from app.application.opportunity_review import (
+    upsert_first_customer_fit_score,
+    upsert_opportunity_score,
+)
 from app.application.research_jobs import research_company
 from app.domain.models import (
     CampaignCompany,
@@ -109,6 +112,9 @@ def campaign_detail(db: Session, campaign_id: int) -> ProspectingCampaign:
             selectinload(ProspectingCampaign.companies)
             .selectinload(CampaignCompany.company)
             .selectinload(Company.opportunity_scores),
+            selectinload(ProspectingCampaign.companies)
+            .selectinload(CampaignCompany.company)
+            .selectinload(Company.first_customer_fit_scores),
             selectinload(ProspectingCampaign.research_runs),
         )
     )
@@ -222,6 +228,7 @@ async def _research_campaign_company(
             raise ValueError("Company not found")
         await research_company(db, company.id, campaign.id)
         upsert_opportunity_score(db, company, campaign.opportunity)
+        upsert_first_customer_fit_score(db, company)
         entry.research_state = "RESEARCHED"
         entry.updated_at = datetime.now(UTC)
         db.commit()

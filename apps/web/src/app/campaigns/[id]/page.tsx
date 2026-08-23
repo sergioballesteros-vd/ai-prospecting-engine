@@ -162,13 +162,19 @@ function CompanyResult({
         {result.entry.error ? <p className="errorText">{result.entry.error}</p> : null}
       </div>
       <div className="scoreBreakdown inline">
-        <Metric label="Total" value={result.score?.total_score ?? 0} />
-        <Metric label="ICP" value={result.score?.icp_score ?? 0} />
-        <Metric label="Dolor" value={result.score?.pain_score ?? 0} />
-        <Metric label="Valor" value={result.score?.value_score ?? 0} />
+        <Metric label="Primer cliente" value={result.first_customer_fit?.total_score ?? 0} />
+        <Metric label="Oportunidad" value={result.score?.total_score ?? 0} />
+        <Metric label="Workflow" value={result.first_customer_fit?.workflow_fit ?? 0} />
+        <Metric label="Gap auto." value={result.first_customer_fit?.automation_gap ?? 0} />
       </div>
       <div className="signalsCell">
-        {(result.score?.matched_signals ?? []).slice(0, 4).map((signal) => (
+        {(
+          result.first_customer_fit?.matched_signals ??
+          result.score?.matched_signals ??
+          []
+        )
+          .slice(0, 4)
+          .map((signal) => (
           <span key={signal}>{signalLabel(signal)}</span>
         ))}
       </div>

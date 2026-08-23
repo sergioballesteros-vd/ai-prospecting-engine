@@ -9,7 +9,11 @@ from uuid import uuid4
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.application.opportunity_review import default_opportunity, upsert_opportunity_score
+from app.application.opportunity_review import (
+    default_opportunity,
+    upsert_first_customer_fit_score,
+    upsert_opportunity_score,
+)
 from app.domain.models import (
     Company,
     CompanyAnalysis,
@@ -240,6 +244,7 @@ async def research_company(db: Session, company_id: int, campaign_id: int | None
         )
     )
     upsert_opportunity_score(db, company, default_opportunity(db))
+    upsert_first_customer_fit_score(db, company)
     usage = _estimate_research_usage(
         provider.provider_name, provider.model_name, evidence_rows, analysis
     )

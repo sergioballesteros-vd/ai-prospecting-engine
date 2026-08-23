@@ -38,6 +38,9 @@ class Company(Base):
     signals: Mapped[list["CompanySignal"]] = relationship(back_populates="company")
     analyses: Mapped[list["CompanyAnalysis"]] = relationship(back_populates="company")
     opportunity_scores: Mapped[list["OpportunityScore"]] = relationship(back_populates="company")
+    first_customer_fit_scores: Mapped[list["FirstCustomerFitScore"]] = relationship(
+        back_populates="company"
+    )
     outreach_drafts: Mapped[list["OutreachDraft"]] = relationship(back_populates="company")
     campaign_entries: Mapped[list["CampaignCompany"]] = relationship(back_populates="company")
     research_runs: Mapped[list["ResearchRun"]] = relationship(back_populates="company")
@@ -174,6 +177,38 @@ class OpportunityScore(Base):
     company: Mapped[Company] = relationship(back_populates="opportunity_scores")
     opportunity: Mapped[Opportunity] = relationship(back_populates="scores")
     outreach_drafts: Mapped[list["OutreachDraft"]] = relationship(back_populates="score")
+
+
+class FirstCustomerFitScore(Base):
+    __tablename__ = "first_customer_fit_scores"
+    __table_args__ = (
+        UniqueConstraint("company_id", name="uq_first_customer_fit_scores_company"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    size_fit: Mapped[float] = mapped_column(Float, nullable=False)
+    buyer_accessibility: Mapped[float] = mapped_column(Float, nullable=False)
+    workflow_fit: Mapped[float] = mapped_column(Float, nullable=False)
+    automation_gap: Mapped[float] = mapped_column(Float, nullable=False)
+    sales_simplicity: Mapped[float] = mapped_column(Float, nullable=False)
+    implementation_fit: Mapped[float] = mapped_column(Float, nullable=False)
+    confidence: Mapped[float] = mapped_column(Float, nullable=False)
+    total_score: Mapped[float] = mapped_column(Float, nullable=False)
+    positive_reasons: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    negative_reasons: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    disqualifiers: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    evidence_ids: Mapped[list[int]] = mapped_column(JSON, nullable=False, default=list)
+    matched_signals: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    explanation: Mapped[str] = mapped_column(Text, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+    company: Mapped[Company] = relationship(back_populates="first_customer_fit_scores")
 
 
 class OutreachDraft(Base):

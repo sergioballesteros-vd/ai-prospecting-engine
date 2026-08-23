@@ -347,6 +347,60 @@ def detect_evidence(pages: list[ExtractedPage]) -> list[DetectedEvidence]:
             0.62,
         ),
         (
+            "OWNER_LED",
+            r"\bsocio director\b|\bsocia directora\b|\bfundador(?:a)?\b|\bowner\b|"
+            r"\bceo\b|\bdirector(?:a)? general\b",
+            0.66,
+        ),
+        (
+            "MANAGING_PARTNER_VISIBLE",
+            r"\bmanaging partner\b|\bsocio(?:a)?\b|\bpartner\b|\bsocio responsable\b|"
+            r"\bsocia responsable\b",
+            0.66,
+        ),
+        (
+            "DIRECT_CONTACT_PATH",
+            r"contacto|tel[eé]fono|ll[aá]manos|escr[ií]benos|solicita informaci[oó]n|"
+            r"formulario de contacto",
+            0.64,
+        ),
+        (
+            "LOCAL_OFFICE",
+            r"\boficina\b|\bdespacho\b|\basesor[ií]a en madrid\b|\bgestor[ií]a en madrid\b|"
+            r"\bmadrid\b",
+            0.62,
+        ),
+        (
+            "MULTIPLE_ADVISORY_AREAS",
+            r"(fiscal|tributari[ao]).*(contable|laboral|mercantil|jur[ií]dic[ao])|"
+            r"(contable|laboral).*(fiscal|tributari[ao])|asesor[ií]a fiscal.*laboral|"
+            r"fiscal.*contable.*laboral",
+            0.72,
+        ),
+        (
+            "DOCUMENT_HEAVY_WORKFLOW",
+            r"documentaci[oó]n|documentos|facturas|n[oó]minas|contratos|certificados|"
+            r"declaraciones|modelos tributarios",
+            0.7,
+        ),
+        (
+            "CLIENT_INTAKE_FLOW",
+            r"alta de cliente|onboarding|env[ií]anos|solicitud|presupuesto|"
+            r"primera consulta|pedir cita|contacta con nosotros",
+            0.68,
+        ),
+        (
+            "STANDARD_VERTICAL_SOFTWARE",
+            r"\ba3(?:doc|asesor|eco|nom)?\b|wolters kluwer|sage|contasol|holded|"
+            r"microsoft 365|google workspace|portal del cliente",
+            0.7,
+        ),
+        (
+            "NO_INTERNAL_TECH_TEAM_VISIBLE",
+            r"asesor[ií]a fiscal|asesor[ií]a contable|gestor[ií]a|despacho profesional",
+            0.55,
+        ),
+        (
             "MULTIPLE_LOCATIONS",
             r"\blocations\b|\boffices\b|\bsedes\b|\bdelegaciones\b|\bcampus\b",
             0.62,
@@ -415,6 +469,59 @@ def detect_evidence(pages: list[ExtractedPage]) -> list[DetectedEvidence]:
             0.64,
         ),
         ("HAS_API", r"\bapi\b|\bdeveloper\b|\bdevelopers\b|\bwebhooks?\b", 0.62),
+        (
+            "PROPRIETARY_ERP",
+            r"erp propio|propio erp|software propio|sistema propio de gesti[oó]n|"
+            r"tecnolog[ií]a propia",
+            0.78,
+        ),
+        (
+            "PROPRIETARY_PLATFORM",
+            r"plataforma propia|portal propio|soluci[oó]n propia|producto propio|"
+            r"suite propia",
+            0.76,
+        ),
+        (
+            "SELLS_TECH_TO_OTHER_FIRMS",
+            r"software para asesor[ií]as|software para despachos|tecnolog[ií]a para asesor[ií]as|"
+            r"soluciones tecnol[oó]gicas para despachos",
+            0.82,
+        ),
+        (
+            "INTERNAL_PRODUCT_TEAM",
+            r"equipo de producto|product team|product manager|producto digital",
+            0.72,
+        ),
+        (
+            "INTERNAL_ENGINEERING_TEAM",
+            r"equipo de ingenier[ií]a|engineering team|desarrolladores?|software engineer|"
+            r"equipo de desarrollo",
+            0.72,
+        ),
+        (
+            "EXPLICIT_AI_AUTOMATION_PROGRAM",
+            r"inteligencia artificial| ia |automatizaci[oó]n inteligente|machine learning|"
+            r"automatizamos nuestros procesos",
+            0.74,
+        ),
+        (
+            "ENTERPRISE_SCALE",
+            r"\b600\+?\s+empleados\b|\bm[aá]s de 500 empleados\b|\b\d{4,}\s+clientes\b|"
+            r"gran empresa|corporativo",
+            0.72,
+        ),
+        (
+            "MULTINATIONAL_COMPLEXITY",
+            r"multinacional|internacional|global|presencia internacional|"
+            r"oficinas en varios pa[ií]ses",
+            0.7,
+        ),
+        (
+            "LONG_PROCUREMENT_RISK",
+            r"licitaci[oó]n|compras corporativas|procurement|homologaci[oó]n de proveedores|"
+            r"grupo empresarial",
+            0.68,
+        ),
         (
             "HIRING",
             r"\bhiring\b|\bcareers\b|\bjobs\b|\btrabaja con nosotros\b|\bofertas de empleo\b",

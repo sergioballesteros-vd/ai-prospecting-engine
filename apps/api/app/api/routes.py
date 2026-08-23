@@ -168,6 +168,9 @@ def list_ranked_opportunities(db: DbSession) -> list[RankedOpportunityRead]:
         rows.append(
             RankedOpportunityRead(
                 score=score,
+                first_customer_fit=score.company.first_customer_fit_scores[0]
+                if score.company.first_customer_fit_scores
+                else None,
                 company=score.company,
                 top_evidence=top_evidence,
                 why_matched=score.explanation,
@@ -211,6 +214,9 @@ def set_opportunity_score_state(
         .where(OpportunityScore.id == score_id)
         .options(
             selectinload(OpportunityScore.company).selectinload(Company.evidence),
+            selectinload(OpportunityScore.company).selectinload(
+                Company.first_customer_fit_scores
+            ),
             selectinload(OpportunityScore.outreach_drafts),
         )
     )
@@ -219,6 +225,9 @@ def set_opportunity_score_state(
     evidence_by_id: dict[int, Evidence] = {item.id: item for item in score.company.evidence}
     return RankedOpportunityRead(
         score=score,
+        first_customer_fit=score.company.first_customer_fit_scores[0]
+        if score.company.first_customer_fit_scores
+        else None,
         company=score.company,
         top_evidence=[
             evidence_by_id[item_id] for item_id in score.evidence_ids if item_id in evidence_by_id
@@ -365,10 +374,16 @@ def _campaign_detail_response(
                 for item_id in score.evidence_ids
                 if item_id in evidence_by_id
             ]
+        first_customer_fit = (
+            entry.company.first_customer_fit_scores[0]
+            if entry.company.first_customer_fit_scores
+            else None
+        )
         company_results.append(
             CampaignCompanyResult(
                 entry=entry,
                 score=score,
+                first_customer_fit=first_customer_fit,
                 top_evidence=top_evidence,
                 pipeline_state=current_pipeline_state(
                     db, entry.company_id, campaign.opportunity_id, campaign.id
@@ -376,7 +391,11 @@ def _campaign_detail_response(
             )
         )
     company_results.sort(
-        key=lambda item: item.score.total_score if item.score is not None else -1, reverse=True
+        key=lambda item: (
+            item.first_customer_fit.total_score if item.first_customer_fit is not None else -1,
+            item.score.total_score if item.score is not None else -1,
+        ),
+        reverse=True,
     )
     return ProspectingCampaignDetail(
         id=campaign.id,

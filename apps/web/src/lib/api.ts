@@ -137,6 +137,27 @@ export type OpportunityScore = {
   updated_at: string;
 };
 
+export type FirstCustomerFitScore = {
+  id: number;
+  company_id: number;
+  size_fit: number;
+  buyer_accessibility: number;
+  workflow_fit: number;
+  automation_gap: number;
+  sales_simplicity: number;
+  implementation_fit: number;
+  confidence: number;
+  total_score: number;
+  positive_reasons: string[];
+  negative_reasons: string[];
+  disqualifiers: string[];
+  evidence_ids: number[];
+  matched_signals: string[];
+  explanation: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type OutreachDraft = {
   id: number;
   company_id: number;
@@ -183,6 +204,7 @@ export type PipelineEvent = {
 
 export type RankedOpportunity = {
   score: OpportunityScore;
+  first_customer_fit: FirstCustomerFitScore | null;
   company: Company;
   top_evidence: Evidence[];
   why_matched: string;
@@ -218,6 +240,7 @@ export type CampaignCompanyResult = {
     company: Company;
   };
   score: OpportunityScore | null;
+  first_customer_fit: FirstCustomerFitScore | null;
   top_evidence: Evidence[];
   pipeline_state: PipelineState | null;
 };

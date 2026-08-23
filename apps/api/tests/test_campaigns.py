@@ -80,6 +80,8 @@ async def test_campaign_deduplicates_domains_tracks_partial_failures_and_scores(
                 _evidence(company_id, "HAS_CRM", 0.8),
                 _evidence(company_id, "MULTIPLE_CONTACT_FORMS", 0.75),
                 _evidence(company_id, "HAS_SALES_TEAM", 0.7),
+                _evidence(company_id, "STANDARD_VERTICAL_SOFTWARE", 0.7),
+                _evidence(company_id, "DOCUMENT_HEAVY_WORKFLOW", 0.68),
             ]
         )
         session.commit()
@@ -99,6 +101,7 @@ async def test_campaign_deduplicates_domains_tracks_partial_failures_and_scores(
     assert any(entry.error == "website timeout" for entry in refreshed.companies)
     successful = [entry for entry in refreshed.companies if entry.research_state == "RESEARCHED"][0]
     assert successful.company.opportunity_scores[0].total_score > 0
+    assert successful.company.first_customer_fit_scores[0].total_score > 0
 
 
 def test_campaign_state_starts_as_draft() -> None:

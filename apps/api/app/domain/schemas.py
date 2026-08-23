@@ -105,6 +105,29 @@ class OpportunityScoreRead(BaseModel):
     updated_at: datetime
 
 
+class FirstCustomerFitScoreRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    company_id: int
+    size_fit: float
+    buyer_accessibility: float
+    workflow_fit: float
+    automation_gap: float
+    sales_simplicity: float
+    implementation_fit: float
+    confidence: float
+    total_score: float
+    positive_reasons: list[str]
+    negative_reasons: list[str]
+    disqualifiers: list[str]
+    evidence_ids: list[int]
+    matched_signals: list[str]
+    explanation: str
+    created_at: datetime
+    updated_at: datetime
+
+
 class OutreachDraftRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
@@ -135,6 +158,7 @@ class ReviewStateUpdate(BaseModel):
 
 class RankedOpportunityRead(BaseModel):
     score: OpportunityScoreRead
+    first_customer_fit: FirstCustomerFitScoreRead | None = None
     company: CompanyRead
     top_evidence: list[EvidenceRead]
     why_matched: str
@@ -205,6 +229,7 @@ class ResearchRunRead(BaseModel):
 class CampaignCompanyResult(BaseModel):
     entry: CampaignCompanyRead
     score: OpportunityScoreRead | None
+    first_customer_fit: FirstCustomerFitScoreRead | None = None
     top_evidence: list[EvidenceRead]
     pipeline_state: str | None = None
 

@@ -157,7 +157,7 @@ export default function OpportunitiesPage() {
             <div className="panelHeader">
               <div>
                 <h2>Empresas</h2>
-                <p>El score total usa pesos configurables por oportunidad.</p>
+                <p>Ordenado por encaje como primer cliente; la oportunidad se mantiene aparte.</p>
               </div>
               <span>{rows.length}</span>
             </div>
@@ -170,10 +170,14 @@ export default function OpportunitiesPage() {
                   key={row.score.id}
                   onClick={() => setSelected(row)}
                 >
-                  <span className="scoreBadge">{Math.round(row.score.total_score)}</span>
+                  <span className="scoreBadge">
+                    {Math.round(row.first_customer_fit?.total_score ?? row.score.total_score)}
+                  </span>
                   <span>
                     <strong>{row.company.name}</strong>
-                    <small>{row.company.domain}</small>
+                    <small>
+                      {row.company.domain} · Oportunidad {Math.round(row.score.total_score)}
+                    </small>
                   </span>
                   <span className={`status ${stateClass(row.score.qualification_state)}`}>
                     {reviewStateLabel(row.score.qualification_state)}
@@ -266,10 +270,34 @@ function OpportunityDetail({
           <h2>{row.company.name}</h2>
           <p>{row.why_matched}</p>
         </div>
-        <span className="scoreBadge large">{Math.round(row.score.total_score)}</span>
+        <span className="scoreBadge large">
+          {Math.round(row.first_customer_fit?.total_score ?? row.score.total_score)}
+        </span>
       </div>
 
       <section className="scoreBreakdown">
+        <Metric label="Primer cliente" value={row.first_customer_fit?.total_score ?? 0} />
+        <Metric label="Acceso" value={row.first_customer_fit?.buyer_accessibility ?? 0} />
+        <Metric label="Workflow" value={row.first_customer_fit?.workflow_fit ?? 0} />
+        <Metric label="Gap auto." value={row.first_customer_fit?.automation_gap ?? 0} />
+        <Metric label="Ventas" value={row.first_customer_fit?.sales_simplicity ?? 0} />
+        <Metric label="Impl." value={row.first_customer_fit?.implementation_fit ?? 0} />
+      </section>
+
+      {row.first_customer_fit ? (
+        <section className="detailSection">
+          <h3>Encaje primer cliente</h3>
+          <p>{row.first_customer_fit.explanation}</p>
+          {row.first_customer_fit.disqualifiers.length ? (
+            <p className="errorText">
+              Riesgos: {row.first_customer_fit.disqualifiers.map(signalLabel).join(", ")}
+            </p>
+          ) : null}
+        </section>
+      ) : null}
+
+      <section className="scoreBreakdown">
+        <Metric label="Oportunidad" value={row.score.total_score} />
         <Metric label="ICP" value={row.score.icp_score} />
         <Metric label="Dolor" value={row.score.pain_score} />
         <Metric label="Valor" value={row.score.value_score} />

@@ -3,9 +3,11 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.application.opportunity_review import (
     generate_outreach_draft,
+    score_company_for_first_customer_fit,
     score_company_for_opportunity,
     update_outreach_draft,
     update_score_state,
+    upsert_first_customer_fit_score,
     upsert_opportunity_score,
 )
 from app.domain.models import Base, Company, Evidence, Opportunity
@@ -46,6 +48,73 @@ def test_score_persists_traceable_evidence_ids() -> None:
     assert score.evidence_ids
     assert set(score.evidence_ids).issubset({item.id for item in company.evidence})
     assert "HAS_CRM" in score.matched_signals
+
+
+def test_first_customer_fit_rewards_standard_software_without_disqualifying() -> None:
+    company = Company(
+        id=1,
+        name="Aselec Style Advisors",
+        domain="aselec-style.example",
+        website_url="https://aselec-style.example",
+        country="Spain",
+        city="Madrid",
+        industry="professional_services",
+        employee_estimate=22,
+    )
+    evidence = [
+        _evidence(1, "STANDARD_VERTICAL_SOFTWARE", 0.8),
+        _evidence(2, "MULTIPLE_ADVISORY_AREAS", 0.75),
+        _evidence(3, "DOCUMENT_HEAVY_WORKFLOW", 0.72),
+        _evidence(4, "MANAGING_PARTNER_VISIBLE", 0.7),
+        _evidence(5, "DIRECT_CONTACT_PATH", 0.68),
+    ]
+
+    score = score_company_for_first_customer_fit(company, evidence)
+
+    assert score.total_score >= 70
+    assert "STANDARD_VERTICAL_SOFTWARE" in score.matched_signals
+    assert score.disqualifiers == []
+    assert any("Standard vertical software" in reason for reason in score.positive_reasons)
+
+
+def test_first_customer_fit_penalizes_internal_technology_maturity() -> None:
+    company = Company(
+        id=1,
+        name="Ayuda Style Advisors",
+        domain="ayuda-style.example",
+        website_url="https://ayuda-style.example",
+        country="Spain",
+        city="Madrid",
+        industry="professional_services",
+        employee_estimate=600,
+    )
+    evidence = [
+        _evidence(1, "PROPRIETARY_ERP", 0.86),
+        _evidence(2, "EXPLICIT_AI_AUTOMATION_PROGRAM", 0.82),
+        _evidence(3, "SELLS_TECH_TO_OTHER_FIRMS", 0.8),
+        _evidence(4, "ENTERPRISE_SCALE", 0.78),
+        _evidence(5, "DOCUMENT_HEAVY_WORKFLOW", 0.7),
+    ]
+
+    score = score_company_for_first_customer_fit(company, evidence)
+
+    assert score.total_score < 35
+    assert "PROPRIETARY_ERP" in score.disqualifiers
+    assert "EXPLICIT_AI_AUTOMATION_PROGRAM" in score.disqualifiers
+    assert any("Internal technology maturity" in reason for reason in score.negative_reasons)
+
+
+def test_first_customer_fit_persists_separately_from_opportunity_score() -> None:
+    db = _session()
+    company, opportunity = _persist_company_opportunity_and_evidence(db)
+
+    opportunity_score = upsert_opportunity_score(db, company, opportunity)
+    fit_score = upsert_first_customer_fit_score(db, company)
+
+    assert opportunity_score.__tablename__ == "opportunity_scores"
+    assert fit_score.__tablename__ == "first_customer_fit_scores"
+    assert fit_score.company_id == company.id
+    assert fit_score.evidence_ids
 
 
 def test_state_transitions_are_limited_to_review_states() -> None:
