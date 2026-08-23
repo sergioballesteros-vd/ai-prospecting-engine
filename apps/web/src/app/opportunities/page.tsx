@@ -571,8 +571,9 @@ function stateClass(state: string) {
 
 function nextPipelineState(state: PipelineState | null): PipelineState | null {
   if (state === null) return "APPROVED";
-  if (state === "APPROVED") return "CONTACTED";
-  if (state === "CONTACTED") return "REPLIED";
+  if (state === "APPROVED") return "CONNECTION_SENT";
+  if (state === "CONTACTED" || state === "CONNECTION_SENT") return "ACCEPTED";
+  if (state === "ACCEPTED") return "REPLIED";
   if (state === "REPLIED") return "MEETING";
   if (state === "MEETING") return "PROPOSAL";
   if (state === "PROPOSAL") return "WON";
@@ -603,7 +604,7 @@ function buildPipelinePayload(
     currency: null as string | null,
     lost_reason: null as string | null,
   };
-  if (toState === "CONTACTED") {
+  if (toState === "CONTACTED" || toState === "CONNECTION_SENT") {
     payload.channel = form.channel;
     payload.message_used = form.message_used || null;
   }

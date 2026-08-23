@@ -1,0 +1,962 @@
+[
+  {
+    "name": "Ironhack",
+    "domain": "ironhack.com",
+    "website_url": "https://www.ironhack.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Codenotch",
+    "domain": "codenotch.com",
+    "website_url": "https://codenotch.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ThePower Business School",
+    "domain": "thepowermba.com",
+    "website_url": "https://thepower.education/thepowermba",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "IEBS Business School",
+    "domain": "iebschool.com",
+    "website_url": "https://www.iebschool.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ISDI",
+    "domain": "isdi.education",
+    "website_url": "https://www.isdi.education/es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "EAE Business School",
+    "domain": "eae.es",
+    "website_url": "https://www.eae.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ESIC Business and Marketing School",
+    "domain": "esic.edu",
+    "website_url": "https://www.esic.edu/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Nuclio Digital School",
+    "domain": "nuclio.school",
+    "website_url": "https://nuclio.school",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "KeepCoding",
+    "domain": "keepcoding.io",
+    "website_url": "https://keepcoding.io",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Upgrade Hub",
+    "domain": "upgrade-hub.com",
+    "website_url": "https://www.upgrade-hub.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "IE Business School",
+    "domain": "ie.edu",
+    "website_url": "https://www.ie.edu/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "EADA Business School",
+    "domain": "eada.edu",
+    "website_url": "https://www.eada.edu/es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "EU Business School",
+    "domain": "euruni.edu",
+    "website_url": "https://www.euruni.edu/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "TBS Education Barcelona",
+    "domain": "tbs-education.es",
+    "website_url": "https://www.tbs-education.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "OBS Business School",
+    "domain": "obsbusiness.school",
+    "website_url": "https://www.obsbusiness.school/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "IMF Smart Education",
+    "domain": "imf-formacion.com",
+    "website_url": "https://imf-formacion.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "EUDE Business School",
+    "domain": "eude.es",
+    "website_url": "https://www.eude.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ENEB",
+    "domain": "eneb.es",
+    "website_url": "https://eneb.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ISEB",
+    "domain": "iseb.es",
+    "website_url": "https://iseb.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CEREM Business School",
+    "domain": "cerem.es",
+    "website_url": "https://www.cerem.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ESDEN Business School",
+    "domain": "esden.es",
+    "website_url": "https://esden.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ENAE Business School",
+    "domain": "enae.es",
+    "website_url": "https://www.enae.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "EOI Escuela de Organizacion Industrial",
+    "domain": "eoi.es",
+    "website_url": "https://www.eoi.es/es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CEF Centro de Estudios Financieros",
+    "domain": "cef.es",
+    "website_url": "https://www.cef.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "UDIMA",
+    "domain": "udima.es",
+    "website_url": "https://www.udima.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "UOC",
+    "domain": "uoc.edu",
+    "website_url": "https://www.uoc.edu/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "UNIE Universidad",
+    "domain": "universidadunie.com",
+    "website_url": "https://www.universidadunie.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CEUPE",
+    "domain": "ceupe.com",
+    "website_url": "https://www.ceupe.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ESERP Business School",
+    "domain": "eserp.com",
+    "website_url": "https://eserp.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Spain Business School",
+    "domain": "spainbs.com",
+    "website_url": "https://spainbs.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Next International Business School",
+    "domain": "nextibs.com",
+    "website_url": "https://www.nextibs.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CMI Business School",
+    "domain": "cmiuniversal.com",
+    "website_url": "https://cmi.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ISDE",
+    "domain": "isde.es",
+    "website_url": "https://isde.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CESIF",
+    "domain": "cesif.es",
+    "website_url": "https://www.cesif.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Structuralia",
+    "domain": "structuralia.com",
+    "website_url": "https://www.structuralia.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Ostelea",
+    "domain": "ostelea.com",
+    "website_url": "https://www.ostelea.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Euroinnova",
+    "domain": "euroinnova.com",
+    "website_url": "https://www.euroinnova.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "INESEM Business School",
+    "domain": "inesem.es",
+    "website_url": "https://www.inesem.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Grupo Femxa",
+    "domain": "femxa.es",
+    "website_url": "https://www.femxa.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Grupo Aspasia",
+    "domain": "grupoaspasia.com",
+    "website_url": "https://grupoaspasia.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Campus Training",
+    "domain": "campustraining.es",
+    "website_url": "https://www.campustraining.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "MasterD",
+    "domain": "masterd.es",
+    "website_url": "https://www.masterd.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CEAC",
+    "domain": "ceac.es",
+    "website_url": "https://www.ceac.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CCC",
+    "domain": "ccc.es",
+    "website_url": "https://ccc.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Deusto Formacion",
+    "domain": "deustoformacion.com",
+    "website_url": "https://www.deustoformacion.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Deusto Salud",
+    "domain": "deustosalud.com",
+    "website_url": "https://www.deustosalud.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Tokio School",
+    "domain": "tokioschool.com",
+    "website_url": "https://www.tokioschool.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "SEAS Estudios Superiores Abiertos",
+    "domain": "seas.es",
+    "website_url": "https://www.seas.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Dsigno",
+    "domain": "dsigno.es",
+    "website_url": "https://dsigno.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Aula 10 Formacion",
+    "domain": "aula10formacion.com",
+    "website_url": "https://aula10formacion.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Implika",
+    "domain": "implika.es",
+    "website_url": "https://www.masterd.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ESSAE Formacion",
+    "domain": "essaeformacion.com",
+    "website_url": "https://essaeformacion.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ILERNA",
+    "domain": "ilerna.es",
+    "website_url": "https://www.ilerna.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "MEDAC",
+    "domain": "medac.es",
+    "website_url": "https://medac.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CESUR",
+    "domain": "cesurformacion.com",
+    "website_url": "https://www.cesurformacion.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "iFP",
+    "domain": "ifp.es",
+    "website_url": "https://www.planetafp.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Linkia FP",
+    "domain": "linkiafp.es",
+    "website_url": "https://linkiafp.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "FP Pro",
+    "domain": "fppro.es",
+    "website_url": "https://www.fppro.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CEU FP",
+    "domain": "fpceu.es",
+    "website_url": "https://fpceu.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Campus FP",
+    "domain": "campusfp.es",
+    "website_url": "https://campusfp.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Obicex",
+    "domain": "obicex.es",
+    "website_url": "https://www.obicex.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "4Geeks Academy",
+    "domain": "4geeksacademy.com",
+    "website_url": "https://4geeks.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Le Wagon Spain",
+    "domain": "lewagon.com",
+    "website_url": "https://www.lewagon.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Neoland",
+    "domain": "neoland.es",
+    "website_url": "https://neoland.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "GeeksHubs Academy",
+    "domain": "geekshubsacademy.com",
+    "website_url": "https://muchowlaw.com/recent-news/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Factoria F5",
+    "domain": "factoriaf5.org",
+    "website_url": "https://factoriaf5.org",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "MIOTI",
+    "domain": "mioti.es",
+    "website_url": "https://mioti.es/es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "The Valley",
+    "domain": "thevalley.es",
+    "website_url": "https://thevalley.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "INESDI",
+    "domain": "inesdi.com",
+    "website_url": "https://www.inesdi.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Ecommaster",
+    "domain": "ecommaster.es",
+    "website_url": "https://ecommaster.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Aula CM",
+    "domain": "aulacm.com",
+    "website_url": "https://aulacm.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Webpositer Academy",
+    "domain": "webpositeracademy.com",
+    "website_url": "https://www.webpositeracademy.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Trazos",
+    "domain": "trazos.net",
+    "website_url": "https://trazos.net",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CEI Escuela",
+    "domain": "cei.es",
+    "website_url": "https://cei.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "U-tad",
+    "domain": "u-tad.com",
+    "website_url": "https://u-tad.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CICE",
+    "domain": "cice.es",
+    "website_url": "https://www.cice.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Voxel School",
+    "domain": "voxelschool.com",
+    "website_url": "https://voxelschool.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Harbour Space",
+    "domain": "harbour.space",
+    "website_url": "https://harbour.space",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "LABASAD",
+    "domain": "labasad.com",
+    "website_url": "https://www.labasad.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "IED Madrid",
+    "domain": "ied.es",
+    "website_url": "https://www.ied.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "BAU",
+    "domain": "baued.es",
+    "website_url": "https://www.baued.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Elisava",
+    "domain": "elisava.net",
+    "website_url": "https://www.elisava.net/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "FX Animation",
+    "domain": "fxanimation.es",
+    "website_url": "https://www.fxbarcelonafilmschool.com/es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ABA English",
+    "domain": "abaenglish.com",
+    "website_url": "https://www.abaenglish.com/en/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Speexx",
+    "domain": "speexx.com",
+    "website_url": "https://www.speexx.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Whats Up Living English",
+    "domain": "whatsup.es",
+    "website_url": "https://whatsup.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Kids and Us",
+    "domain": "kidsandus.es",
+    "website_url": "https://www.kidsandus.es/es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "English Connection",
+    "domain": "englishconnection.es",
+    "website_url": "https://englishconnection.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Wall Street English Spain",
+    "domain": "wallstreetenglish.es",
+    "website_url": "https://www.wallstreetenglish.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Berlitz Spain",
+    "domain": "berlitz.com",
+    "website_url": "https://www.berlitz.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Tandem Madrid",
+    "domain": "tandemmadrid.com",
+    "website_url": "https://www.tandemmadrid.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Enforex",
+    "domain": "enforex.com",
+    "website_url": "https://www.enforex.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Don Quijote",
+    "domain": "donquijote.org",
+    "website_url": "https://www.donquijote.org/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "AIL Madrid",
+    "domain": "ailmadrid.com",
+    "website_url": "https://ailmadrid.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "International House Madrid",
+    "domain": "ihmadrid.com",
+    "website_url": "https://www.ihmadrid.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Cronopios Idiomas",
+    "domain": "cronopiosidiomas.com",
+    "website_url": "https://cronopiosidiomas.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Delengua",
+    "domain": "delengua.es",
+    "website_url": "https://delengua.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Cegos Spain",
+    "domain": "cegos.es",
+    "website_url": "https://www.cegos.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Adams Formacion",
+    "domain": "adams.es",
+    "website_url": "https://www.adams.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Formaziona",
+    "domain": "formaziona.com",
+    "website_url": "https://formaziona.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ADR Formacion",
+    "domain": "adrformacion.com",
+    "website_url": "https://www.adrformacion.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Netmind",
+    "domain": "netmind.net",
+    "website_url": "https://netmind.net",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CAS Training",
+    "domain": "cas-training.com",
+    "website_url": "https://cas-training.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Nanfor Iberica",
+    "domain": "nanfor.com",
+    "website_url": "https://nanfor.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "PUE",
+    "domain": "pue.es",
+    "website_url": "https://www.pue.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Tajamar",
+    "domain": "tajamar.es",
+    "website_url": "https://www.tajamar.es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Core Networks",
+    "domain": "corenetworks.es",
+    "website_url": "https://corenetworks.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Grupo Atrium",
+    "domain": "grupoatrium.com",
+    "website_url": "https://www.grupoatrium.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Barcelona Culinary Hub",
+    "domain": "barcelonaculinaryhub.com",
+    "website_url": "https://www.barcelonaculinaryhub.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "CETT",
+    "domain": "cett.es",
+    "website_url": "https://www.cett.es/es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Basque Culinary Center",
+    "domain": "bculinary.com",
+    "website_url": "https://bculinary.com/es/home",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Les Roches Marbella",
+    "domain": "lesroches.edu",
+    "website_url": "https://lesroches.edu",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Grupo CTO",
+    "domain": "grupocto.es",
+    "website_url": "https://grupocto.es",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "AMIR",
+    "domain": "grupoamir.com",
+    "website_url": "https://grupoamir.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "EIP International Business School",
+    "domain": "eiposgrados.com",
+    "website_url": "https://eiposgrados.com",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Euncet Business School",
+    "domain": "euncet.com",
+    "website_url": "https://www.euncet.com/es/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "ESCP Business School",
+    "domain": "escp.eu",
+    "website_url": "https://escp.eu",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "La Salle URL",
+    "domain": "salleurl.edu",
+    "website_url": "https://www.salleurl.edu/en",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Fundesem Business School",
+    "domain": "fundesem.es",
+    "website_url": "https://fundesem.es/business-school/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  },
+  {
+    "name": "Escuela Europea de Coaching",
+    "domain": "escuelacoaching.com",
+    "website_url": "https://www.escuelacoaching.com/",
+    "industry": "Education / Training",
+    "country": "Spain",
+    "city": ""
+  }
+]

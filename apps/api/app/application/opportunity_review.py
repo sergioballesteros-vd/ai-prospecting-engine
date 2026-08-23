@@ -408,7 +408,7 @@ def _first_customer_size_fit(
         negative_reasons.append("Enterprise-scale signal makes this a poor first-customer fit.")
         return 20
     if company.employee_estimate is None:
-        positive_reasons.append("Employee count is unknown; size fit is scored conservatively.")
+        negative_reasons.append("Employee count is unknown; size fit is scored conservatively.")
         return 55
     if 5 <= company.employee_estimate <= 50:
         positive_reasons.append("Estimated 5-50 employee range fits the first-customer ICP.")
@@ -416,7 +416,10 @@ def _first_customer_size_fit(
     if 51 <= company.employee_estimate <= 100:
         negative_reasons.append("Estimated 51-100 employees may add some sales complexity.")
         return 62
-    negative_reasons.append("Estimated 100+ employees creates first-customer sales complexity.")
+    if company.employee_estimate > 100:
+        negative_reasons.append("Estimated 100+ employees creates first-customer sales complexity.")
+    else:
+        negative_reasons.append("Estimated team size is below the target 5-100 employee range.")
     return 28
 
 

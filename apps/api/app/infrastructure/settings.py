@@ -23,6 +23,12 @@ class Settings(BaseSettings):
     research_timeout_seconds: float = Field(
         default=10.0, ge=1.0, le=60.0, alias="RESEARCH_TIMEOUT_SECONDS"
     )
+    research_crawl_max_seconds: float = Field(
+        default=30.0, ge=1.0, le=300.0, alias="RESEARCH_CRAWL_MAX_SECONDS"
+    )
+    research_max_runtime_seconds: float = Field(
+        default=60.0, ge=5.0, le=600.0, alias="RESEARCH_MAX_RUNTIME_SECONDS"
+    )
     research_retries: int = Field(default=1, ge=0, le=5, alias="RESEARCH_RETRIES")
     research_rate_limit_seconds: float = Field(
         default=0.25, ge=0.0, le=5.0, alias="RESEARCH_RATE_LIMIT_SECONDS"

@@ -893,6 +893,434 @@ a.secondaryButton {
   font-size: 12px;
 }
 
+.commercialGrid {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.8fr) minmax(560px, 1.2fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.commercialBoard {
+  display: grid;
+  gap: 10px;
+}
+
+.commercialGroup {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.commercialGroup > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  background: var(--surface-subtle);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.commercialGroup > header span {
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: var(--surface);
+  font-weight: 900;
+}
+
+.commercialRow {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  border: 0;
+  border-top: 1px solid var(--border);
+  padding: 10px 12px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.commercialRow.selected {
+  background: var(--accent-soft);
+}
+
+.commercialRow strong,
+.commercialRow small {
+  display: block;
+}
+
+.commercialRow small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.commercialDetail {
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 48px);
+}
+
+.commercialSummary {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1.2fr;
+  gap: 16px;
+}
+
+.commercialSummary small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.buyerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.buyerGrid input,
+.commercialActions input,
+.commercialActions textarea {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid #cbd5d3;
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--text);
+}
+
+.commercialActions {
+  display: grid;
+  gap: 8px;
+}
+
+.commercialActions textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+.checkboxRow,
+.profileLink {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.commercialActions .checkboxRow input {
+  width: auto;
+  min-height: auto;
+}
+
+.compactActions {
+  border: 0;
+  padding: 4px 0 0;
+}
+
+.commercialCopy {
+  margin-top: 8px;
+  color: #2e403f;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.commercialNote {
+  border-top: 1px solid var(--border);
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.commercialNote p,
+.templateList p {
+  color: #2e403f;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.commercialNote small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.templateList summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.templateList section {
+  margin-top: 12px;
+}
+
+.discoveryScoreboard {
+  margin-bottom: 12px;
+  overflow: hidden;
+  border: 1px solid #bfd3ce;
+  border-radius: 9px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.discoveryScoreboard > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 16px;
+  background: linear-gradient(115deg, #eaf5f1, #f7faf9);
+}
+
+.discoveryScoreboard header strong,
+.discoveryScoreboard header span,
+.discoveryScoreboard header small {
+  display: block;
+}
+
+.discoveryScoreboard .eyebrow,
+.northStar span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.northStar {
+  text-align: right;
+}
+
+.northStar small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.scoreboardMetrics {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(90px, 1fr));
+}
+
+.scoreboardMetrics > div {
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 9px 12px;
+}
+
+.scoreboardMetrics span,
+.scoreboardMetrics strong {
+  display: block;
+}
+
+.scoreboardMetrics span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.scoreboardMetrics strong {
+  margin-top: 3px;
+  font-size: 18px;
+}
+
+.sectionTitleRow,
+.discoveryResult > header,
+.calculationRow,
+.discoveryHistory > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sectionTitleRow p {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.discoveryResult {
+  margin-top: 10px;
+  border: 1px solid #cbdad7;
+  border-radius: 7px;
+  padding: 11px;
+  background: #f8fbfa;
+}
+
+.discoveryResult p {
+  margin-top: 7px;
+  color: #2e403f;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.outcomeBadge {
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: #e4efec;
+  color: #23413c;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.outcome-pilot_candidate {
+  background: #d9f2e6;
+  color: #12633f;
+}
+
+.outcome-disqualified,
+.outcome-no_problem {
+  background: #f3e8e6;
+  color: #8b3328;
+}
+
+.blockerList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 9px;
+}
+
+.blockerList span {
+  border-radius: 4px;
+  padding: 3px 6px;
+  background: #fff0dd;
+  color: #804d10;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.greenText {
+  color: #16704b !important;
+}
+
+.calculationRow {
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 7px;
+  font-size: 11px;
+}
+
+.calculationRow small {
+  color: var(--muted);
+}
+
+.discoveryForm {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.discoveryForm label {
+  display: grid;
+  gap: 4px;
+  color: #3f5451;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.discoveryForm input,
+.discoveryForm select,
+.discoveryForm textarea {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid #cbd5d3;
+  border-radius: 6px;
+  padding: 7px 9px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+}
+
+.discoveryForm textarea {
+  min-height: 68px;
+  resize: vertical;
+}
+
+.discoveryCoreGrid,
+.qualificationGrid,
+.discoveryMetricsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.discoveryMetricsGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.calculationPreview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  border-radius: 6px;
+  padding: 9px 11px;
+  background: #eaf5f1;
+  color: #284c45;
+  font-size: 11px;
+}
+
+.calculationPreview small {
+  width: 100%;
+  color: var(--muted);
+}
+
+.discoveryDetails {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px;
+}
+
+.discoveryDetails summary,
+.discoveryHistory summary {
+  cursor: pointer;
+  color: #314744;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.readinessGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.readinessGrid > div {
+  display: grid;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 7px;
+}
+
+.discoveryHistory {
+  margin-top: 10px;
+}
+
+.discoveryHistory > div {
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  padding-top: 8px;
+  font-size: 11px;
+}
+
+.discoveryHistory p {
+  width: 100%;
+  color: var(--muted);
+}
+
 .empty {
   display: grid;
   min-height: 260px;
@@ -948,10 +1376,30 @@ a.secondaryButton {
   .statusStrip,
   .split,
   .reviewGrid,
+  .commercialGrid,
+  .commercialSummary,
+  .discoveryCoreGrid,
+  .qualificationGrid,
+  .discoveryMetricsGrid,
+  .readinessGrid,
+  .buyerGrid,
   .columns,
   .revenueGrid,
   .timelineItem {
     grid-template-columns: 1fr;
+  }
+
+  .scoreboardMetrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .discoveryScoreboard > header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .northStar {
+    text-align: left;
   }
 
   .scoreBreakdown {

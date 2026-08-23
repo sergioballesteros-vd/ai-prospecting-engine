@@ -31,6 +31,10 @@ from app.modules.research.website import detect_evidence, extract_relevant_pages
 logger = logging.getLogger(__name__)
 
 
+class ResearchFailureRecorded(RuntimeError):
+    research_run_recorded = True
+
+
 @dataclass
 class ResearchJob:
     id: str
@@ -152,21 +156,61 @@ async def _research_company(db: Session, job: ResearchJob) -> None:
 
 
 async def research_company(db: Session, company_id: int, campaign_id: int | None = None) -> None:
+    settings = get_settings()
+    try:
+        async with asyncio.timeout(settings.research_max_runtime_seconds):
+            await _research_company_within_budget(db, company_id, campaign_id, settings)
+    except TimeoutError as exc:
+        raise RuntimeError(
+            f"Research exceeded the {settings.research_max_runtime_seconds:g}s maximum runtime"
+        ) from exc
+
+
+async def _research_company_within_budget(
+    db: Session, company_id: int, campaign_id: int | None, settings
+) -> None:
     started = perf_counter()
     company = db.get(Company, company_id)
     if company is None:
         raise ValueError("Company not found")
 
-    settings = get_settings()
     crawl = await extract_relevant_pages(
         company.domain,
         timeout_seconds=settings.research_timeout_seconds,
+        max_runtime_seconds=settings.research_crawl_max_seconds,
         max_pages=settings.research_max_pages,
         max_content_bytes=settings.research_max_content_bytes,
         retries=settings.research_retries,
         rate_limit_seconds=settings.research_rate_limit_seconds,
     )
     pages = crawl.pages
+    if not pages:
+        diagnostics = _research_diagnostics(
+            crawl=crawl,
+            detected_count=0,
+            created_evidence_count=0,
+            evidence_rows=[],
+            usage={"input_tokens": 0, "output_tokens": 0, "estimated_cost": 0.0},
+            latency_ms=int((perf_counter() - started) * 1000),
+        )
+        error = _empty_crawl_error(crawl)
+        db.add(
+            ResearchRun(
+                company_id=company.id,
+                campaign_id=campaign_id,
+                provider="research",
+                model="not_started",
+                input_tokens=0,
+                output_tokens=0,
+                estimated_cost=0,
+                execution_time_ms=diagnostics["total_research_latency_ms"],
+                status="FAILED",
+                error=error,
+                diagnostics=diagnostics,
+            )
+        )
+        db.commit()
+        raise ResearchFailureRecorded(error)
 
     sources_by_url: dict[str, CompanySource] = {}
     for page in pages:
@@ -266,11 +310,18 @@ async def research_company(db: Session, company_id: int, campaign_id: int | None
             output_tokens=usage["output_tokens"],
             estimated_cost=usage["estimated_cost"],
             execution_time_ms=diagnostics["total_research_latency_ms"],
-            status="COMPLETED",
+            status="PARTIAL" if crawl.failures else "COMPLETED",
+            error=("Some pages failed during crawl" if crawl.failures else None),
             diagnostics=diagnostics,
         )
     )
     db.commit()
+
+
+def _empty_crawl_error(crawl) -> str:
+    errors = sorted({item.error for item in crawl.failures})
+    detail = ", ".join(errors) if errors else "no HTML pages returned"
+    return f"Website research produced no usable pages ({detail})"
 
 
 def _validate_analysis_references(payload: dict, evidence_ids: set[int]) -> None:

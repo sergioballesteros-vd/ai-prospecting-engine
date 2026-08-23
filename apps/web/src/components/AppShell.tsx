@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, Building2, FileSearch, Search, Send, Sparkles } from "lucide-react";
+import { BarChart3, BriefcaseBusiness, Building2, FileSearch, Search, Send, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
@@ -10,6 +10,7 @@ const navItems = [
   { href: "/companies", label: "Empresas", icon: Building2 },
   { href: "/campaigns", label: "Campañas", icon: Send },
   { href: "/opportunities", label: "Oportunidades", icon: Sparkles },
+  { href: "/commercial", label: "Comercial", icon: BriefcaseBusiness },
   { href: "/analytics", label: "Analítica", icon: BarChart3 },
 ];
 

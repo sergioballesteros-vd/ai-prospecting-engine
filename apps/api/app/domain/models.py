@@ -1,6 +1,16 @@
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint, func
+from sqlalchemy import (
+    Boolean,
+    DateTime,
+    Float,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+    UniqueConstraint,
+    func,
+)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy.types import JSON
 
@@ -46,6 +56,9 @@ class Company(Base):
     research_runs: Mapped[list["ResearchRun"]] = relationship(back_populates="company")
     pipeline_events: Mapped[list["PipelineEvent"]] = relationship(back_populates="company")
     research_jobs: Mapped[list["ResearchJobRecord"]] = relationship(back_populates="company")
+    contacts: Mapped[list["Contact"]] = relationship(back_populates="company")
+    commercial_notes: Mapped[list["CommercialNote"]] = relationship(back_populates="company")
+    discovery_sessions: Mapped[list["DiscoverySession"]] = relationship(back_populates="company")
 
 
 class Opportunity(Base):
@@ -65,6 +78,10 @@ class Opportunity(Base):
     outreach_drafts: Mapped[list["OutreachDraft"]] = relationship(back_populates="opportunity")
     campaigns: Mapped[list["ProspectingCampaign"]] = relationship(back_populates="opportunity")
     pipeline_events: Mapped[list["PipelineEvent"]] = relationship(back_populates="opportunity")
+    commercial_notes: Mapped[list["CommercialNote"]] = relationship(back_populates="opportunity")
+    discovery_sessions: Mapped[list["DiscoverySession"]] = relationship(
+        back_populates="opportunity"
+    )
 
 
 class CompanySource(Base):
@@ -235,6 +252,99 @@ class OutreachDraft(Base):
     company: Mapped[Company] = relationship(back_populates="outreach_drafts")
     opportunity: Mapped[Opportunity] = relationship(back_populates="outreach_drafts")
     score: Mapped[OpportunityScore | None] = relationship(back_populates="outreach_drafts")
+
+
+class Contact(Base):
+    __tablename__ = "contacts"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    full_name: Mapped[str | None] = mapped_column(String(255))
+    role: Mapped[str | None] = mapped_column(String(255))
+    profile_url: Mapped[str | None] = mapped_column(String(1024))
+    channel: Mapped[str | None] = mapped_column(String(40))
+    is_primary: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    notes: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+    company: Mapped[Company] = relationship(back_populates="contacts")
+    commercial_notes: Mapped[list["CommercialNote"]] = relationship(back_populates="contact")
+    discovery_sessions: Mapped[list["DiscoverySession"]] = relationship(back_populates="contact")
+
+
+class CommercialNote(Base):
+    __tablename__ = "commercial_notes"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    contact_id: Mapped[int | None] = mapped_column(
+        ForeignKey("contacts.id", ondelete="SET NULL")
+    )
+    opportunity_id: Mapped[int | None] = mapped_column(
+        ForeignKey("opportunities.id", ondelete="SET NULL")
+    )
+    body: Mapped[str] = mapped_column(Text, nullable=False)
+    learning_tags: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    evidence_ids: Mapped[list[int]] = mapped_column(JSON, nullable=False, default=list)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+    company: Mapped[Company] = relationship(back_populates="commercial_notes")
+    contact: Mapped[Contact | None] = relationship(back_populates="commercial_notes")
+    opportunity: Mapped[Opportunity | None] = relationship(back_populates="commercial_notes")
+
+
+class DiscoverySession(Base):
+    """One immutable commercial discovery event backed only by buyer-reported input."""
+
+    __tablename__ = "discovery_sessions"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    contact_id: Mapped[int | None] = mapped_column(
+        ForeignKey("contacts.id", ondelete="SET NULL")
+    )
+    opportunity_id: Mapped[int | None] = mapped_column(
+        ForeignKey("opportunities.id", ondelete="SET NULL")
+    )
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    hypothesis: Mapped[str] = mapped_column(String(60), nullable=False)
+    workflow_discussed: Mapped[str] = mapped_column(Text, nullable=False)
+    discovery_status: Mapped[str] = mapped_column(String(60), nullable=False)
+    qualification_outcome: Mapped[str] = mapped_column(String(60), nullable=False)
+    evidence_type: Mapped[str] = mapped_column(
+        String(30), nullable=False, default="BUYER_REPORTED"
+    )
+    existing_software: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    workflow_details: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
+    buyer_reported_facts: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    buyer_reported_metrics: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
+    calculated_metrics: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
+    pain_examples: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    objections: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    alternatives: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    existing_stack_capability: Mapped[str] = mapped_column(String(60), nullable=False)
+    qualification: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
+    readiness: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
+    readiness_total: Mapped[int] = mapped_column(Integer, nullable=False)
+    fatal_blockers: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    unresolved_questions: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    missing_information: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    next_action: Mapped[str] = mapped_column(Text, nullable=False)
+    raw_notes: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+    company: Mapped[Company] = relationship(back_populates="discovery_sessions")
+    contact: Mapped[Contact | None] = relationship(back_populates="discovery_sessions")
+    opportunity: Mapped[Opportunity | None] = relationship(back_populates="discovery_sessions")
 
 
 class ProspectingCampaign(Base):

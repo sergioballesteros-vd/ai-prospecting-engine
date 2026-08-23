@@ -151,6 +151,9 @@ function CompanyResult({
   pending: string | null;
   onRetry: (entryId: number) => void;
 }) {
+  const crawlFailures = result.latest_research_run?.diagnostics.crawl_failures ?? 0;
+  const crawlFailureDetails =
+    result.latest_research_run?.diagnostics.crawl_failure_details ?? [];
   return (
     <article className="campaignCompanyRow">
       <div>
@@ -160,6 +163,12 @@ function CompanyResult({
           Cronología
         </Link>
         {result.entry.error ? <p className="errorText">{result.entry.error}</p> : null}
+        {crawlFailures ? (
+          <p className="errorText">
+            {crawlFailures} fallo(s) de crawl
+            {crawlFailureDetails[0]?.error ? ` · ${crawlFailureDetails[0].error}` : ""}
+          </p>
+        ) : null}
       </div>
       <div className="scoreBreakdown inline">
         <Metric label="Primer cliente" value={result.first_customer_fit?.total_score ?? 0} />
@@ -192,7 +201,7 @@ function CompanyResult({
             {pipelineStateLabel(result.pipeline_state)}
           </span>
         ) : null}
-        {result.entry.research_state === "FAILED" ? (
+        {result.entry.research_state === "FAILED" || crawlFailures ? (
           <button
             className="secondaryButton tiny"
             onClick={() => onRetry(result.entry.id)}

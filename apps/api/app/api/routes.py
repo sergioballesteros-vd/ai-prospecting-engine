@@ -11,6 +11,14 @@ from app.application.campaigns import (
     retry_campaign_company,
     run_campaign,
 )
+from app.application.commercial import (
+    get_commercial_prospect,
+    list_commercial_prospects,
+    list_outreach_templates,
+    record_commercial_action,
+    upsert_primary_contact,
+)
+from app.application.discovery import commercial_scoreboard, create_discovery_session
 from app.application.opportunity_review import (
     generate_outreach_draft,
     ranked_opportunity_scores,
@@ -25,18 +33,33 @@ from app.application.pipeline import (
     transition_pipeline,
 )
 from app.application.research_jobs import create_research_job, get_research_job, run_research_job
-from app.domain.models import Company, Evidence, OpportunityScore, ProspectingCampaign
+from app.domain.models import (
+    Company,
+    Contact,
+    DiscoverySession,
+    Evidence,
+    OpportunityScore,
+    ProspectingCampaign,
+)
 from app.domain.schemas import (
     CampaignCompanyRead,
     CampaignCompanyResult,
     CampaignComparisonRead,
+    CommercialActionCreate,
+    CommercialProspectRead,
+    CommercialScoreboardRead,
     CompanyCreate,
     CompanyDetail,
     CompanyRead,
     CompanyTimelineRead,
+    ContactRead,
+    ContactUpsert,
+    DiscoverySessionCreate,
+    DiscoverySessionRead,
     FunnelAnalyticsRead,
     OutreachDraftRead,
     OutreachDraftUpdate,
+    OutreachTemplateRead,
     PipelineEventRead,
     PipelineTransitionCreate,
     ProspectingCampaignCreate,
@@ -256,6 +279,66 @@ def edit_score_draft(draft_id: int, payload: OutreachDraftUpdate, db: DbSession)
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
+@router.get("/commercial/prospects", response_model=list[CommercialProspectRead])
+def read_commercial_prospects(db: DbSession) -> list[CommercialProspectRead]:
+    return list_commercial_prospects(db)
+
+
+@router.get("/commercial/scoreboard", response_model=CommercialScoreboardRead)
+def read_commercial_scoreboard(db: DbSession) -> CommercialScoreboardRead:
+    return commercial_scoreboard(db)
+
+
+@router.get("/commercial/prospects/{company_id}", response_model=CommercialProspectRead)
+def read_commercial_prospect(company_id: int, db: DbSession) -> CommercialProspectRead:
+    try:
+        return get_commercial_prospect(db, company_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@router.put("/commercial/prospects/{company_id}/buyer", response_model=ContactRead)
+def save_commercial_buyer(
+    company_id: int, payload: ContactUpsert, db: DbSession
+) -> Contact:
+    try:
+        return upsert_primary_contact(db, company_id, payload)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post(
+    "/commercial/prospects/{company_id}/actions", response_model=CommercialProspectRead
+)
+def create_commercial_action(
+    company_id: int, payload: CommercialActionCreate, db: DbSession
+) -> CommercialProspectRead:
+    try:
+        return record_commercial_action(db, company_id, payload)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post(
+    "/commercial/prospects/{company_id}/discovery-sessions",
+    response_model=DiscoverySessionRead,
+)
+def record_discovery_session(
+    company_id: int, payload: DiscoverySessionCreate, db: DbSession
+) -> DiscoverySession:
+    if db.get(Company, company_id) is None:
+        raise HTTPException(status_code=404, detail="Company not found")
+    try:
+        return create_discovery_session(db, company_id, payload)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.get("/commercial/templates", response_model=list[OutreachTemplateRead])
+def read_outreach_templates() -> list[OutreachTemplateRead]:
+    return list_outreach_templates()
+
+
 @router.post("/campaigns", response_model=ProspectingCampaignRead)
 def create_prospecting_campaign(payload: ProspectingCampaignCreate, db: DbSession):
     try:
@@ -379,6 +462,16 @@ def _campaign_detail_response(
             if entry.company.first_customer_fit_scores
             else None
         )
+        research_runs = [
+            run
+            for run in entry.company.research_runs
+            if run.campaign_id in {None, campaign.id}
+        ]
+        latest_research_run = (
+            sorted(research_runs, key=lambda item: item.id, reverse=True)[0]
+            if research_runs
+            else None
+        )
         company_results.append(
             CampaignCompanyResult(
                 entry=entry,
@@ -388,6 +481,7 @@ def _campaign_detail_response(
                 pipeline_state=current_pipeline_state(
                     db, entry.company_id, campaign.opportunity_id, campaign.id
                 ),
+                latest_research_run=latest_research_run,
             )
         )
     company_results.sort(

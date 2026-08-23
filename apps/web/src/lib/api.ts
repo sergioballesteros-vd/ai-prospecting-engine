@@ -175,6 +175,8 @@ export type OutreachDraft = {
 export type PipelineState =
   | "APPROVED"
   | "CONTACTED"
+  | "CONNECTION_SENT"
+  | "ACCEPTED"
   | "REPLIED"
   | "MEETING"
   | "PROPOSAL"
@@ -243,6 +245,172 @@ export type CampaignCompanyResult = {
   first_customer_fit: FirstCustomerFitScore | null;
   top_evidence: Evidence[];
   pipeline_state: PipelineState | null;
+  latest_research_run: ResearchRun | null;
+};
+
+export type Contact = {
+  id: number;
+  company_id: number;
+  full_name: string | null;
+  role: string | null;
+  profile_url: string | null;
+  channel: string | null;
+  is_primary: boolean;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CommercialNote = {
+  id: number;
+  company_id: number;
+  contact_id: number | null;
+  opportunity_id: number | null;
+  body: string;
+  learning_tags: string[];
+  evidence_ids: number[];
+  created_at: string;
+};
+
+export type DiscoveryOutcome =
+  | "NO_PROBLEM"
+  | "EXISTING_STACK_SOLVES_IT"
+  | "MEASURE_FIRST"
+  | "LABOR_CLOSE_CANDIDATE"
+  | "OUT_OF_SCOPE_WORK_CANDIDATE"
+  | "OTHER_WORKFLOW_SIGNAL"
+  | "PILOT_CANDIDATE"
+  | "DISQUALIFIED";
+
+export type DiscoveryHypothesis =
+  | "PAYROLL_CLOSE_EXCEPTIONS"
+  | "OUT_OF_SCOPE_WORK"
+  | "OTHER_WORKFLOW";
+
+export type ReadinessDimension = { score: 0 | 1 | 2; reason: string };
+
+export type DiscoverySession = {
+  id: number;
+  company_id: number;
+  contact_id: number | null;
+  opportunity_id: number | null;
+  occurred_at: string;
+  hypothesis: DiscoveryHypothesis;
+  workflow_discussed: string;
+  discovery_status: "COMPLETED" | "PARTIAL" | "FOLLOW_UP_REQUIRED";
+  qualification_outcome: DiscoveryOutcome;
+  evidence_type: "BUYER_REPORTED";
+  existing_software: string[];
+  workflow_details: Record<string, string | boolean | string[] | null>;
+  buyer_reported_facts: string[];
+  buyer_reported_metrics: Record<string, number>;
+  calculated_metrics: Record<
+    string,
+    { value: number; unit: string; formula: string; source_fields: string[] }
+  >;
+  pain_examples: string[];
+  objections: string[];
+  alternatives: string[];
+  existing_stack_capability: string;
+  qualification: Record<string, boolean | null>;
+  readiness: Record<string, ReadinessDimension>;
+  readiness_total: number;
+  fatal_blockers: string[];
+  unresolved_questions: string[];
+  missing_information: string[];
+  next_action: string;
+  raw_notes: string | null;
+  created_at: string;
+};
+
+export type DiscoverySessionPayload = Omit<
+  DiscoverySession,
+  | "id"
+  | "company_id"
+  | "qualification_outcome"
+  | "evidence_type"
+  | "calculated_metrics"
+  | "readiness_total"
+  | "fatal_blockers"
+  | "missing_information"
+  | "created_at"
+>;
+
+export type CommercialScoreboard = {
+  connections_sent: number;
+  connections_accepted: number;
+  conversations_started: number;
+  discovery_calls: number;
+  no_problem: number;
+  existing_stack_solves_it: number;
+  measure_first: number;
+  payroll_candidates: number;
+  out_of_scope_candidates: number;
+  other_workflow_signals: number;
+  pilot_candidates: number;
+  disqualified: number;
+  pilots_proposed: number;
+  pilots_paid: number;
+  setup_revenue: number;
+  mrr: number;
+  north_star_mrr: number;
+  next_objective: "FIRST_PAID_PILOT";
+};
+
+export type CommercialStatus =
+  | "TO_CONTACT"
+  | "CONNECTION_SENT"
+  | "ACCEPTED"
+  | "REPLIED"
+  | "MEETING"
+  | "PROPOSAL"
+  | "WON"
+  | "LOST";
+
+export type CommercialProspect = {
+  company: Company;
+  opportunity_id: number;
+  buyer: Contact | null;
+  status: CommercialStatus;
+  channel: string | null;
+  connection_note_used: string | null;
+  connection_note_type: "WITH_NOTE" | "WITHOUT_NOTE" | null;
+  message_version: string | null;
+  selected_evidence: Evidence[];
+  outreach_reason: string | null;
+  first_customer_fit: FirstCustomerFitScore | null;
+  last_action: string;
+  last_action_at: string | null;
+  next_action: string;
+  contacted_at: string | null;
+  accepted_at: string | null;
+  replied_at: string | null;
+  meeting_at: string | null;
+  proposal_at: string | null;
+  closed_at: string | null;
+  lost_reason: string | null;
+  learning_tags: string[];
+  manual_notes: CommercialNote[];
+  discovery_sessions: DiscoverySession[];
+};
+
+export type CommercialAction =
+  | "MARK_CONNECTION_SENT"
+  | "MARK_ACCEPTED"
+  | "MARK_REPLIED"
+  | "MARK_MEETING"
+  | "MARK_REJECTED"
+  | "MARK_NO_RESPONSE"
+  | "ADD_NOTE";
+
+export type OutreachTemplate = {
+  key: string;
+  label: string;
+  channel: string;
+  body: string;
+  placeholders: string[];
+  max_length: number | null;
+  automated: false;
 };
 
 export type ProspectingCampaignDetail = ProspectingCampaign & {
@@ -446,4 +614,64 @@ export function retryCampaignCompany(entryId: number): Promise<CampaignCompanyRe
   return request<CampaignCompanyResult["entry"]>(`/campaign-companies/${entryId}/retry`, {
     method: "POST",
   });
+}
+
+export function listCommercialProspects(): Promise<CommercialProspect[]> {
+  return request<CommercialProspect[]>("/commercial/prospects");
+}
+
+export function getCommercialScoreboard(): Promise<CommercialScoreboard> {
+  return request<CommercialScoreboard>("/commercial/scoreboard");
+}
+
+export function createDiscoverySession(
+  companyId: number,
+  payload: DiscoverySessionPayload,
+): Promise<DiscoverySession> {
+  return request<DiscoverySession>(`/commercial/prospects/${companyId}/discovery-sessions`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function saveCommercialBuyer(
+  companyId: number,
+  payload: {
+    full_name: string | null;
+    role: string | null;
+    profile_url: string | null;
+    channel?: string | null;
+    notes?: string | null;
+  },
+): Promise<Contact> {
+  return request<Contact>(`/commercial/prospects/${companyId}/buyer`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function recordCommercialAction(
+  companyId: number,
+  payload: {
+    action: CommercialAction;
+    opportunity_id?: number | null;
+    notes?: string | null;
+    channel?: string | null;
+    with_note?: boolean | null;
+    message_used?: string | null;
+    message_version?: string | null;
+    evidence_ids?: number[];
+    outreach_reason?: string | null;
+    learning_tags?: string[];
+    lost_reason?: string | null;
+  },
+): Promise<CommercialProspect> {
+  return request<CommercialProspect>(`/commercial/prospects/${companyId}/actions`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function listOutreachTemplates(): Promise<OutreachTemplate[]> {
+  return request<OutreachTemplate[]>("/commercial/templates");
 }

@@ -77,6 +77,31 @@ def test_first_customer_fit_rewards_standard_software_without_disqualifying() ->
     assert any("Standard vertical software" in reason for reason in score.positive_reasons)
 
 
+def test_first_customer_fit_classifies_unknown_and_small_team_size_cautiously() -> None:
+    unknown = Company(
+        id=1,
+        name="Unknown Size",
+        domain="unknown-size.example",
+        website_url="https://unknown-size.example",
+        employee_estimate=None,
+    )
+    very_small = Company(
+        id=2,
+        name="Very Small",
+        domain="very-small.example",
+        website_url="https://very-small.example",
+        employee_estimate=3,
+    )
+
+    unknown_score = score_company_for_first_customer_fit(unknown, [])
+    small_score = score_company_for_first_customer_fit(very_small, [])
+
+    assert any("unknown" in reason.lower() for reason in unknown_score.negative_reasons)
+    assert not any("unknown" in reason.lower() for reason in unknown_score.positive_reasons)
+    assert any("below" in reason.lower() for reason in small_score.negative_reasons)
+    assert not any("100+" in reason for reason in small_score.negative_reasons)
+
+
 def test_first_customer_fit_penalizes_internal_technology_maturity() -> None:
     company = Company(
         id=1,

@@ -1,0 +1,2692 @@
+{
+  "benchmark": {
+    "ironhack.com": {
+      "company": {
+        "id": 1,
+        "name": "Ironhack",
+        "domain": "ironhack.com"
+      },
+      "evidence": [
+        {
+          "id": 1,
+          "company_id": 1,
+          "source_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://www.ironhack.com/",
+          "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T18:10:46.312177Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+          }
+        },
+        {
+          "id": 3,
+          "company_id": 1,
+          "source_id": 3,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://www.ironhack.com/",
+          "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T18:17:11.794133Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+          }
+        },
+        {
+          "id": 4,
+          "company_id": 1,
+          "source_id": 4,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://www.ironhack.com/",
+          "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:13:21.490904Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+          }
+        },
+        {
+          "id": 7,
+          "company_id": 1,
+          "source_id": 7,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://www.ironhack.com/",
+          "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:19:01.319604Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+          }
+        },
+        {
+          "id": 9,
+          "company_id": 1,
+          "source_id": 9,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://www.ironhack.com/",
+          "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:20:45.548378Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+          }
+        },
+        {
+          "id": 10,
+          "company_id": 1,
+          "source_id": 17,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://www.ironhack.com/",
+          "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:25:11.438988Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+          }
+        },
+        {
+          "id": 18,
+          "company_id": 1,
+          "source_id": 41,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://www.ironhack.com/",
+          "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:27:19.323321Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+          }
+        }
+      ],
+      "signals": [
+        {
+          "id": 1,
+          "company_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 1,
+          "created_at": "2026-08-17T18:10:46.312177Z"
+        },
+        {
+          "id": 3,
+          "company_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 3,
+          "created_at": "2026-08-17T18:17:11.794133Z"
+        },
+        {
+          "id": 4,
+          "company_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 4,
+          "created_at": "2026-08-17T19:13:21.490904Z"
+        },
+        {
+          "id": 7,
+          "company_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 7,
+          "created_at": "2026-08-17T19:19:01.319604Z"
+        },
+        {
+          "id": 9,
+          "company_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 9,
+          "created_at": "2026-08-17T19:20:45.548378Z"
+        },
+        {
+          "id": 10,
+          "company_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 10,
+          "created_at": "2026-08-17T19:25:11.438988Z"
+        },
+        {
+          "id": 18,
+          "company_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 18,
+          "created_at": "2026-08-17T19:27:19.323321Z"
+        }
+      ],
+      "runs": {
+        "stub": {
+          "job_id": "ef1cda58-7bd9-48eb-adef-35a72a029690",
+          "analysis": {
+            "id": 7,
+            "company_id": 1,
+            "provider": "stub",
+            "model": "deterministic-local",
+            "summary": "Ironhack has public website evidence that can be reviewed for possible automation or integration opportunities. The analysis is limited to observable website content and does not assert internal process problems.",
+            "observed_signals": [
+              {
+                "signalType": "PUBLIC_WEBSITE_AVAILABLE",
+                "reasoning": "Detected from public website evidence.",
+                "confidence": 0.5,
+                "evidenceIds": [
+                  7
+                ]
+              }
+            ],
+            "possible_automation_opportunities": [
+              {
+                "problem": "Lead routing or follow-up process complexity",
+                "reasoning": "Public signals suggest acquisition or contact workflows may exist. This should be validated with the company before making any claim.",
+                "confidence": 0.45,
+                "evidenceIds": [
+                  7
+                ]
+              }
+            ],
+            "unknowns": [
+              "Current CRM or operational system configuration",
+              "Lead volume and response-time requirements",
+              "Whether existing processes are manual or automated"
+            ],
+            "recommended_buyer_roles": [
+              "CEO",
+              "COO",
+              "Head of Sales",
+              "Head of Operations"
+            ],
+            "created_at": "2026-08-17T19:19:03.708937Z"
+          },
+          "latency_ms": 2468,
+          "input_tokens_est": 54,
+          "output_tokens_est": 229,
+          "estimated_cost_usd": 0.0,
+          "non_generic_hypothesis": false
+        },
+        "openai": {
+          "job_id": "a47ecbe5-cb84-4a57-baec-b589b296fe8d",
+          "analysis": {
+            "id": 17,
+            "company_id": 1,
+            "provider": "openai",
+            "model": "gpt-5.4-mini",
+            "summary": "Ironhack appears to be a public-facing education provider offering training in web development, data analytics, cybersecurity, and UX/UI design across multiple regions. Based on the website evidence, it likely serves a distributed, international audience and may have operational needs around regional web content, lead handling, and program enrollment workflows. However, only the public homepage is available here, so deeper conclusions remain uncertain.",
+            "observed_signals": [
+              {
+                "signalType": "PUBLIC_WEBSITE_AVAILABLE",
+                "reasoning": "A public website exists for Ironhack, and the homepage indicates multiple regions/languages and several training categories, suggesting a customer-facing, multi-market online presence.",
+                "confidence": 0.95,
+                "evidenceIds": [
+                  18
+                ]
+              }
+            ],
+            "possible_automation_opportunities": [
+              {
+                "problem": "Managing region-specific website content and routing visitors to the correct market/language may require manual maintenance as the company serves multiple regions.",
+                "reasoning": "The homepage lists several regions (Germany, Spain, France, Netherlands, Portugal, United Kingdom, United States, Worldwide), which suggests content localization and regional user flows could be operationally repetitive. This is an inference from the public homepage only, not confirmation of internal processes.",
+                "confidence": 0.62,
+                "evidenceIds": [
+                  18
+                ]
+              },
+              {
+                "problem": "Handling inquiries and enrollments across multiple training tracks could create repetitive lead qualification and student support work.",
+                "reasoning": "The website advertises multiple programs (Web Development, Data Analytics, Cybersecurity, UX/UI Design), which commonly generate recurring questions about admissions, schedules, and program fit. This is a plausible external-facing workflow, but internal tooling and process details are unknown.",
+                "confidence": 0.58,
+                "evidenceIds": [
+                  18
+                ]
+              }
+            ],
+            "unknowns": [
+              "Whether Ironhack is primarily bootcamp, higher education, or corporate training focused.",
+              "What internal systems they use for admissions, student support, marketing, or CRM.",
+              "The scale of operations, team size, and whether regional offices manage localized workflows.",
+              "Whether they already use automation for localization, lead management, or student communications."
+            ],
+            "recommended_buyer_roles": [
+              "Head of Admissions",
+              "Marketing Operations Manager",
+              "Revenue Operations Lead",
+              "Student Success/Support Lead",
+              "Regional General Manager",
+              "Director of Operations"
+            ],
+            "created_at": "2026-08-17T19:27:21.134290Z"
+          },
+          "latency_ms": 13149,
+          "input_tokens_est": 54,
+          "output_tokens_est": 613,
+          "estimated_cost_usd": 0.002799,
+          "non_generic_hypothesis": true
+        }
+      }
+    },
+    "codenotch.com": {
+      "company": {
+        "id": 2,
+        "name": "Codenotch",
+        "domain": "codenotch.com"
+      },
+      "evidence": [
+        {
+          "id": 2,
+          "company_id": 2,
+          "source_id": 2,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://codenotch.com/",
+          "content_excerpt": "Codenotch | Build smarter. Code faster. Run and scale with no limits.",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T18:14:47.451939Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Codenotch | Build smarter. Code faster. Run and scale with no limits."
+          }
+        },
+        {
+          "id": 5,
+          "company_id": 2,
+          "source_id": 5,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://codenotch.com/",
+          "content_excerpt": "Codenotch | Build smarter. Code faster. Run and scale with no limits.",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:14:22.518175Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Codenotch | Build smarter. Code faster. Run and scale with no limits."
+          }
+        },
+        {
+          "id": 6,
+          "company_id": 2,
+          "source_id": 6,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://codenotch.com/",
+          "content_excerpt": "Codenotch | Build smarter. Code faster. Run and scale with no limits.",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:19:02.212937Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Codenotch | Build smarter. Code faster. Run and scale with no limits."
+          }
+        },
+        {
+          "id": 8,
+          "company_id": 2,
+          "source_id": 8,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://codenotch.com/",
+          "content_excerpt": "Codenotch | Build smarter. Code faster. Run and scale with no limits.",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:20:46.451541Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Codenotch | Build smarter. Code faster. Run and scale with no limits."
+          }
+        },
+        {
+          "id": 11,
+          "company_id": 2,
+          "source_id": 18,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://codenotch.com/",
+          "content_excerpt": "Codenotch | Build smarter. Code faster. Run and scale with no limits.",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:25:25.441949Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Codenotch | Build smarter. Code faster. Run and scale with no limits."
+          }
+        },
+        {
+          "id": 19,
+          "company_id": 2,
+          "source_id": 42,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://codenotch.com/",
+          "content_excerpt": "Codenotch | Build smarter. Code faster. Run and scale with no limits.",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:27:26.407372Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Codenotch | Build smarter. Code faster. Run and scale with no limits."
+          }
+        }
+      ],
+      "signals": [
+        {
+          "id": 2,
+          "company_id": 2,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 2,
+          "created_at": "2026-08-17T18:14:47.451939Z"
+        },
+        {
+          "id": 5,
+          "company_id": 2,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 5,
+          "created_at": "2026-08-17T19:14:22.518175Z"
+        },
+        {
+          "id": 6,
+          "company_id": 2,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 6,
+          "created_at": "2026-08-17T19:19:02.212937Z"
+        },
+        {
+          "id": 8,
+          "company_id": 2,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 8,
+          "created_at": "2026-08-17T19:20:46.451541Z"
+        },
+        {
+          "id": 11,
+          "company_id": 2,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 11,
+          "created_at": "2026-08-17T19:25:25.441949Z"
+        },
+        {
+          "id": 19,
+          "company_id": 2,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "confidence": 0.5,
+          "evidence_id": 19,
+          "created_at": "2026-08-17T19:27:26.407372Z"
+        }
+      ],
+      "runs": {
+        "stub": {
+          "job_id": "25d0ad7c-b76f-4554-bfed-9bed9c2b5909",
+          "analysis": {
+            "id": 6,
+            "company_id": 2,
+            "provider": "stub",
+            "model": "deterministic-local",
+            "summary": "Codenotch has public website evidence that can be reviewed for possible automation or integration opportunities. The analysis is limited to observable website content and does not assert internal process problems.",
+            "observed_signals": [
+              {
+                "signalType": "PUBLIC_WEBSITE_AVAILABLE",
+                "reasoning": "Detected from public website evidence.",
+                "confidence": 0.5,
+                "evidenceIds": [
+                  6
+                ]
+              }
+            ],
+            "possible_automation_opportunities": [
+              {
+                "problem": "Lead routing or follow-up process complexity",
+                "reasoning": "Public signals suggest acquisition or contact workflows may exist. This should be validated with the company before making any claim.",
+                "confidence": 0.45,
+                "evidenceIds": [
+                  6
+                ]
+              }
+            ],
+            "unknowns": [
+              "Current CRM or operational system configuration",
+              "Lead volume and response-time requirements",
+              "Whether existing processes are manual or automated"
+            ],
+            "recommended_buyer_roles": [
+              "CEO",
+              "COO",
+              "Head of Sales",
+              "Head of Operations"
+            ],
+            "created_at": "2026-08-17T19:19:02.442137Z"
+          },
+          "latency_ms": 399,
+          "input_tokens_est": 17,
+          "output_tokens_est": 230,
+          "estimated_cost_usd": 0.0,
+          "non_generic_hypothesis": false
+        },
+        "openai": {
+          "job_id": "98266bad-a639-4f10-9f36-955e8816ad0e",
+          "analysis": {
+            "id": 18,
+            "company_id": 2,
+            "provider": "openai",
+            "model": "gpt-5.4-mini",
+            "summary": "Codenotch has a public website and presents itself with a software/engineering-oriented marketing message: \"Build smarter. Code faster. Run and scale with no limits.\" Beyond that, the supplied evidence does not reveal the company’s size, product, customers, or operations.",
+            "observed_signals": [
+              {
+                "signalType": "PUBLIC_WEBSITE_AVAILABLE",
+                "reasoning": "A public website exists at codenotch.com, which indicates an externally visible web presence and suggests the company is actively presenting itself online.",
+                "confidence": 0.95,
+                "evidenceIds": [
+                  19
+                ]
+              },
+              {
+                "signalType": "MARKETING_MESSAGE_FOCUSED_ON_SOFTWARE_DEVELOPMENT",
+                "reasoning": "The homepage tagline uses terms like \"Build smarter,\" \"Code faster,\" and \"Run and scale,\" which strongly suggests the company is positioned around software development, engineering productivity, or infrastructure/scaling themes.",
+                "confidence": 0.74,
+                "evidenceIds": [
+                  19
+                ]
+              }
+            ],
+            "possible_automation_opportunities": [
+              {
+                "problem": "Lead capture and qualification on the public website may be manual or only lightly structured, which can create friction for inbound visitors if the company relies on web inquiries.",
+                "reasoning": "Because the only evidence is a public-facing website with a product/value proposition, a common automation opportunity is to automate contact routing, qualification, and follow-up. This is an inference, not a confirmed current process.",
+                "confidence": 0.42,
+                "evidenceIds": [
+                  19
+                ]
+              },
+              {
+                "problem": "Website messaging and conversion optimization may benefit from automated experimentation and analytics, especially if the company wants to improve how visitors respond to the \"build/code/scale\" positioning.",
+                "reasoning": "A public marketing site often needs ongoing optimization. Automating A/B testing, event tracking, and conversion reporting can reduce manual effort. This is a general opportunity inferred from the existence of the website.",
+                "confidence": 0.37,
+                "evidenceIds": [
+                  19
+                ]
+              }
+            ],
+            "unknowns": [
+              "Whether Codenotch is a software vendor, agency, consultancy, or training provider.",
+              "The company’s size, geography, and target customer segment.",
+              "Whether the website includes product pages, pricing, demos, or contact flows beyond the homepage tagline.",
+              "What internal workflows currently exist and where manual effort is actually concentrated."
+            ],
+            "recommended_buyer_roles": [
+              "Head of Growth / Marketing",
+              "Founder / CEO",
+              "Product Owner",
+              "Operations Manager",
+              "Engineering Manager"
+            ],
+            "created_at": "2026-08-17T19:27:26.613054Z"
+          },
+          "latency_ms": 12200,
+          "input_tokens_est": 17,
+          "output_tokens_est": 618,
+          "estimated_cost_usd": 0.002794,
+          "non_generic_hypothesis": true
+        }
+      }
+    }
+  },
+  "campaign": {
+    "id": 3,
+    "name": "Validation - 10 Spanish education companies - GPT-5.4 mini - 2026-08-17",
+    "country": "Spain",
+    "city_or_region": "a",
+    "industries": [
+      "training companies",
+      "education",
+      "formacion"
+    ],
+    "employee_min": null,
+    "employee_max": null,
+    "opportunity_id": 1,
+    "target_company_count": 10,
+    "status": "COMPLETED",
+    "created_at": "2026-08-17T19:27:18.851093Z",
+    "started_at": "2026-08-17T19:27:19.193855Z",
+    "completed_at": "2026-08-17T19:29:27.088320Z",
+    "stats": {
+      "discovered": 10,
+      "target": 10,
+      "researched": 10,
+      "failed": 0,
+      "qualified": 0,
+      "approved": 0,
+      "total_research_cost": 0.002851,
+      "average_cost_per_company": 0.000285
+    },
+    "companies": [
+      {
+        "entry": {
+          "id": 12,
+          "campaign_id": 3,
+          "company_id": 4,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "ISDI",
+              "domain": "isdi.education",
+              "website_url": "https://www.isdi.education",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Madrid"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 4,
+            "name": "ISDI",
+            "domain": "isdi.education",
+            "website_url": "https://www.isdi.education",
+            "industry": "training companies",
+            "country": "Spain",
+            "city": "Madrid",
+            "created_at": "2026-08-17T19:25:11.276219Z"
+          }
+        },
+        "score": {
+          "id": 4,
+          "company_id": 4,
+          "opportunity_id": 1,
+          "icp_score": 80.0,
+          "pain_score": 33.0,
+          "value_score": 44.0,
+          "intent_score": 10.0,
+          "reachability_score": 20.0,
+          "confidence_score": 56.5,
+          "total_score": 45.7,
+          "qualification_state": "RESEARCHED",
+          "explanation": "ISDI matched Sales Operations Automation through observable signals MULTIPLE_LOCATIONS. Score is based on evidence #13.",
+          "evidence_ids": [
+            13
+          ],
+          "matched_signals": [
+            "MULTIPLE_LOCATIONS"
+          ],
+          "created_at": "2026-08-17T19:25:50.318000Z",
+          "updated_at": "2026-08-17T19:28:07.230870Z"
+        },
+        "top_evidence": [
+          {
+            "id": 13,
+            "company_id": 4,
+            "source_id": 26,
+            "signal_type": "MULTIPLE_LOCATIONS",
+            "source_url": "https://www.isdi.education/es/",
+            "content_excerpt": "ISDI España | La escuela de Negocios de la Era Digital Ir al contenido Esto es ISDI Qué es ISDI Profesores Top partners Metodología Empleabilidad Financiación y becas Sedes Preguntas frecuentes Programas Tipos de programa Programas por sede Toda la oferta académica In Company Formación ad-hoc Metodología Casos de éxito Vida estudiante Experiencia Alumni Programa de Referidos Centro Un",
+            "confidence": 0.62,
+            "detected_at": "2026-08-17T19:25:38.615372Z",
+            "evidence_metadata": {
+              "detector": "regex",
+              "pattern": "\\blocations\\b|\\boffices\\b|\\bsedes\\b|\\bdelegaciones\\b",
+              "page_title": "ISDI España | La escuela de Negocios de la Era Digital"
+            }
+          }
+        ],
+        "pipeline_state": null
+      },
+      {
+        "entry": {
+          "id": 11,
+          "campaign_id": 3,
+          "company_id": 8,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "IEBS Business School",
+              "domain": "iebschool.com",
+              "website_url": "https://www.iebschool.com",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Barcelona"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 8,
+            "name": "IEBS Business School",
+            "domain": "iebschool.com",
+            "website_url": "https://www.iebschool.com",
+            "industry": "training companies",
+            "country": "Spain",
+            "city": "Barcelona",
+            "created_at": "2026-08-17T19:27:19.197706Z"
+          }
+        },
+        "score": {
+          "id": 8,
+          "company_id": 8,
+          "opportunity_id": 1,
+          "icp_score": 80.0,
+          "pain_score": 31.0,
+          "value_score": 32.0,
+          "intent_score": 10.0,
+          "reachability_score": 44.0,
+          "confidence_score": 53.0,
+          "total_score": 45.1,
+          "qualification_state": "RESEARCHED",
+          "explanation": "IEBS Business School matched Sales Operations Automation through observable signals HAS_SALES_TEAM. Score is based on evidence #21.",
+          "evidence_ids": [
+            21
+          ],
+          "matched_signals": [
+            "HAS_SALES_TEAM"
+          ],
+          "created_at": "2026-08-17T19:27:46.217405Z",
+          "updated_at": "2026-08-17T19:27:50.454557Z"
+        },
+        "top_evidence": [
+          {
+            "id": 21,
+            "company_id": 8,
+            "source_id": 44,
+            "signal_type": "HAS_SALES_TEAM",
+            "source_url": "https://www.iebschool.com/",
+            "content_excerpt": "umanos Finanzas Tecnología VER MÁS POR TEMÁTICA Marketing Digital Ver todos SEO/SEM Marketing Digital e-Commerce Inbound Marketing Growth Hacking Redes Sociales UX, UI y CX Gamificación Marketing Estratégico Dirección y Ventas Management Ver todos MBA's Emprendedores Transformación Digital Management Agile & Scrum Recursos Humanos Product Manager Finanzas Big data & IA Ver todos Data Science Inteligencia Artificial Data Analytics Big da",
+            "confidence": 0.64,
+            "detected_at": "2026-08-17T19:27:42.740945Z",
+            "evidence_metadata": {
+              "detector": "regex",
+              "pattern": "\\bsales team\\b|\\bsales manager\\b|\\bcomercial\\b|\\bventas\\b",
+              "page_title": "IEBS - La Escuela de Negocios de la Innovación y los Emprendedores"
+            }
+          }
+        ],
+        "pipeline_state": null
+      },
+      {
+        "entry": {
+          "id": 13,
+          "campaign_id": 3,
+          "company_id": 9,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "EAE Business School",
+              "domain": "eae.es",
+              "website_url": "https://www.eae.es",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Barcelona"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 9,
+            "name": "EAE Business School",
+            "domain": "eae.es",
+            "website_url": "https://www.eae.es",
+            "industry": "training companies",
+            "country": "Spain",
+            "city": "Barcelona",
+            "created_at": "2026-08-17T19:27:19.197706Z"
+          }
+        },
+        "score": {
+          "id": 9,
+          "company_id": 9,
+          "opportunity_id": 1,
+          "icp_score": 80.0,
+          "pain_score": 31.0,
+          "value_score": 32.0,
+          "intent_score": 10.0,
+          "reachability_score": 44.0,
+          "confidence_score": 58.0,
+          "total_score": 45.1,
+          "qualification_state": "RESEARCHED",
+          "explanation": "EAE Business School matched Sales Operations Automation through observable signals HAS_SALES_TEAM. Score is based on evidence #23.",
+          "evidence_ids": [
+            23
+          ],
+          "matched_signals": [
+            "HAS_SALES_TEAM"
+          ],
+          "created_at": "2026-08-17T19:28:18.694804Z",
+          "updated_at": "2026-08-17T19:28:22.949812Z"
+        },
+        "top_evidence": [
+          {
+            "id": 23,
+            "company_id": 9,
+            "source_id": 52,
+            "signal_type": "HAS_SALES_TEAM",
+            "source_url": "https://www.eae.es/",
+            "content_excerpt": "y ESG Máster en Análisis Económico del Derecho Luxury Brand Management MBA Máster en Emprendimiento e Innovación Máster en Fashion & Retail Management Máster en Sports Management Todos los MBAs Marketing, Comunicación y Ventas Máster en Comunicación Corporativa & Digital Máster en Marketing digital and E-сommerce Máster en Marketing y Gestión Comercial Máster en Dirección Comercial y Ventas Máster en Dirección de Marketing Máster en Psi",
+            "confidence": 0.64,
+            "detected_at": "2026-08-17T19:28:07.307225Z",
+            "evidence_metadata": {
+              "detector": "regex",
+              "pattern": "\\bsales team\\b|\\bsales manager\\b|\\bcomercial\\b|\\bventas\\b",
+              "page_title": "Escuela de negocios - EAE Business School"
+            }
+          }
+        ],
+        "pipeline_state": null
+      },
+      {
+        "entry": {
+          "id": 14,
+          "campaign_id": 3,
+          "company_id": 5,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "ESIC Business and Marketing School",
+              "domain": "esic.edu",
+              "website_url": "https://www.esic.edu",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Madrid"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 5,
+            "name": "ESIC Business and Marketing School",
+            "domain": "esic.edu",
+            "website_url": "https://www.esic.edu",
+            "industry": "training companies",
+            "country": "Spain",
+            "city": "Madrid",
+            "created_at": "2026-08-17T19:25:11.276219Z"
+          }
+        },
+        "score": {
+          "id": 5,
+          "company_id": 5,
+          "opportunity_id": 1,
+          "icp_score": 80.0,
+          "pain_score": 31.0,
+          "value_score": 32.0,
+          "intent_score": 10.0,
+          "reachability_score": 44.0,
+          "confidence_score": 68.0,
+          "total_score": 45.1,
+          "qualification_state": "RESEARCHED",
+          "explanation": "ESIC Business and Marketing School matched Sales Operations Automation through observable signals HAS_SALES_TEAM. Score is based on evidence #14.",
+          "evidence_ids": [
+            14
+          ],
+          "matched_signals": [
+            "HAS_SALES_TEAM"
+          ],
+          "created_at": "2026-08-17T19:26:02.655587Z",
+          "updated_at": "2026-08-17T19:28:33.105552Z"
+        },
+        "top_evidence": [
+          {
+            "id": 14,
+            "company_id": 5,
+            "source_id": 27,
+            "signal_type": "HAS_SALES_TEAM",
+            "source_url": "https://www.esic.edu/",
+            "content_excerpt": "OS Doble Grado en Administración y Dirección de Empresas y Marketing Double Bachelor's Degree in Business Administration & Marketing Doble Grado en Administración y Dirección de Empresas y Derecho Doble Grado en Gestión Comercial y Marketing y Negocios Internacionales Ver todos los Dobles Grados GRADOS PARA TITULADOS DE CICLO FORMATIVO Grado en Marketing Grado en Administración y Dirección de Empresas​ Ver todos los Grados TÍTULOS SUPER",
+            "confidence": 0.64,
+            "detected_at": "2026-08-17T19:25:57.098691Z",
+            "evidence_metadata": {
+              "detector": "regex",
+              "pattern": "\\bsales team\\b|\\bsales manager\\b|\\bcomercial\\b|\\bventas\\b",
+              "page_title": "ESIC University - Transformation with Purpose"
+            }
+          }
+        ],
+        "pipeline_state": null
+      },
+      {
+        "entry": {
+          "id": 17,
+          "campaign_id": 3,
+          "company_id": 7,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "Upgrade Hub",
+              "domain": "upgrade-hub.com",
+              "website_url": "https://www.upgrade-hub.com",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Madrid"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 7,
+            "name": "Upgrade Hub",
+            "domain": "upgrade-hub.com",
+            "website_url": "https://www.upgrade-hub.com",
+            "industry": "training companies",
+            "country": "Spain",
+            "city": "Madrid",
+            "created_at": "2026-08-17T19:25:11.276219Z"
+          }
+        },
+        "score": {
+          "id": 7,
+          "company_id": 7,
+          "opportunity_id": 1,
+          "icp_score": 80.0,
+          "pain_score": 25.0,
+          "value_score": 32.0,
+          "intent_score": 10.0,
+          "reachability_score": 20.0,
+          "confidence_score": 52.0,
+          "total_score": 40.9,
+          "qualification_state": "RESEARCHED",
+          "explanation": "Upgrade Hub matched Sales Operations Automation through observable signals HAS_API. Score is based on evidence #17.",
+          "evidence_ids": [
+            17
+          ],
+          "matched_signals": [
+            "HAS_API"
+          ],
+          "created_at": "2026-08-17T19:26:54.866539Z",
+          "updated_at": "2026-08-17T19:29:27.083305Z"
+        },
+        "top_evidence": [
+          {
+            "id": 17,
+            "company_id": 7,
+            "source_id": 30,
+            "signal_type": "HAS_API",
+            "source_url": "https://www.upgrade-hub.com",
+            "content_excerpt": "la pena. Chiarella Bencan LinkedIn El talento de Upgrade Hub ha sido clave en proyectos como el rediseño de nuestra web y nueva identidad de marca. Profesionales que combinan lo último en conocimientos técnicos con una integración rápida y natural en los equipos. Susana Flecha LinkedIn La experiencia ha sido muy positiva, tanto a nivel de contenidos como de enfoque y aplicabilidad, y sin duda, el bootcamp ha aportado herramientas que e",
+            "confidence": 0.56,
+            "detected_at": "2026-08-17T19:26:18.559704Z",
+            "evidence_metadata": {
+              "detector": "regex",
+              "pattern": "\\bapi\\b|\\bintegration\\b|\\bintegraci[oó]n",
+              "page_title": "Upgrade Hub | Formación Tech y Digital"
+            }
+          }
+        ],
+        "pipeline_state": null
+      },
+      {
+        "entry": {
+          "id": 10,
+          "campaign_id": 3,
+          "company_id": 3,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "ThePower Business School",
+              "domain": "thepowermba.com",
+              "website_url": "https://www.thepowermba.com",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Madrid"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 3,
+            "name": "ThePower Business School",
+            "domain": "thepowermba.com",
+            "website_url": "https://www.thepowermba.com",
+            "industry": "training companies",
+            "country": "Spain",
+            "city": "Madrid",
+            "created_at": "2026-08-17T19:25:11.276219Z"
+          }
+        },
+        "score": {
+          "id": 3,
+          "company_id": 3,
+          "opportunity_id": 1,
+          "icp_score": 80.0,
+          "pain_score": 15.0,
+          "value_score": 20.0,
+          "intent_score": 18.0,
+          "reachability_score": 36.0,
+          "confidence_score": 47.5,
+          "total_score": 37.9,
+          "qualification_state": "RESEARCHED",
+          "explanation": "ThePower Business School matched Sales Operations Automation through observable signals PUBLIC_WEBSITE_AVAILABLE. Score is based on evidence #12.",
+          "evidence_ids": [
+            12
+          ],
+          "matched_signals": [
+            "PUBLIC_WEBSITE_AVAILABLE"
+          ],
+          "created_at": "2026-08-17T19:25:32.587869Z",
+          "updated_at": "2026-08-17T19:27:42.730003Z"
+        },
+        "top_evidence": [
+          {
+            "id": 12,
+            "company_id": 3,
+            "source_id": 19,
+            "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+            "source_url": "https://thepower.education/thepowermba",
+            "content_excerpt": "ThePowerMBA | Escuela de Negocios Online ¡Nuevo programa! AI MAKER | Precio Lanzamiento: Ahorra hasta 200€ VER OFERTA ¡Nuevo programa! AI MAKER | Precio Lanzamiento: Ahorra hasta 200€ VER OFERTA Un enfoque diferente en l",
+            "confidence": 0.5,
+            "detected_at": "2026-08-17T19:25:29.523403Z",
+            "evidence_metadata": {
+              "detector": "fallback",
+              "page_title": "ThePowerMBA | Escuela de Negocios Online"
+            }
+          }
+        ],
+        "pipeline_state": null
+      },
+      {
+        "entry": {
+          "id": 16,
+          "campaign_id": 3,
+          "company_id": 6,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "KeepCoding",
+              "domain": "keepcoding.io",
+              "website_url": "https://keepcoding.io",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Madrid"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 6,
+            "name": "KeepCoding",
+            "domain": "keepcoding.io",
+            "website_url": "https://keepcoding.io",
+            "industry": "training companies",
+            "country": "Spain",
+            "city": "Madrid",
+            "created_at": "2026-08-17T19:25:11.276219Z"
+          }
+        },
+        "score": {
+          "id": 6,
+          "company_id": 6,
+          "opportunity_id": 1,
+          "icp_score": 80.0,
+          "pain_score": 15.0,
+          "value_score": 20.0,
+          "intent_score": 18.0,
+          "reachability_score": 36.0,
+          "confidence_score": 47.5,
+          "total_score": 37.9,
+          "qualification_state": "RESEARCHED",
+          "explanation": "KeepCoding matched Sales Operations Automation through observable signals PUBLIC_WEBSITE_AVAILABLE. Score is based on evidence #16.",
+          "evidence_ids": [
+            16
+          ],
+          "matched_signals": [
+            "PUBLIC_WEBSITE_AVAILABLE"
+          ],
+          "created_at": "2026-08-17T19:26:13.082371Z",
+          "updated_at": "2026-08-17T19:28:43.702119Z"
+        },
+        "top_evidence": [
+          {
+            "id": 16,
+            "company_id": 6,
+            "source_id": 29,
+            "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+            "source_url": "https://keepcoding.io/",
+            "content_excerpt": "Los Mejores Bootcamps Online | KeepCoding Saltar al contenido Bootcamps Aprende a Programar desde Cero Desarrollo Web Full Stack Desarrollo Apps iOS & Android Big Data & Machine Learning Inteligencia Artificial DevOps &",
+            "confidence": 0.5,
+            "detected_at": "2026-08-17T19:26:09.166523Z",
+            "evidence_metadata": {
+              "detector": "fallback",
+              "page_title": "Los Mejores Bootcamps Online | KeepCoding"
+            }
+          }
+        ],
+        "pipeline_state": null
+      },
+      {
+        "entry": {
+          "id": 8,
+          "campaign_id": 3,
+          "company_id": 1,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "Ironhack",
+              "domain": "ironhack.com",
+              "website_url": "https://www.ironhack.com",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Madrid"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 1,
+            "name": "Ironhack",
+            "domain": "ironhack.com",
+            "website_url": "https://ironhack.com",
+            "industry": null,
+            "country": null,
+            "city": null,
+            "created_at": "2026-08-17T18:10:33.791131Z"
+          }
+        },
+        "score": {
+          "id": 1,
+          "company_id": 1,
+          "opportunity_id": 1,
+          "icp_score": 70.0,
+          "pain_score": 15.0,
+          "value_score": 20.0,
+          "intent_score": 18.0,
+          "reachability_score": 36.0,
+          "confidence_score": 62.5,
+          "total_score": 34.9,
+          "qualification_state": "REJECTED",
+          "explanation": "Ironhack matched Sales Operations Automation through observable signals PUBLIC_WEBSITE_AVAILABLE. Score is based on evidence #1.",
+          "evidence_ids": [
+            1
+          ],
+          "matched_signals": [
+            "PUBLIC_WEBSITE_AVAILABLE"
+          ],
+          "created_at": "2026-08-17T18:10:48.674252Z",
+          "updated_at": "2026-08-17T19:27:26.353474Z"
+        },
+        "top_evidence": [
+          {
+            "id": 1,
+            "company_id": 1,
+            "source_id": 1,
+            "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+            "source_url": "https://www.ironhack.com/",
+            "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+            "confidence": 0.5,
+            "detected_at": "2026-08-17T18:10:46.312177Z",
+            "evidence_metadata": {
+              "detector": "fallback",
+              "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+            }
+          }
+        ],
+        "pipeline_state": null
+      },
+      {
+        "entry": {
+          "id": 9,
+          "campaign_id": 3,
+          "company_id": 2,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "Codenotch",
+              "domain": "codenotch.com",
+              "website_url": "https://www.codenotch.com",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Madrid"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 2,
+            "name": "Codenotch",
+            "domain": "codenotch.com",
+            "website_url": "https://codenotch.com",
+            "industry": null,
+            "country": null,
+            "city": null,
+            "created_at": "2026-08-17T18:14:47.282395Z"
+          }
+        },
+        "score": {
+          "id": 2,
+          "company_id": 2,
+          "opportunity_id": 1,
+          "icp_score": 70.0,
+          "pain_score": 15.0,
+          "value_score": 20.0,
+          "intent_score": 18.0,
+          "reachability_score": 36.0,
+          "confidence_score": 62.5,
+          "total_score": 34.9,
+          "qualification_state": "REJECTED",
+          "explanation": "Codenotch matched Sales Operations Automation through observable signals PUBLIC_WEBSITE_AVAILABLE. Score is based on evidence #2.",
+          "evidence_ids": [
+            2
+          ],
+          "matched_signals": [
+            "PUBLIC_WEBSITE_AVAILABLE"
+          ],
+          "created_at": "2026-08-17T18:14:48.017720Z",
+          "updated_at": "2026-08-17T19:27:31.756136Z"
+        },
+        "top_evidence": [
+          {
+            "id": 2,
+            "company_id": 2,
+            "source_id": 2,
+            "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+            "source_url": "https://codenotch.com/",
+            "content_excerpt": "Codenotch | Build smarter. Code faster. Run and scale with no limits.",
+            "confidence": 0.5,
+            "detected_at": "2026-08-17T18:14:47.451939Z",
+            "evidence_metadata": {
+              "detector": "fallback",
+              "page_title": "Codenotch | Build smarter. Code faster. Run and scale with no limits."
+            }
+          }
+        ],
+        "pipeline_state": "APPROVED"
+      },
+      {
+        "entry": {
+          "id": 15,
+          "campaign_id": 3,
+          "company_id": 10,
+          "discovery_source": "csv",
+          "discovery_metadata": {
+            "row": {
+              "name": "Nuclio Digital School",
+              "domain": "nuclio.school",
+              "website_url": "https://www.nuclio.school",
+              "industry": "training companies",
+              "country": "Spain",
+              "city": "Barcelona"
+            }
+          },
+          "research_state": "RESEARCHED",
+          "error": null,
+          "company": {
+            "id": 10,
+            "name": "Nuclio Digital School",
+            "domain": "nuclio.school",
+            "website_url": "https://www.nuclio.school",
+            "industry": "training companies",
+            "country": "Spain",
+            "city": "Barcelona",
+            "created_at": "2026-08-17T19:27:19.197706Z"
+          }
+        },
+        "score": {
+          "id": 10,
+          "company_id": 10,
+          "opportunity_id": 1,
+          "icp_score": 80.0,
+          "pain_score": 0.0,
+          "value_score": 0.0,
+          "intent_score": 0.0,
+          "reachability_score": 0.0,
+          "confidence_score": 0.0,
+          "total_score": 24.0,
+          "qualification_state": "RESEARCHED",
+          "explanation": "Nuclio Digital School has limited public evidence for Sales Operations Automation.",
+          "evidence_ids": [],
+          "matched_signals": [],
+          "created_at": "2026-08-17T19:28:34.415634Z",
+          "updated_at": "2026-08-17T19:28:37.286213Z"
+        },
+        "top_evidence": [],
+        "pipeline_state": null
+      }
+    ],
+    "research_runs": [
+      {
+        "id": 17,
+        "company_id": 1,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 54,
+        "output_tokens": 613,
+        "estimated_cost": 0.000267,
+        "execution_time_ms": 7011,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:27:21.134290Z"
+      },
+      {
+        "id": 18,
+        "company_id": 2,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 17,
+        "output_tokens": 618,
+        "estimated_cost": 0.000254,
+        "execution_time_ms": 5329,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:27:26.613054Z"
+      },
+      {
+        "id": 19,
+        "company_id": 3,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 55,
+        "output_tokens": 654,
+        "estimated_cost": 0.000284,
+        "execution_time_ms": 10944,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:27:35.836203Z"
+      },
+      {
+        "id": 20,
+        "company_id": 8,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 110,
+        "output_tokens": 481,
+        "estimated_cost": 0.000236,
+        "execution_time_ms": 7699,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:27:46.217405Z"
+      },
+      {
+        "id": 21,
+        "company_id": 4,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 96,
+        "output_tokens": 698,
+        "estimated_cost": 0.000318,
+        "execution_time_ms": 16749,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:01.717728Z"
+      },
+      {
+        "id": 22,
+        "company_id": 9,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 220,
+        "output_tokens": 602,
+        "estimated_cost": 0.000329,
+        "execution_time_ms": 15627,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:18.694804Z"
+      },
+      {
+        "id": 23,
+        "company_id": 5,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 220,
+        "output_tokens": 788,
+        "estimated_cost": 0.000403,
+        "execution_time_ms": 10129,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:26.433470Z"
+      },
+      {
+        "id": 24,
+        "company_id": 10,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 0,
+        "output_tokens": 141,
+        "estimated_cost": 5.6e-05,
+        "execution_time_ms": 4151,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:34.415634Z"
+      },
+      {
+        "id": 25,
+        "company_id": 6,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 54,
+        "output_tokens": 716,
+        "estimated_cost": 0.000308,
+        "execution_time_ms": 6369,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:38.711590Z"
+      },
+      {
+        "id": 26,
+        "company_id": 7,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 109,
+        "output_tokens": 880,
+        "estimated_cost": 0.000396,
+        "execution_time_ms": 43352,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:29:20.001915Z"
+      }
+    ]
+  },
+  "campaign_rows": [
+    {
+      "company": {
+        "id": 4,
+        "name": "ISDI",
+        "domain": "isdi.education",
+        "website_url": "https://www.isdi.education",
+        "industry": "training companies",
+        "country": "Spain",
+        "city": "Madrid",
+        "created_at": "2026-08-17T19:25:11.276219Z"
+      },
+      "score": {
+        "id": 4,
+        "company_id": 4,
+        "opportunity_id": 1,
+        "icp_score": 80.0,
+        "pain_score": 33.0,
+        "value_score": 44.0,
+        "intent_score": 10.0,
+        "reachability_score": 20.0,
+        "confidence_score": 56.5,
+        "total_score": 45.7,
+        "qualification_state": "RESEARCHED",
+        "explanation": "ISDI matched Sales Operations Automation through observable signals MULTIPLE_LOCATIONS. Score is based on evidence #13.",
+        "evidence_ids": [
+          13
+        ],
+        "matched_signals": [
+          "MULTIPLE_LOCATIONS"
+        ],
+        "created_at": "2026-08-17T19:25:50.318000Z",
+        "updated_at": "2026-08-17T19:28:07.230870Z"
+      },
+      "top_evidence": [
+        {
+          "id": 13,
+          "company_id": 4,
+          "source_id": 26,
+          "signal_type": "MULTIPLE_LOCATIONS",
+          "source_url": "https://www.isdi.education/es/",
+          "content_excerpt": "ISDI España | La escuela de Negocios de la Era Digital Ir al contenido Esto es ISDI Qué es ISDI Profesores Top partners Metodología Empleabilidad Financiación y becas Sedes Preguntas frecuentes Programas Tipos de programa Programas por sede Toda la oferta académica In Company Formación ad-hoc Metodología Casos de éxito Vida estudiante Experiencia Alumni Programa de Referidos Centro Un",
+          "confidence": 0.62,
+          "detected_at": "2026-08-17T19:25:38.615372Z",
+          "evidence_metadata": {
+            "detector": "regex",
+            "pattern": "\\blocations\\b|\\boffices\\b|\\bsedes\\b|\\bdelegaciones\\b",
+            "page_title": "ISDI España | La escuela de Negocios de la Era Digital"
+          }
+        }
+      ],
+      "evidence_count": 2,
+      "signal_types": [
+        "MULTIPLE_LOCATIONS"
+      ],
+      "analysis": {
+        "id": 21,
+        "company_id": 4,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "ISDI appears to be a digital-business school in Spain with multiple locations/sedes and a broad set of offerings, including academic programs, in-company/ad-hoc training, employability, financing/becas, and alumni/student experience. The public site suggests a relatively complex multi-program, multi-audience operating model, but the evidence is limited to the homepage navigation and does not confirm internal workflows.",
+        "observed_signals": [
+          {
+            "signalType": "MULTIPLE_LOCATIONS",
+            "reasoning": "The homepage navigation explicitly includes 'Sedes' and 'Programas por sede', which indicates operations across more than one location/campus.",
+            "confidence": 0.86,
+            "evidenceIds": [
+              22
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "Managing program inquiries and routing them correctly across multiple locations and program types may create repetitive manual coordination work.",
+            "reasoning": "The site exposes multiple pathways such as 'Programas por sede', 'Toda la oferta académica', and different program types, suggesting a need to help prospective students quickly find the right location and offering. This is an inference from the public navigation, not confirmation of the internal process.",
+            "confidence": 0.67,
+            "evidenceIds": [
+              22
+            ]
+          },
+          {
+            "problem": "Coordinating requests for 'In Company' and 'Formación ad-hoc' offerings may require repeated intake, qualification, and follow-up across corporate clients.",
+            "reasoning": "The presence of dedicated corporate-training pages implies a B2B education offer that often involves customized requests. An automation opportunity could be streamlining request capture and handoff, though the exact workflow is not visible publicly.",
+            "confidence": 0.61,
+            "evidenceIds": [
+              22
+            ]
+          },
+          {
+            "problem": "Handling common questions about financing, scholarships, employability, and program selection may generate a high volume of repetitive support interactions.",
+            "reasoning": "The navigation highlights 'Financiación y becas', 'Empleabilidad', and 'Preguntas frecuentes', which suggests a substantial information-support burden. A self-service assistant or triage workflow could reduce manual responses, but this is only a likely use case.",
+            "confidence": 0.64,
+            "evidenceIds": [
+              22
+            ]
+          }
+        ],
+        "unknowns": [
+          "Whether ISDI operates centralized admissions or campus-specific admissions teams.",
+          "The volume of inbound inquiries by program, location, or corporate training line.",
+          "Which systems (CRM, LMS, ticketing, ERP) are currently in use.",
+          "Whether alumni, student services, or corporate training are handled by shared or separate teams."
+        ],
+        "recommended_buyer_roles": [
+          "Head of Admissions",
+          "Director of Marketing / Growth",
+          "Corporate Training / In Company Director",
+          "Operations Director",
+          "Student Services / Academic Services Manager"
+        ],
+        "created_at": "2026-08-17T19:28:01.717728Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 21,
+        "company_id": 4,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 96,
+        "output_tokens": 698,
+        "estimated_cost": 0.000318,
+        "execution_time_ms": 16749,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:01.717728Z"
+      }
+    },
+    {
+      "company": {
+        "id": 8,
+        "name": "IEBS Business School",
+        "domain": "iebschool.com",
+        "website_url": "https://www.iebschool.com",
+        "industry": "training companies",
+        "country": "Spain",
+        "city": "Barcelona",
+        "created_at": "2026-08-17T19:27:19.197706Z"
+      },
+      "score": {
+        "id": 8,
+        "company_id": 8,
+        "opportunity_id": 1,
+        "icp_score": 80.0,
+        "pain_score": 31.0,
+        "value_score": 32.0,
+        "intent_score": 10.0,
+        "reachability_score": 44.0,
+        "confidence_score": 53.0,
+        "total_score": 45.1,
+        "qualification_state": "RESEARCHED",
+        "explanation": "IEBS Business School matched Sales Operations Automation through observable signals HAS_SALES_TEAM. Score is based on evidence #21.",
+        "evidence_ids": [
+          21
+        ],
+        "matched_signals": [
+          "HAS_SALES_TEAM"
+        ],
+        "created_at": "2026-08-17T19:27:46.217405Z",
+        "updated_at": "2026-08-17T19:27:50.454557Z"
+      },
+      "top_evidence": [
+        {
+          "id": 21,
+          "company_id": 8,
+          "source_id": 44,
+          "signal_type": "HAS_SALES_TEAM",
+          "source_url": "https://www.iebschool.com/",
+          "content_excerpt": "umanos Finanzas Tecnología VER MÁS POR TEMÁTICA Marketing Digital Ver todos SEO/SEM Marketing Digital e-Commerce Inbound Marketing Growth Hacking Redes Sociales UX, UI y CX Gamificación Marketing Estratégico Dirección y Ventas Management Ver todos MBA's Emprendedores Transformación Digital Management Agile & Scrum Recursos Humanos Product Manager Finanzas Big data & IA Ver todos Data Science Inteligencia Artificial Data Analytics Big da",
+          "confidence": 0.64,
+          "detected_at": "2026-08-17T19:27:42.740945Z",
+          "evidence_metadata": {
+            "detector": "regex",
+            "pattern": "\\bsales team\\b|\\bsales manager\\b|\\bcomercial\\b|\\bventas\\b",
+            "page_title": "IEBS - La Escuela de Negocios de la Innovación y los Emprendedores"
+          }
+        }
+      ],
+      "evidence_count": 1,
+      "signal_types": [
+        "HAS_SALES_TEAM"
+      ],
+      "analysis": {
+        "id": 20,
+        "company_id": 8,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "IEBS Business School publicly presents a broad set of program themes on its website, including a category labeled \"Dirección y Ventas\" alongside marketing, management, data, and technology topics. From this public evidence, it is reasonable to infer the organization has at least some sales-oriented commercial focus, but the evidence does not reveal its internal sales structure or processes.",
+        "observed_signals": [
+          {
+            "signalType": "HAS_SALES_TEAM",
+            "reasoning": "The website navigation includes a dedicated theme/category for \"Dirección y Ventas,\" which suggests the business school offers sales-related content or programs and likely engages in commercial selling of training programs. This is an inference from the public program taxonomy rather than proof of an internal sales department.",
+            "confidence": 0.64,
+            "evidenceIds": [
+              21
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "Potential manual handling of inbound leads or program inquiries related to sales, marketing, and other training categories.",
+            "reasoning": "Because the site organizes offerings across multiple high-intent themes, it likely receives interest from prospective students seeking information. If inquiries are handled manually, lead routing, follow-up, and qualification could be candidates for automation. This is only a general opportunity inferred from the public-facing program structure, not a confirmed internal workflow.",
+            "confidence": 0.38,
+            "evidenceIds": [
+              21
+            ]
+          }
+        ],
+        "unknowns": [
+          "Whether IEBS has a dedicated internal sales team versus relying on admissions, marketing, or partner channels.",
+          "How leads are captured, routed, and followed up on internally.",
+          "Whether the school already uses automation for admissions, CRM, or email nurturing."
+        ],
+        "recommended_buyer_roles": [
+          "Director/a de Ventas",
+          "Director/a Comercial",
+          "Responsable de Admisiones",
+          "Director/a de Marketing",
+          "CRM/Revenue Operations Manager"
+        ],
+        "created_at": "2026-08-17T19:27:46.217405Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 20,
+        "company_id": 8,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 110,
+        "output_tokens": 481,
+        "estimated_cost": 0.000236,
+        "execution_time_ms": 7699,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:27:46.217405Z"
+      }
+    },
+    {
+      "company": {
+        "id": 9,
+        "name": "EAE Business School",
+        "domain": "eae.es",
+        "website_url": "https://www.eae.es",
+        "industry": "training companies",
+        "country": "Spain",
+        "city": "Barcelona",
+        "created_at": "2026-08-17T19:27:19.197706Z"
+      },
+      "score": {
+        "id": 9,
+        "company_id": 9,
+        "opportunity_id": 1,
+        "icp_score": 80.0,
+        "pain_score": 31.0,
+        "value_score": 32.0,
+        "intent_score": 10.0,
+        "reachability_score": 44.0,
+        "confidence_score": 58.0,
+        "total_score": 45.1,
+        "qualification_state": "RESEARCHED",
+        "explanation": "EAE Business School matched Sales Operations Automation through observable signals HAS_SALES_TEAM. Score is based on evidence #23.",
+        "evidence_ids": [
+          23
+        ],
+        "matched_signals": [
+          "HAS_SALES_TEAM"
+        ],
+        "created_at": "2026-08-17T19:28:18.694804Z",
+        "updated_at": "2026-08-17T19:28:22.949812Z"
+      },
+      "top_evidence": [
+        {
+          "id": 23,
+          "company_id": 9,
+          "source_id": 52,
+          "signal_type": "HAS_SALES_TEAM",
+          "source_url": "https://www.eae.es/",
+          "content_excerpt": "y ESG Máster en Análisis Económico del Derecho Luxury Brand Management MBA Máster en Emprendimiento e Innovación Máster en Fashion & Retail Management Máster en Sports Management Todos los MBAs Marketing, Comunicación y Ventas Máster en Comunicación Corporativa & Digital Máster en Marketing digital and E-сommerce Máster en Marketing y Gestión Comercial Máster en Dirección Comercial y Ventas Máster en Dirección de Marketing Máster en Psi",
+          "confidence": 0.64,
+          "detected_at": "2026-08-17T19:28:07.307225Z",
+          "evidence_metadata": {
+            "detector": "regex",
+            "pattern": "\\bsales team\\b|\\bsales manager\\b|\\bcomercial\\b|\\bventas\\b",
+            "page_title": "Escuela de negocios - EAE Business School"
+          }
+        }
+      ],
+      "evidence_count": 2,
+      "signal_types": [
+        "HAS_SALES_TEAM"
+      ],
+      "analysis": {
+        "id": 22,
+        "company_id": 9,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "Public evidence suggests EAE Business School offers multiple programs related to marketing, sales, commercial management, and business development. This is a weak-to-moderate signal that the organization likely has a sales-oriented function or team supporting enrollment and commercial programs, but the evidence does not directly show team structure or responsibilities.",
+        "observed_signals": [
+          {
+            "signalType": "HAS_SALES_TEAM",
+            "reasoning": "The public homepage lists programs such as 'Máster en Dirección Comercial y Ventas', 'Máster en Marketing y Gestión Comercial', and 'Máster en Dirección de Marketing', which indicates the institution operates in sales/commercial education and likely supports a commercial admissions or enrollment motion. However, the evidence does not explicitly describe an internal sales team.",
+            "confidence": 0.64,
+            "evidenceIds": [
+              23
+            ]
+          },
+          {
+            "signalType": "HAS_SALES_TEAM",
+            "reasoning": "The contact page repeats the same marketing and sales-related program listings, reinforcing that these offerings are prominently exposed on the site. This is still only an indirect indicator of sales-oriented activity rather than direct proof of a sales organization.",
+            "confidence": 0.64,
+            "evidenceIds": [
+              24
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "Managing inquiries and lead routing for many sales, marketing, and commercial programs may require manual handling.",
+            "reasoning": "Because the site prominently advertises multiple enrollment-oriented programs, there is likely repeated intake of prospective-student inquiries. A public-facing automation opportunity could be inquiry triage, form routing, or FAQ/chat automation, but this is an inference from the program catalog rather than direct evidence of current pain points.",
+            "confidence": 0.46,
+            "evidenceIds": [
+              23,
+              24
+            ]
+          }
+        ],
+        "unknowns": [
+          "Whether EAE Business School has a dedicated sales team versus admissions, recruitment, or student enrollment staff.",
+          "How leads or inquiries are currently captured, routed, and followed up.",
+          "Whether the organization uses CRM, marketing automation, or call-center tooling.",
+          "The size of the commercial/admissions function and whether it is centralized or distributed across programs."
+        ],
+        "recommended_buyer_roles": [
+          "Director of Admissions",
+          "Head of Enrollment Management",
+          "Commercial Director",
+          "Marketing Director",
+          "Sales Operations Manager"
+        ],
+        "created_at": "2026-08-17T19:28:18.694804Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 22,
+        "company_id": 9,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 220,
+        "output_tokens": 602,
+        "estimated_cost": 0.000329,
+        "execution_time_ms": 15627,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:18.694804Z"
+      }
+    },
+    {
+      "company": {
+        "id": 5,
+        "name": "ESIC Business and Marketing School",
+        "domain": "esic.edu",
+        "website_url": "https://www.esic.edu",
+        "industry": "training companies",
+        "country": "Spain",
+        "city": "Madrid",
+        "created_at": "2026-08-17T19:25:11.276219Z"
+      },
+      "score": {
+        "id": 5,
+        "company_id": 5,
+        "opportunity_id": 1,
+        "icp_score": 80.0,
+        "pain_score": 31.0,
+        "value_score": 32.0,
+        "intent_score": 10.0,
+        "reachability_score": 44.0,
+        "confidence_score": 68.0,
+        "total_score": 45.1,
+        "qualification_state": "RESEARCHED",
+        "explanation": "ESIC Business and Marketing School matched Sales Operations Automation through observable signals HAS_SALES_TEAM. Score is based on evidence #14.",
+        "evidence_ids": [
+          14
+        ],
+        "matched_signals": [
+          "HAS_SALES_TEAM"
+        ],
+        "created_at": "2026-08-17T19:26:02.655587Z",
+        "updated_at": "2026-08-17T19:28:33.105552Z"
+      },
+      "top_evidence": [
+        {
+          "id": 14,
+          "company_id": 5,
+          "source_id": 27,
+          "signal_type": "HAS_SALES_TEAM",
+          "source_url": "https://www.esic.edu/",
+          "content_excerpt": "OS Doble Grado en Administración y Dirección de Empresas y Marketing Double Bachelor's Degree in Business Administration & Marketing Doble Grado en Administración y Dirección de Empresas y Derecho Doble Grado en Gestión Comercial y Marketing y Negocios Internacionales Ver todos los Dobles Grados GRADOS PARA TITULADOS DE CICLO FORMATIVO Grado en Marketing Grado en Administración y Dirección de Empresas​ Ver todos los Grados TÍTULOS SUPER",
+          "confidence": 0.64,
+          "detected_at": "2026-08-17T19:25:57.098691Z",
+          "evidence_metadata": {
+            "detector": "regex",
+            "pattern": "\\bsales team\\b|\\bsales manager\\b|\\bcomercial\\b|\\bventas\\b",
+            "page_title": "ESIC University - Transformation with Purpose"
+          }
+        }
+      ],
+      "evidence_count": 4,
+      "signal_types": [
+        "HAS_SALES_TEAM"
+      ],
+      "analysis": {
+        "id": 23,
+        "company_id": 5,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "ESIC Business and Marketing School appears to be an education provider focused on business, marketing, and related double-degree programs. The public evidence shows program listings on the main site and contact page, which suggests a need to handle prospective-student inquiries and admissions-related communication, though no internal team structure is confirmed from the evidence provided.",
+        "observed_signals": [
+          {
+            "signalType": "OFFERS_BUSINESS_AND_MARKETING_PROGRAMS",
+            "reasoning": "The website lists multiple degrees and double degrees in Business Administration, Marketing, Commercial Management, International Business, and Law, indicating a strong focus on business and marketing education.",
+            "confidence": 0.98,
+            "evidenceIds": [
+              25,
+              26
+            ]
+          },
+          {
+            "signalType": "HAS_PUBLIC_CONTACT_ENTRYPOINT",
+            "reasoning": "A dedicated contact page is present, which indicates a public-facing inbound inquiry channel for prospective students or other stakeholders.",
+            "confidence": 0.88,
+            "evidenceIds": [
+              26
+            ]
+          },
+          {
+            "signalType": "MULTI_PROGRAM_OR_PROGRAM_CATALOG_SITE",
+            "reasoning": "The excerpt shows several program categories and a 'see all' style catalog structure, suggesting the site is organized around browsing educational offerings.",
+            "confidence": 0.86,
+            "evidenceIds": [
+              25,
+              26
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "Triage and routing of prospective-student inquiries across many degree/program options",
+            "reasoning": "Because the site presents multiple degrees and double degrees, a likely operational need is helping visitors quickly identify the right program and route questions to the appropriate admissions or program contact. This is an inference from the public program catalog, not confirmation of current process.",
+            "confidence": 0.8,
+            "evidenceIds": [
+              25,
+              26
+            ]
+          },
+          {
+            "problem": "Automated FAQ response for admissions and program-selection questions",
+            "reasoning": "A school with a broad portfolio of business and marketing degrees will likely receive repetitive questions about requirements, degree differences, and next steps. An FAQ assistant could reduce manual handling, but the evidence does not show current workflows.",
+            "confidence": 0.74,
+            "evidenceIds": [
+              25,
+              26
+            ]
+          },
+          {
+            "problem": "Lead capture and follow-up for interested applicants",
+            "reasoning": "The presence of a contact page and multiple program listings suggests an inbound-interest funnel where automation could collect details, segment by program interest, and trigger follow-up. This is a reasonable opportunity, but not directly evidenced as an existing sales process.",
+            "confidence": 0.72,
+            "evidenceIds": [
+              26,
+              25
+            ]
+          }
+        ],
+        "unknowns": [
+          "Whether the organization has a formal sales team versus an admissions team.",
+          "How inquiries from the contact page are currently handled.",
+          "Whether the school uses CRM, marketing automation, or chat support tools.",
+          "Which programs generate the highest inquiry volume.",
+          "Whether multilingual inquiry handling is needed beyond what is visible publicly."
+        ],
+        "recommended_buyer_roles": [
+          "Admissions Director",
+          "Head of Enrollment Management",
+          "Marketing Director",
+          "Prospective Student Recruitment Lead",
+          "Web/Digital Experience Manager"
+        ],
+        "created_at": "2026-08-17T19:28:26.433470Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 23,
+        "company_id": 5,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 220,
+        "output_tokens": 788,
+        "estimated_cost": 0.000403,
+        "execution_time_ms": 10129,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:26.433470Z"
+      }
+    },
+    {
+      "company": {
+        "id": 7,
+        "name": "Upgrade Hub",
+        "domain": "upgrade-hub.com",
+        "website_url": "https://www.upgrade-hub.com",
+        "industry": "training companies",
+        "country": "Spain",
+        "city": "Madrid",
+        "created_at": "2026-08-17T19:25:11.276219Z"
+      },
+      "score": {
+        "id": 7,
+        "company_id": 7,
+        "opportunity_id": 1,
+        "icp_score": 80.0,
+        "pain_score": 25.0,
+        "value_score": 32.0,
+        "intent_score": 10.0,
+        "reachability_score": 20.0,
+        "confidence_score": 52.0,
+        "total_score": 40.9,
+        "qualification_state": "RESEARCHED",
+        "explanation": "Upgrade Hub matched Sales Operations Automation through observable signals HAS_API. Score is based on evidence #17.",
+        "evidence_ids": [
+          17
+        ],
+        "matched_signals": [
+          "HAS_API"
+        ],
+        "created_at": "2026-08-17T19:26:54.866539Z",
+        "updated_at": "2026-08-17T19:29:27.083305Z"
+      },
+      "top_evidence": [
+        {
+          "id": 17,
+          "company_id": 7,
+          "source_id": 30,
+          "signal_type": "HAS_API",
+          "source_url": "https://www.upgrade-hub.com",
+          "content_excerpt": "la pena. Chiarella Bencan LinkedIn El talento de Upgrade Hub ha sido clave en proyectos como el rediseño de nuestra web y nueva identidad de marca. Profesionales que combinan lo último en conocimientos técnicos con una integración rápida y natural en los equipos. Susana Flecha LinkedIn La experiencia ha sido muy positiva, tanto a nivel de contenidos como de enfoque y aplicabilidad, y sin duda, el bootcamp ha aportado herramientas que e",
+          "confidence": 0.56,
+          "detected_at": "2026-08-17T19:26:18.559704Z",
+          "evidence_metadata": {
+            "detector": "regex",
+            "pattern": "\\bapi\\b|\\bintegration\\b|\\bintegraci[oó]n",
+            "page_title": "Upgrade Hub | Formación Tech y Digital"
+          }
+        }
+      ],
+      "evidence_count": 2,
+      "signal_types": [
+        "HAS_API"
+      ],
+      "analysis": {
+        "id": 26,
+        "company_id": 7,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "Public evidence is very limited. The website excerpt appears to show customer testimonials in Spanish and references to a bootcamp, suggesting Upgrade Hub offers training or talent/services related to technical and brand/website work. The provided evidence is tagged as having an API, but the excerpt itself does not reveal the API’s purpose or scope.",
+        "observed_signals": [
+          {
+            "signalType": "HAS_API",
+            "reasoning": "The supplied evidence is explicitly tagged HAS_API. However, the excerpt itself does not describe what the API does, so this can only be treated as a weakly supported signal that some API exists on or behind the site.",
+            "confidence": 0.56,
+            "evidenceIds": [
+              28
+            ]
+          },
+          {
+            "signalType": "CUSTOMER_TESTIMONIALS",
+            "reasoning": "The excerpt includes multiple testimonial-style quotes attributed to named individuals and LinkedIn, which indicates the company publicly presents customer or participant feedback on its website.",
+            "confidence": 0.83,
+            "evidenceIds": [
+              28
+            ]
+          },
+          {
+            "signalType": "BOOTCAMP_OFFERING",
+            "reasoning": "The excerpt explicitly mentions 'el bootcamp', suggesting the company offers or promotes a bootcamp-related learning or training program. The exact topic is not stated in the evidence.",
+            "confidence": 0.74,
+            "evidenceIds": [
+              28
+            ]
+          },
+          {
+            "signalType": "TECHNICAL_AND_CREATIVE_SERVICES",
+            "reasoning": "One testimonial mentions work on 'el rediseño de nuestra web y nueva identidad de marca' and describes the team as combining technical knowledge with fast integration into client teams. This suggests the company may provide web redesign, branding, or team augmentation services, though this is an inference from testimonials rather than a direct service listing.",
+            "confidence": 0.62,
+            "evidenceIds": [
+              28
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "Managing and scaling testimonial collection and publication across the website may require manual coordination.",
+            "reasoning": "The public page shows testimonials, implying a process for gathering, approving, formatting, and publishing customer feedback. This is a common workflow that could benefit from automation, but the evidence does not confirm current pain points.",
+            "confidence": 0.55,
+            "evidenceIds": [
+              28
+            ]
+          },
+          {
+            "problem": "Bootcamp content delivery and learner support may involve repetitive administrative work.",
+            "reasoning": "Because the site references a bootcamp, there may be recurring tasks such as onboarding, reminders, scheduling, progress tracking, or feedback collection. This is only a plausible opportunity; the evidence does not specify actual operations.",
+            "confidence": 0.51,
+            "evidenceIds": [
+              28
+            ]
+          },
+          {
+            "problem": "If the company delivers web redesign or branding projects, project intake and status updates may be time-consuming.",
+            "reasoning": "A testimonial references website redesign and new brand identity work, which often involves repeated client briefing, approvals, and status communication. This is an inference from the described project type, not a confirmed internal process.",
+            "confidence": 0.5,
+            "evidenceIds": [
+              28
+            ]
+          }
+        ],
+        "unknowns": [
+          "Whether Upgrade Hub is primarily a training provider, a service agency, or both.",
+          "What the referenced API is used for.",
+          "What specific bootcamp(s) they offer and to whom.",
+          "What industries or customer segments they serve.",
+          "Whether they have repeatable operational workflows that are ready for automation."
+        ],
+        "recommended_buyer_roles": [
+          "CEO / Founder",
+          "Operations Manager",
+          "Head of Marketing",
+          "Program Manager / Bootcamp Manager",
+          "CTO / Technical Lead"
+        ],
+        "created_at": "2026-08-17T19:29:20.001915Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 26,
+        "company_id": 7,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 109,
+        "output_tokens": 880,
+        "estimated_cost": 0.000396,
+        "execution_time_ms": 43352,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:29:20.001915Z"
+      }
+    },
+    {
+      "company": {
+        "id": 3,
+        "name": "ThePower Business School",
+        "domain": "thepowermba.com",
+        "website_url": "https://www.thepowermba.com",
+        "industry": "training companies",
+        "country": "Spain",
+        "city": "Madrid",
+        "created_at": "2026-08-17T19:25:11.276219Z"
+      },
+      "score": {
+        "id": 3,
+        "company_id": 3,
+        "opportunity_id": 1,
+        "icp_score": 80.0,
+        "pain_score": 15.0,
+        "value_score": 20.0,
+        "intent_score": 18.0,
+        "reachability_score": 36.0,
+        "confidence_score": 47.5,
+        "total_score": 37.9,
+        "qualification_state": "RESEARCHED",
+        "explanation": "ThePower Business School matched Sales Operations Automation through observable signals PUBLIC_WEBSITE_AVAILABLE. Score is based on evidence #12.",
+        "evidence_ids": [
+          12
+        ],
+        "matched_signals": [
+          "PUBLIC_WEBSITE_AVAILABLE"
+        ],
+        "created_at": "2026-08-17T19:25:32.587869Z",
+        "updated_at": "2026-08-17T19:27:42.730003Z"
+      },
+      "top_evidence": [
+        {
+          "id": 12,
+          "company_id": 3,
+          "source_id": 19,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://thepower.education/thepowermba",
+          "content_excerpt": "ThePowerMBA | Escuela de Negocios Online ¡Nuevo programa! AI MAKER | Precio Lanzamiento: Ahorra hasta 200€ VER OFERTA ¡Nuevo programa! AI MAKER | Precio Lanzamiento: Ahorra hasta 200€ VER OFERTA Un enfoque diferente en l",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:25:29.523403Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "ThePowerMBA | Escuela de Negocios Online"
+          }
+        }
+      ],
+      "evidence_count": 2,
+      "signal_types": [
+        "PUBLIC_WEBSITE_AVAILABLE"
+      ],
+      "analysis": {
+        "id": 19,
+        "company_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "ThePower Business School has a public website for its online business school offering, with prominent promotion of a new AI-related program called “AI MAKER.” Based on the limited evidence, the strongest signal is that the company markets digital education products and is actively launching new courses, but internal operations are unknown.",
+        "observed_signals": [
+          {
+            "signalType": "PUBLIC_WEBSITE_AVAILABLE",
+            "reasoning": "A public website is available for the company, indicating an externally accessible web presence for marketing or program information.",
+            "confidence": 0.95,
+            "evidenceIds": [
+              20
+            ]
+          },
+          {
+            "signalType": "ONLINE_EDUCATION_OFFERING",
+            "reasoning": "The page excerpt identifies the company as “ThePowerMBA | Escuela de Negocios Online,” which supports that the business offers online business education.",
+            "confidence": 0.9,
+            "evidenceIds": [
+              20
+            ]
+          },
+          {
+            "signalType": "NEW_AI_PROGRAM_PROMOTION",
+            "reasoning": "The excerpt prominently advertises a “Nuevo programa! AI MAKER” and a launch price offer, suggesting a recently introduced AI-themed educational product.",
+            "confidence": 0.87,
+            "evidenceIds": [
+              20
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "Launching and promoting new online programs likely requires repeated content updates across web pages, offers, and promotional messaging.",
+            "reasoning": "The evidence shows a public promotion for a new program with launch pricing. That suggests ongoing marketing coordination, but the specific workflow is unknown. A likely opportunity is automating campaign content updates and offer publishing across channels.",
+            "confidence": 0.62,
+            "evidenceIds": [
+              20
+            ]
+          },
+          {
+            "problem": "Managing course enrollment or lead capture for a promoted online program may involve repetitive inbound handling.",
+            "reasoning": "The public website advertises a purchase or offer action, which often implies lead capture or enrollment flows. However, no form, checkout, or CRM system is visible in the evidence, so this is only a cautious inference.",
+            "confidence": 0.45,
+            "evidenceIds": [
+              20
+            ]
+          }
+        ],
+        "unknowns": [
+          "Whether the site includes checkout, lead capture forms, or CRM integrations.",
+          "Whether the company has internal administrative, admissions, or support teams that handle program inquiries.",
+          "What systems they use for marketing automation, course delivery, or student management.",
+          "Whether AI Maker is a standalone course, a bundle, or part of a larger curriculum."
+        ],
+        "recommended_buyer_roles": [
+          "Head of Marketing",
+          "Growth Marketing Manager",
+          "Director of Online Programs",
+          "Product Marketing Manager",
+          "Admissions or Enrollment Lead"
+        ],
+        "created_at": "2026-08-17T19:27:35.836203Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 19,
+        "company_id": 3,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 55,
+        "output_tokens": 654,
+        "estimated_cost": 0.000284,
+        "execution_time_ms": 10944,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:27:35.836203Z"
+      }
+    },
+    {
+      "company": {
+        "id": 6,
+        "name": "KeepCoding",
+        "domain": "keepcoding.io",
+        "website_url": "https://keepcoding.io",
+        "industry": "training companies",
+        "country": "Spain",
+        "city": "Madrid",
+        "created_at": "2026-08-17T19:25:11.276219Z"
+      },
+      "score": {
+        "id": 6,
+        "company_id": 6,
+        "opportunity_id": 1,
+        "icp_score": 80.0,
+        "pain_score": 15.0,
+        "value_score": 20.0,
+        "intent_score": 18.0,
+        "reachability_score": 36.0,
+        "confidence_score": 47.5,
+        "total_score": 37.9,
+        "qualification_state": "RESEARCHED",
+        "explanation": "KeepCoding matched Sales Operations Automation through observable signals PUBLIC_WEBSITE_AVAILABLE. Score is based on evidence #16.",
+        "evidence_ids": [
+          16
+        ],
+        "matched_signals": [
+          "PUBLIC_WEBSITE_AVAILABLE"
+        ],
+        "created_at": "2026-08-17T19:26:13.082371Z",
+        "updated_at": "2026-08-17T19:28:43.702119Z"
+      },
+      "top_evidence": [
+        {
+          "id": 16,
+          "company_id": 6,
+          "source_id": 29,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://keepcoding.io/",
+          "content_excerpt": "Los Mejores Bootcamps Online | KeepCoding Saltar al contenido Bootcamps Aprende a Programar desde Cero Desarrollo Web Full Stack Desarrollo Apps iOS & Android Big Data & Machine Learning Inteligencia Artificial DevOps &",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T19:26:09.166523Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Los Mejores Bootcamps Online | KeepCoding"
+          }
+        }
+      ],
+      "evidence_count": 2,
+      "signal_types": [
+        "PUBLIC_WEBSITE_AVAILABLE"
+      ],
+      "analysis": {
+        "id": 25,
+        "company_id": 6,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "KeepCoding appears to be an online bootcamp provider focused on programming and technical training areas such as web development, mobile apps, Big Data, Machine Learning, AI, and DevOps. Public evidence confirms an active website and a broad training catalog, but does not reveal internal operations, sales processes, or tooling.",
+        "observed_signals": [
+          {
+            "signalType": "PUBLIC_WEBSITE_AVAILABLE",
+            "reasoning": "A public website is available for KeepCoding, and the homepage excerpt indicates it presents its bootcamps and program categories online.",
+            "confidence": 0.9,
+            "evidenceIds": [
+              27
+            ]
+          },
+          {
+            "signalType": "ONLINE_BOOTCAMP_EDUCATION_BUSINESS",
+            "reasoning": "The homepage excerpt explicitly describes KeepCoding as offering online bootcamps and lists multiple technical training tracks, indicating an education/training business model.",
+            "confidence": 0.88,
+            "evidenceIds": [
+              27
+            ]
+          },
+          {
+            "signalType": "MULTI_PROGRAM_CATALOG",
+            "reasoning": "The excerpt lists several distinct subject areas (Full Stack, iOS & Android, Big Data & Machine Learning, Inteligencia Artificial, DevOps), suggesting a broad course catalog.",
+            "confidence": 0.84,
+            "evidenceIds": [
+              27
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "High-intent visitor inquiries across multiple bootcamp tracks may require timely routing and response handling.",
+            "reasoning": "Because the site offers several specialized programs, public-facing lead capture and inquiry triage could benefit from automation, but the actual current process is unknown.",
+            "confidence": 0.58,
+            "evidenceIds": [
+              27
+            ]
+          },
+          {
+            "problem": "Potential complexity in matching prospects to the right program among many bootcamp options.",
+            "reasoning": "A broad catalog can make program selection harder for visitors; automated program guidance or recommendation flows could help, though this is an inference from the catalog rather than an observed pain point.",
+            "confidence": 0.55,
+            "evidenceIds": [
+              27
+            ]
+          },
+          {
+            "problem": "Marketing content and course pages likely need frequent updates across several technical tracks.",
+            "reasoning": "A multi-track bootcamp provider often maintains many landing pages and program descriptions; automation might help content publishing or page management, but no internal content workflow is evidenced.",
+            "confidence": 0.42,
+            "evidenceIds": [
+              27
+            ]
+          }
+        ],
+        "unknowns": [
+          "Current CRM, admissions, and support tooling are not visible from the supplied evidence.",
+          "No evidence is provided about lead volume, conversion issues, or operational bottlenecks.",
+          "It is unknown whether KeepCoding sells primarily to individuals, companies, or both.",
+          "No information is available on course delivery systems, student onboarding, or post-enrollment operations."
+        ],
+        "recommended_buyer_roles": [
+          "Head of Admissions",
+          "Marketing Director",
+          "Growth Manager",
+          "Operations Manager",
+          "CTO / Head of Technology",
+          "Customer Support Lead"
+        ],
+        "created_at": "2026-08-17T19:28:38.711590Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 25,
+        "company_id": 6,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 54,
+        "output_tokens": 716,
+        "estimated_cost": 0.000308,
+        "execution_time_ms": 6369,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:38.711590Z"
+      }
+    },
+    {
+      "company": {
+        "id": 1,
+        "name": "Ironhack",
+        "domain": "ironhack.com",
+        "website_url": "https://ironhack.com",
+        "industry": null,
+        "country": null,
+        "city": null,
+        "created_at": "2026-08-17T18:10:33.791131Z"
+      },
+      "score": {
+        "id": 1,
+        "company_id": 1,
+        "opportunity_id": 1,
+        "icp_score": 70.0,
+        "pain_score": 15.0,
+        "value_score": 20.0,
+        "intent_score": 18.0,
+        "reachability_score": 36.0,
+        "confidence_score": 62.5,
+        "total_score": 34.9,
+        "qualification_state": "REJECTED",
+        "explanation": "Ironhack matched Sales Operations Automation through observable signals PUBLIC_WEBSITE_AVAILABLE. Score is based on evidence #1.",
+        "evidence_ids": [
+          1
+        ],
+        "matched_signals": [
+          "PUBLIC_WEBSITE_AVAILABLE"
+        ],
+        "created_at": "2026-08-17T18:10:48.674252Z",
+        "updated_at": "2026-08-17T19:27:26.353474Z"
+      },
+      "top_evidence": [
+        {
+          "id": 1,
+          "company_id": 1,
+          "source_id": 1,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://www.ironhack.com/",
+          "content_excerpt": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack Select a region Germany / Deutschland Spain / España France Netherlands / Nederland Portugal United Kingdom United States Worldwide Select a",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T18:10:46.312177Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Learn Web Development, Data Analytics, Cybersecurity & UX/UI Design | Ironhack"
+          }
+        }
+      ],
+      "evidence_count": 7,
+      "signal_types": [
+        "PUBLIC_WEBSITE_AVAILABLE"
+      ],
+      "analysis": {
+        "id": 17,
+        "company_id": 1,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "Ironhack appears to be a public-facing education provider offering training in web development, data analytics, cybersecurity, and UX/UI design across multiple regions. Based on the website evidence, it likely serves a distributed, international audience and may have operational needs around regional web content, lead handling, and program enrollment workflows. However, only the public homepage is available here, so deeper conclusions remain uncertain.",
+        "observed_signals": [
+          {
+            "signalType": "PUBLIC_WEBSITE_AVAILABLE",
+            "reasoning": "A public website exists for Ironhack, and the homepage indicates multiple regions/languages and several training categories, suggesting a customer-facing, multi-market online presence.",
+            "confidence": 0.95,
+            "evidenceIds": [
+              18
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "Managing region-specific website content and routing visitors to the correct market/language may require manual maintenance as the company serves multiple regions.",
+            "reasoning": "The homepage lists several regions (Germany, Spain, France, Netherlands, Portugal, United Kingdom, United States, Worldwide), which suggests content localization and regional user flows could be operationally repetitive. This is an inference from the public homepage only, not confirmation of internal processes.",
+            "confidence": 0.62,
+            "evidenceIds": [
+              18
+            ]
+          },
+          {
+            "problem": "Handling inquiries and enrollments across multiple training tracks could create repetitive lead qualification and student support work.",
+            "reasoning": "The website advertises multiple programs (Web Development, Data Analytics, Cybersecurity, UX/UI Design), which commonly generate recurring questions about admissions, schedules, and program fit. This is a plausible external-facing workflow, but internal tooling and process details are unknown.",
+            "confidence": 0.58,
+            "evidenceIds": [
+              18
+            ]
+          }
+        ],
+        "unknowns": [
+          "Whether Ironhack is primarily bootcamp, higher education, or corporate training focused.",
+          "What internal systems they use for admissions, student support, marketing, or CRM.",
+          "The scale of operations, team size, and whether regional offices manage localized workflows.",
+          "Whether they already use automation for localization, lead management, or student communications."
+        ],
+        "recommended_buyer_roles": [
+          "Head of Admissions",
+          "Marketing Operations Manager",
+          "Revenue Operations Lead",
+          "Student Success/Support Lead",
+          "Regional General Manager",
+          "Director of Operations"
+        ],
+        "created_at": "2026-08-17T19:27:21.134290Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 17,
+        "company_id": 1,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 54,
+        "output_tokens": 613,
+        "estimated_cost": 0.000267,
+        "execution_time_ms": 7011,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:27:21.134290Z"
+      }
+    },
+    {
+      "company": {
+        "id": 2,
+        "name": "Codenotch",
+        "domain": "codenotch.com",
+        "website_url": "https://codenotch.com",
+        "industry": null,
+        "country": null,
+        "city": null,
+        "created_at": "2026-08-17T18:14:47.282395Z"
+      },
+      "score": {
+        "id": 2,
+        "company_id": 2,
+        "opportunity_id": 1,
+        "icp_score": 70.0,
+        "pain_score": 15.0,
+        "value_score": 20.0,
+        "intent_score": 18.0,
+        "reachability_score": 36.0,
+        "confidence_score": 62.5,
+        "total_score": 34.9,
+        "qualification_state": "REJECTED",
+        "explanation": "Codenotch matched Sales Operations Automation through observable signals PUBLIC_WEBSITE_AVAILABLE. Score is based on evidence #2.",
+        "evidence_ids": [
+          2
+        ],
+        "matched_signals": [
+          "PUBLIC_WEBSITE_AVAILABLE"
+        ],
+        "created_at": "2026-08-17T18:14:48.017720Z",
+        "updated_at": "2026-08-17T19:27:31.756136Z"
+      },
+      "top_evidence": [
+        {
+          "id": 2,
+          "company_id": 2,
+          "source_id": 2,
+          "signal_type": "PUBLIC_WEBSITE_AVAILABLE",
+          "source_url": "https://codenotch.com/",
+          "content_excerpt": "Codenotch | Build smarter. Code faster. Run and scale with no limits.",
+          "confidence": 0.5,
+          "detected_at": "2026-08-17T18:14:47.451939Z",
+          "evidence_metadata": {
+            "detector": "fallback",
+            "page_title": "Codenotch | Build smarter. Code faster. Run and scale with no limits."
+          }
+        }
+      ],
+      "evidence_count": 6,
+      "signal_types": [
+        "PUBLIC_WEBSITE_AVAILABLE"
+      ],
+      "analysis": {
+        "id": 18,
+        "company_id": 2,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "Codenotch has a public website and presents itself with a software/engineering-oriented marketing message: \"Build smarter. Code faster. Run and scale with no limits.\" Beyond that, the supplied evidence does not reveal the company’s size, product, customers, or operations.",
+        "observed_signals": [
+          {
+            "signalType": "PUBLIC_WEBSITE_AVAILABLE",
+            "reasoning": "A public website exists at codenotch.com, which indicates an externally visible web presence and suggests the company is actively presenting itself online.",
+            "confidence": 0.95,
+            "evidenceIds": [
+              19
+            ]
+          },
+          {
+            "signalType": "MARKETING_MESSAGE_FOCUSED_ON_SOFTWARE_DEVELOPMENT",
+            "reasoning": "The homepage tagline uses terms like \"Build smarter,\" \"Code faster,\" and \"Run and scale,\" which strongly suggests the company is positioned around software development, engineering productivity, or infrastructure/scaling themes.",
+            "confidence": 0.74,
+            "evidenceIds": [
+              19
+            ]
+          }
+        ],
+        "possible_automation_opportunities": [
+          {
+            "problem": "Lead capture and qualification on the public website may be manual or only lightly structured, which can create friction for inbound visitors if the company relies on web inquiries.",
+            "reasoning": "Because the only evidence is a public-facing website with a product/value proposition, a common automation opportunity is to automate contact routing, qualification, and follow-up. This is an inference, not a confirmed current process.",
+            "confidence": 0.42,
+            "evidenceIds": [
+              19
+            ]
+          },
+          {
+            "problem": "Website messaging and conversion optimization may benefit from automated experimentation and analytics, especially if the company wants to improve how visitors respond to the \"build/code/scale\" positioning.",
+            "reasoning": "A public marketing site often needs ongoing optimization. Automating A/B testing, event tracking, and conversion reporting can reduce manual effort. This is a general opportunity inferred from the existence of the website.",
+            "confidence": 0.37,
+            "evidenceIds": [
+              19
+            ]
+          }
+        ],
+        "unknowns": [
+          "Whether Codenotch is a software vendor, agency, consultancy, or training provider.",
+          "The company’s size, geography, and target customer segment.",
+          "Whether the website includes product pages, pricing, demos, or contact flows beyond the homepage tagline.",
+          "What internal workflows currently exist and where manual effort is actually concentrated."
+        ],
+        "recommended_buyer_roles": [
+          "Head of Growth / Marketing",
+          "Founder / CEO",
+          "Product Owner",
+          "Operations Manager",
+          "Engineering Manager"
+        ],
+        "created_at": "2026-08-17T19:27:26.613054Z"
+      },
+      "non_generic_hypothesis": true,
+      "run": {
+        "id": 18,
+        "company_id": 2,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 17,
+        "output_tokens": 618,
+        "estimated_cost": 0.000254,
+        "execution_time_ms": 5329,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:27:26.613054Z"
+      }
+    },
+    {
+      "company": {
+        "id": 10,
+        "name": "Nuclio Digital School",
+        "domain": "nuclio.school",
+        "website_url": "https://www.nuclio.school",
+        "industry": "training companies",
+        "country": "Spain",
+        "city": "Barcelona",
+        "created_at": "2026-08-17T19:27:19.197706Z"
+      },
+      "score": {
+        "id": 10,
+        "company_id": 10,
+        "opportunity_id": 1,
+        "icp_score": 80.0,
+        "pain_score": 0.0,
+        "value_score": 0.0,
+        "intent_score": 0.0,
+        "reachability_score": 0.0,
+        "confidence_score": 0.0,
+        "total_score": 24.0,
+        "qualification_state": "RESEARCHED",
+        "explanation": "Nuclio Digital School has limited public evidence for Sales Operations Automation.",
+        "evidence_ids": [],
+        "matched_signals": [],
+        "created_at": "2026-08-17T19:28:34.415634Z",
+        "updated_at": "2026-08-17T19:28:37.286213Z"
+      },
+      "top_evidence": [],
+      "evidence_count": 0,
+      "signal_types": [],
+      "analysis": {
+        "id": 24,
+        "company_id": 10,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "summary": "No public evidence was provided, so I cannot reliably infer Nuclio Digital School’s operations, tools, workflows, or automation needs from the supplied material alone.",
+        "observed_signals": [],
+        "possible_automation_opportunities": [],
+        "unknowns": [
+          "Core business model and service lines",
+          "Target customers and buying roles",
+          "Operational processes and administrative workflows",
+          "Current software stack and automation maturity",
+          "Growth priorities, pain points, or compliance constraints"
+        ],
+        "recommended_buyer_roles": [
+          "Unknown from provided evidence"
+        ],
+        "created_at": "2026-08-17T19:28:34.415634Z"
+      },
+      "non_generic_hypothesis": false,
+      "run": {
+        "id": 24,
+        "company_id": 10,
+        "campaign_id": 3,
+        "provider": "openai",
+        "model": "gpt-5.4-mini",
+        "input_tokens": 0,
+        "output_tokens": 141,
+        "estimated_cost": 5.6e-05,
+        "execution_time_ms": 4151,
+        "status": "COMPLETED",
+        "error": null,
+        "created_at": "2026-08-17T19:28:34.415634Z"
+      }
+    }
+  ],
+  "summary": {
+    "campaign_id": 3,
+    "average_score": 39.15,
+    "companies_with_useful_evidence": 9,
+    "companies_with_non_generic_hypotheses": 9,
+    "average_cost_per_company_app_estimate": 0.000285,
+    "total_cost_app_estimate": 0.002851,
+    "top_3": [
+      {
+        "name": "ISDI",
+        "domain": "isdi.education",
+        "score": 45.7,
+        "signals": [
+          "MULTIPLE_LOCATIONS"
+        ]
+      },
+      {
+        "name": "IEBS Business School",
+        "domain": "iebschool.com",
+        "score": 45.1,
+        "signals": [
+          "HAS_SALES_TEAM"
+        ]
+      },
+      {
+        "name": "EAE Business School",
+        "domain": "eae.es",
+        "score": 45.1,
+        "signals": [
+          "HAS_SALES_TEAM"
+        ]
+      }
+    ],
+    "weakest_3": [
+      {
+        "name": "Nuclio Digital School",
+        "domain": "nuclio.school",
+        "score": 24.0,
+        "evidence_count": 0,
+        "non_generic": false,
+        "summary": "No public evidence was provided, so I cannot reliably infer Nuclio Digital School’s operations, tools, workflows, or automation needs from the supplied material alone."
+      },
+      {
+        "name": "IEBS Business School",
+        "domain": "iebschool.com",
+        "score": 45.1,
+        "evidence_count": 1,
+        "non_generic": true,
+        "summary": "IEBS Business School publicly presents a broad set of program themes on its website, including a category labeled \"Dirección y Ventas\" alongside marketing, management, data, and technology topics. From this public eviden"
+      },
+      {
+        "name": "ThePower Business School",
+        "domain": "thepowermba.com",
+        "score": 37.9,
+        "evidence_count": 2,
+        "non_generic": true,
+        "summary": "ThePower Business School has a public website for its online business school offering, with prominent promotion of a new AI-related program called “AI MAKER.” Based on the limited evidence, the strongest signal is that t"
+      }
+    ]
+  }
+}

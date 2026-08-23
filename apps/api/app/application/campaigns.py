@@ -115,6 +115,9 @@ def campaign_detail(db: Session, campaign_id: int) -> ProspectingCampaign:
             selectinload(ProspectingCampaign.companies)
             .selectinload(CampaignCompany.company)
             .selectinload(Company.first_customer_fit_scores),
+            selectinload(ProspectingCampaign.companies)
+            .selectinload(CampaignCompany.company)
+            .selectinload(Company.research_runs),
             selectinload(ProspectingCampaign.research_runs),
         )
     )
@@ -239,7 +242,7 @@ async def _research_campaign_company(
             entry.research_state = "FAILED"
             entry.error = str(exc)
             entry.updated_at = datetime.now(UTC)
-        if entry is not None:
+        if entry is not None and not getattr(exc, "research_run_recorded", False):
             db.add(
                 ResearchRun(
                     company_id=entry.company_id,

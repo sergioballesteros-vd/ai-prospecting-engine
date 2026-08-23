@@ -1,0 +1,35 @@
+[
+  {
+    "key": "linkedin_connection_note",
+    "label": "LinkedIn connection note",
+    "channel": "LINKEDIN",
+    "body": "Hola {buyer_first_name}, vi {evidence_observation}. Estoy explorando cómo despachos como {company_name} gestionan {workflow}. ¿Conectamos?",
+    "placeholders": ["buyer_first_name", "evidence_observation", "company_name", "workflow"],
+    "max_length": 190,
+    "automated": false
+  },
+  {
+    "key": "post_acceptance_discovery",
+    "label": "Post-acceptance discovery message",
+    "channel": "LINKEDIN",
+    "body": "Gracias por aceptar, {buyer_first_name}. Vi {evidence_observation}. No doy por hecho que sea un problema interno: estoy contrastando cómo gestionáis {workflow} y dónde aparece trabajo repetitivo. ¿Te importaría contarme cómo funciona hoy?",
+    "placeholders": ["buyer_first_name", "evidence_observation", "workflow"],
+    "automated": false
+  },
+  {
+    "key": "follow_up_no_reply",
+    "label": "Follow-up after no reply",
+    "channel": "LINKEDIN",
+    "body": "Hola {buyer_first_name}, retomo esto una sola vez. Estoy validando si {workflow} genera seguimiento manual en despachos como {company_name}. Si no es relevante ahora, ningún problema.",
+    "placeholders": ["buyer_first_name", "workflow", "company_name"],
+    "automated": false
+  },
+  {
+    "key": "discovery_call_15_min",
+    "label": "15-minute discovery call request",
+    "channel": "LINKEDIN",
+    "body": "¿Te encajaría una conversación de 15 minutos para entender cómo gestionáis {workflow}? No es una demo: quiero validar si {evidence_observation} se traduce en trabajo repetitivo o no.",
+    "placeholders": ["workflow", "evidence_observation"],
+    "automated": false
+  }
+]

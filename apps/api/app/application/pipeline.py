@@ -12,11 +12,23 @@ from app.domain.models import (
     ProspectingCampaign,
 )
 
-PIPELINE_STATES = ["APPROVED", "CONTACTED", "REPLIED", "MEETING", "PROPOSAL", "WON", "LOST"]
+PIPELINE_STATES = [
+    "APPROVED",
+    "CONTACTED",
+    "CONNECTION_SENT",
+    "ACCEPTED",
+    "REPLIED",
+    "MEETING",
+    "PROPOSAL",
+    "WON",
+    "LOST",
+]
 VALID_TRANSITIONS = {
-    None: {"APPROVED"},
-    "APPROVED": {"CONTACTED", "LOST"},
-    "CONTACTED": {"REPLIED", "LOST"},
+    None: {"APPROVED", "LOST"},
+    "APPROVED": {"CONTACTED", "CONNECTION_SENT", "LOST"},
+    "CONTACTED": {"ACCEPTED", "REPLIED", "LOST"},
+    "CONNECTION_SENT": {"ACCEPTED", "REPLIED", "LOST"},
+    "ACCEPTED": {"REPLIED", "MEETING", "LOST"},
     "REPLIED": {"MEETING", "LOST"},
     "MEETING": {"PROPOSAL", "LOST"},
     "PROPOSAL": {"WON", "LOST"},
@@ -51,9 +63,11 @@ def transition_pipeline(
     from_state = current_pipeline_state(db, company_id, opportunity_id, campaign_id)
     if to_state not in VALID_TRANSITIONS.get(from_state, set()):
         raise ValueError(f"Invalid transition from {from_state or 'START'} to {to_state}")
-    if to_state == "CONTACTED":
+    if to_state in {"CONTACTED", "CONNECTION_SENT"}:
         if channel not in CHANNELS:
-            raise ValueError("CONTACTED requires channel EMAIL, LINKEDIN, PHONE, or OTHER")
+            raise ValueError(
+                f"{to_state} requires channel EMAIL, LINKEDIN, PHONE, or OTHER"
+            )
         contacted_at = contacted_at or datetime.now(UTC)
     if to_state == "WON":
         missing_revenue = (
@@ -257,6 +271,7 @@ def _reached_states(events: list[PipelineEvent]) -> dict[str, int]:
     for event in events:
         key = (event.company_id, event.campaign_id, event.opportunity_id)
         reached[event.to_state].add(key)
+    reached["CONTACTED"].update(reached["CONNECTION_SENT"])
     return {state: len(reached[state]) for state in PIPELINE_STATES}
 
 

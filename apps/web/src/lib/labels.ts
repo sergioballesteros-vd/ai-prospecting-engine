@@ -13,6 +13,8 @@ export function pipelineStateLabel(state: string | null) {
   const labels: Record<string, string> = {
     APPROVED: "Aprobado",
     CONTACTED: "Contactado",
+    CONNECTION_SENT: "Conexión enviada",
+    ACCEPTED: "Conexión aceptada",
     REPLIED: "Respondió",
     MEETING: "Reunión",
     PROPOSAL: "Propuesta",

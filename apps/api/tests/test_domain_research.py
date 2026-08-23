@@ -1,3 +1,5 @@
+import asyncio
+
 import httpx
 import pytest
 
@@ -108,6 +110,49 @@ async def test_extract_relevant_pages_discovers_prioritized_same_domain_links(
     ]
     assert crawl.pages[1].selected_reason.startswith("matched:services")
     assert any(item.reason == "low_relevance_or_excluded" for item in crawl.skipped)
+
+
+@pytest.mark.asyncio
+async def test_crawl_runtime_bound_returns_safe_partial_pages(monkeypatch) -> None:
+    calls = 0
+
+    class FakeClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *args: object):
+            return None
+
+    async def fake_fetch(client, url: str, retries: int):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            return httpx.Response(
+                200,
+                headers={"content-type": "text/html"},
+                text=(
+                    "<html><title>Home</title><body>"
+                    "<a href='/services'>Services</a></body></html>"
+                ),
+                request=httpx.Request("GET", url),
+            )
+        await asyncio.sleep(0.2)
+        raise AssertionError("crawl deadline should cancel the slow request")
+
+    monkeypatch.setattr(httpx, "AsyncClient", lambda **kwargs: FakeClient())
+    monkeypatch.setattr("app.modules.research.website._fetch", fake_fetch)
+
+    crawl = await extract_relevant_pages(
+        "example.com",
+        max_pages=3,
+        rate_limit_seconds=0,
+        timeout_seconds=1,
+        max_runtime_seconds=0.05,
+    )
+
+    assert len(crawl.pages) == 1
+    assert crawl.pages[0].title == "Home"
+    assert crawl.failures[-1].error == "overall_timeout"
 
 
 @pytest.mark.asyncio

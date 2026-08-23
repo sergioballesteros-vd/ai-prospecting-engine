@@ -2,6 +2,7 @@ import asyncio
 import hashlib
 import re
 from dataclasses import dataclass
+from time import monotonic
 from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
 
 import httpx
@@ -151,11 +152,13 @@ def website_url_for_domain(domain: str) -> str:
 async def extract_relevant_pages(
     domain: str,
     timeout_seconds: float = 10.0,
+    max_runtime_seconds: float = 30.0,
     max_pages: int = DEFAULT_MAX_PAGES,
     max_content_bytes: int = DEFAULT_MAX_CONTENT_BYTES,
     retries: int = DEFAULT_RETRIES,
     rate_limit_seconds: float = DEFAULT_RATE_LIMIT_SECONDS,
 ) -> CrawlResult:
+    deadline = monotonic() + max_runtime_seconds
     base_url = website_url_for_domain(domain)
     normalized_domain = normalize_domain(domain)
     pages: list[ExtractedPage] = []
@@ -172,11 +175,20 @@ async def extract_relevant_pages(
         headers={"User-Agent": "AIProspectingEngine/0.1 research bot"},
     ) as client:
         while len(pages) < max_pages and discovered:
+            remaining = deadline - monotonic()
+            if remaining <= 0:
+                failures.append(CrawlFailure(base_url, "overall_timeout"))
+                break
             url, (score, reason) = _pop_next_url(discovered)
             if url in visited:
                 continue
             visited.add(url)
-            response = await _fetch(client, url, retries)
+            try:
+                async with asyncio.timeout(remaining):
+                    response = await _fetch(client, url, retries)
+            except TimeoutError:
+                failures.append(CrawlFailure(url, "overall_timeout"))
+                break
             if isinstance(response, CrawlFailure):
                 failures.append(response)
                 continue
@@ -222,7 +234,9 @@ async def extract_relevant_pages(
                     continue
                 discovered[link_url] = (link_score, link_reason)
             if rate_limit_seconds > 0:
-                await asyncio.sleep(rate_limit_seconds)
+                remaining = deadline - monotonic()
+                if remaining > 0:
+                    await asyncio.sleep(min(rate_limit_seconds, remaining))
     return CrawlResult(
         pages=pages,
         discovered_urls=sorted(visited | set(discovered)),
