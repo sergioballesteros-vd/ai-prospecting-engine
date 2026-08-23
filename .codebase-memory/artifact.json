@@ -1,11 +1,11 @@
 {
     "schema_version": 1,
-    "commit": "f2288c22e6b028564b25c5e610b7fa8f023f9167",
-    "indexed_at": "2026-08-23T17:06:14Z",
+    "commit": "94fa41ea5709497cd2ea94160bfc8b18b8a0318c",
+    "indexed_at": "2026-08-23T18:45:57Z",
     "project": "Users-sergioballesteros-ai-prospecting-engine",
-    "nodes": 349,
-    "edges": 1396,
-    "original_size": 3407872,
-    "compressed_size": 448555,
+    "nodes": 710,
+    "edges": 2376,
+    "original_size": 4521984,
+    "compressed_size": 707682,
     "compression_level": 3
 }
