@@ -239,7 +239,7 @@ Required Render environment variables:
 
 - `DATABASE_URL`: provided by `ai-prospecting-db`
 - `LLM_PROVIDER`: `stub` unless real LLM calls are intentionally enabled
-- `OPENAI_MODEL`: current default `gpt-4.1-mini`
+- `OPENAI_MODEL`: current default `gpt-5.4-mini`
 - `DISCOVERY_PROVIDER`: `csv`
 - `CORS_ORIGINS`: set in Render, should include the Vercel production origin
 - `OPENAI_API_KEY`: set only when `LLM_PROVIDER=openai`

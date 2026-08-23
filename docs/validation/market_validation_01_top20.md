@@ -1,5 +1,7 @@
 # Market Validation 01 - Top 20
 
+> **HISTORICAL VALIDATION ARTIFACT:** this scoring run predates the current ICP and primary wedge. Scores are preserved as run evidence, not current commercial truth; see [`PROJECT_STATUS.md`](../../PROJECT_STATUS.md).
+
 Generated: 2026-08-17T20:34:37.620047+00:00
 
 ## Summary

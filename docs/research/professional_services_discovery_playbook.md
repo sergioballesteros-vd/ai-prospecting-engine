@@ -1,5 +1,7 @@
 # Professional Services Discovery Playbook
 
+> **HISTORICAL / SUPERSEDED PLAYBOOK:** retained as an input from the generic intake hypothesis. Use the current [`discovery playbook`](../discovery/discovery_playbook_v1.md) for real calls.
+
 ## Buyer-role Strategy
 
 | Company size | Likely buyer | Likely champion | Likely blocker |

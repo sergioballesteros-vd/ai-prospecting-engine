@@ -1,5 +1,7 @@
 # First-Customer Fit Campaign: Madrid Advisory Firms
 
+> **HISTORICAL VALIDATION ARTIFACT:** this ranking informed the first manual outreach cycle. The persisted funnel and current next action in [`PROJECT_STATUS.md`](../../PROJECT_STATUS.md) supersede its recommendations.
+
 Ranking basis: `FirstCustomerFitScore` first, `OpportunityScore` retained separately.
 Manual contacts excluded from next steps: CE Consulting local office and Aselec Consultores.
 
@@ -124,7 +126,7 @@ Processed: 30 discovered, 25 researched, 5 failed by crawl timeout.
 - Recommended buyer role: Owner / Managing Partner
 - Why now: No strong why-now signal detected.
 - Evidence examples:
-  - #218 MULTIPLE_ADVISORY_AREAS (https://delamoasesores.es/contact): Contact Standard – Del Amo Asesores Home Servicios Fiscal Laboral Contable Precios Contacto The contact form on the live demo uses Contact Form 7. Install that plugin, configure your form and place the shortcode it gives you here! Don’t hesitate to reach out! 
+  - #218 MULTIPLE_ADVISORY_AREAS (https://delamoasesores.es/contact): Contact Standard – Del Amo Asesores Home Servicios Fiscal Laboral Contable Precios Contacto The contact form on the live demo uses Contact Form 7. Install that plugin, configure your form and place the shortcode it gives you here! Don’t hesitate to reach out!
   - #210 MULTIPLE_ADVISORY_AREAS (https://delamoasesores.es/contacto): Contacto – Del Amo Asesores Home Servicios Fiscal Laboral Contable Precios Contacto Contacto. Gracias por contactar con Del Amo Asesores, en menos de 24horas le responderemos. Madrid Avenida de Cantabria, 13 +34 91 3717524 info@delamoasesores.es Pozuelo de Ala
 
 ### 7. Guijarro y Ruiz Asesores

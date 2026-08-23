@@ -1,5 +1,7 @@
 # Professional Services Top 10 Prospects
 
+> **HISTORICAL VALIDATION ARTIFACT:** retained as evidence of the earlier selection process. It is not the current prospect ranking or outreach instruction.
+
 Selection prioritizes fit with the winning accounting/tax/gestoría workflow hypothesis, evidence strength, buyer reachability and credible conversation angle. It is not sorted solely by score.
 
 ## CE Consulting

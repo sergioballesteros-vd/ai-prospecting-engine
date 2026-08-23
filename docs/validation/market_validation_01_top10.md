@@ -1,5 +1,7 @@
 # Market Validation 01 - Recommended Top 10
 
+> **HISTORICAL VALIDATION ARTIFACT:** this ranking predates the current payroll-close hypothesis and must not be treated as a live outreach queue; see [`PROJECT_STATUS.md`](../../PROJECT_STATUS.md).
+
 These are the first companies Sergio should manually review for potential outreach. No outreach has been sent.
 
 ## 1. ENAE Business School (enae.es)

@@ -1,5 +1,7 @@
 # Day 1 Vertical Tournament 2026-08-18
 
+> **HISTORICAL VALIDATION ARTIFACT:** this tournament records an earlier market-selection stage. It is not the current ICP, offer, or outreach instruction; see [`PROJECT_STATUS.md`](../../PROJECT_STATUS.md).
+
 Production API was reachable but rejected the local APP_API_TOKEN, so this run used the same local engine configuration against SQLite: OpenAI provider, gpt-5.4-mini, unchanged research/scoring rules.
 
 ## Ranking

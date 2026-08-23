@@ -77,7 +77,7 @@ Open `http://localhost:3000`.
 ```bash
 LLM_PROVIDER=openai
 OPENAI_API_KEY=...
-OPENAI_MODEL=gpt-4.1-mini
+OPENAI_MODEL=gpt-5.4-mini
 ```
 
 Secrets must stay in environment variables or secret storage.
@@ -120,13 +120,13 @@ The two active hypotheses are:
 
 Start with:
 
-- [`discovery_first_call_cheatsheet.md`](discovery_first_call_cheatsheet.md)
-- [`discovery_playbook_v1.md`](discovery_playbook_v1.md)
-- [`discovery_decision_tree.md`](discovery_decision_tree.md)
-- [`pilot_candidate_handoff.md`](pilot_candidate_handoff.md)
-- [`discovery_engine_implementation.md`](discovery_engine_implementation.md)
+- [`docs/discovery/discovery_first_call_cheatsheet.md`](docs/discovery/discovery_first_call_cheatsheet.md)
+- [`docs/discovery/discovery_playbook_v1.md`](docs/discovery/discovery_playbook_v1.md)
+- [`docs/discovery/discovery_decision_tree.md`](docs/discovery/discovery_decision_tree.md)
+- [`docs/pilot/pilot_candidate_handoff.md`](docs/pilot/pilot_candidate_handoff.md)
+- [`docs/discovery/discovery_engine_implementation.md`](docs/discovery/discovery_engine_implementation.md)
 
-The complete commercial operating material is stored as Markdown files at the repository root. Research reports and their JSON evidence snapshots are versioned alongside them so conclusions remain auditable.
+The complete documentation map and current commercial checkpoint are in [`docs/README.md`](docs/README.md) and [`PROJECT_STATUS.md`](PROJECT_STATUS.md). Research reports and their JSON evidence snapshots remain versioned so conclusions are auditable.
 
 ## Current Tradeoffs
 
@@ -139,4 +139,4 @@ The complete commercial operating material is stored as Markdown files at the re
 
 ## Recommended Next Milestone
 
-Run the first real discovery conversation and record it in `/commercial`. Use an existing-stack-solved or no-problem result as valid learning. Do not start technical pilot work until the hard gate in `pilot_candidate_handoff.md` is complete.
+Review the five LinkedIn connection requests already sent and wait for buyer-reported evidence. Record actual outcomes in `/commercial`; an existing-stack-solved or no-problem result is valid learning. Do not start technical pilot work until the hard gate in [`docs/pilot/pilot_candidate_handoff.md`](docs/pilot/pilot_candidate_handoff.md) is complete.

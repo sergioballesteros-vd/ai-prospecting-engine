@@ -258,7 +258,9 @@ class Contact(Base):
     __tablename__ = "contacts"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    company_id: Mapped[int] = mapped_column(
+        ForeignKey("companies.id", ondelete="CASCADE"), index=True
+    )
     full_name: Mapped[str | None] = mapped_column(String(255))
     role: Mapped[str | None] = mapped_column(String(255))
     profile_url: Mapped[str | None] = mapped_column(String(1024))
@@ -281,7 +283,9 @@ class CommercialNote(Base):
     __tablename__ = "commercial_notes"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    company_id: Mapped[int] = mapped_column(
+        ForeignKey("companies.id", ondelete="CASCADE"), index=True
+    )
     contact_id: Mapped[int | None] = mapped_column(
         ForeignKey("contacts.id", ondelete="SET NULL")
     )
@@ -306,14 +310,18 @@ class DiscoverySession(Base):
     __tablename__ = "discovery_sessions"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    company_id: Mapped[int] = mapped_column(ForeignKey("companies.id", ondelete="CASCADE"))
+    company_id: Mapped[int] = mapped_column(
+        ForeignKey("companies.id", ondelete="CASCADE"), index=True
+    )
     contact_id: Mapped[int | None] = mapped_column(
         ForeignKey("contacts.id", ondelete="SET NULL")
     )
     opportunity_id: Mapped[int | None] = mapped_column(
         ForeignKey("opportunities.id", ondelete="SET NULL")
     )
-    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    occurred_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, index=True
+    )
     hypothesis: Mapped[str] = mapped_column(String(60), nullable=False)
     workflow_discussed: Mapped[str] = mapped_column(Text, nullable=False)
     discovery_status: Mapped[str] = mapped_column(String(60), nullable=False)

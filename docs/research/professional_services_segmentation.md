@@ -1,5 +1,7 @@
 # Professional Services Segmentation
 
+> **HISTORICAL RESEARCH ARTIFACT:** this segmentation belongs to the earlier broad professional-services tournament and does not define the current ICP.
+
 Source: existing Professional Services cohort from the completed tournament. No research was rerun.
 
 ## Company Classification

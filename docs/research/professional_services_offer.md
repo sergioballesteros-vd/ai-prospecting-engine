@@ -1,5 +1,7 @@
 # Initial Professional Services Offer
 
+> **HISTORICAL / SUPERSEDED HYPOTHESIS:** retained to show how the offer evolved. The generic intake/routing proposal was rejected by the commercial red team; the current hypothesis is [`First Offer v2`](../commercial/first_offer_v2.md).
+
 ## Target Customer
 
 Spanish accounting, tax, labour and gestoría firms with roughly 5-50 employees that receive recurring client emails, forms and documents and still depend on manual review, classification, follow-up or data copying.

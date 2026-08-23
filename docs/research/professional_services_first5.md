@@ -1,5 +1,7 @@
 # First 5 Companies Sergio Should Approach
 
+> **HISTORICAL OUTREACH INPUT:** retained for traceability. It is not a current send list; use persisted commercial state and [`PROJECT_STATUS.md`](../../PROJECT_STATUS.md).
+
 These are manual commercial-review targets. Do not contact until Sergio reviews the evidence and identifies real decision makers.
 
 ## CE Consulting

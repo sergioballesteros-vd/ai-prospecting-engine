@@ -1,5 +1,7 @@
 # Tomorrow Outreach Queue — Madrid Advisory Campaign
 
+> **PAUSED / HISTORICAL QUEUE (2026-08-23):** retained for traceability. Do not send from this list while the five existing connection requests await buyer-reported evidence; revalidate every buyer and claim before any later use.
+
 Prepared: 2026-08-23. No outreach has been sent from this queue.
 
 Ranking uses the existing Madrid campaign’s deterministic FirstCustomerFit score. Excluded: CE Consulting, Aselec Consultores, Gestoría DS, Gaudium Asesores, OK Asesores, Ayuda T Pymes, and GD Asesoría.
