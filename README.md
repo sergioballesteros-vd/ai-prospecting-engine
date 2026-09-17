@@ -14,7 +14,7 @@ The current system supports:
 - a manual commercial inbox
 - historical, buyer-reported discovery sessions
 - transparent discovery quantification, readiness blockers, and qualification outcomes
-- a commercial scoreboard centred on the first paid pilot and €900 MRR
+- a commercial scoreboard centred on the first paid pilot and a target of €900 MRR
 
 No automatic outreach sending, contact enrichment, ML, billing, multi-tenancy, Kafka, or Kubernetes is included. Public research evidence and buyer-reported discovery evidence remain separate.
 
